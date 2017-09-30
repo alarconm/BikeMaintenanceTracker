@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<p th:unless="${user != null}"> Please <a href="/user/login.html">log in</a> or <a href="/user/add.html">create an account</a> to access app </p>
+
+<h1 th:unless="${user == null}"
+    th:text="'Welcome ' + ${user.name}"></h1>
+
+
+</body>
+</html>

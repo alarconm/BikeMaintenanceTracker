@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+
+<form method="post"  th:object="${user}">
+    <div class="form-group">
+        <label th:for="name"> User Name:</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="password">Password:</label>
+        <input class="form-control" type="password" th:field="*{password}" />
+        <span th:errors="*{password}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="verifyPassword">Enter Password Again:</label>
+        <input class="form-control" type="password" name="verifyPassword" id="verifyPassword" />
+        <span th:text="${passwordError}"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="email">Email:</label>
+        <input class="form-control" th:type="email" th:field="*{email}" />
+        <span th:errors="*{email}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Add User" />
+</form>
+</body>
+</html>
