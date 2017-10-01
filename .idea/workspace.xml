@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b66d127-a803-486b-80bd-3e8b8ab1059c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/com/bikemaintapp/Bike/Maintenance/App/controllers/UserController.class" afterPath="$PROJECT_DIR$/out/production/classes/com/bikemaintapp/Bike/Maintenance/App/controllers/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bikemaintapp/Bike/Maintenance/App/controllers/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/bikemaintapp/Bike/Maintenance/App/controllers/UserController.java" />
-    </list>
+    <list default="true" id="4b66d127-a803-486b-80bd-3e8b8ab1059c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -109,7 +105,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1506829810998" expanded="true" signature="81560:81645" ph="..." />
+                <marker date="1506829810998" expanded="true" signature="81560:81662" ph="..." />
+                <marker date="1506829810998" expanded="true" signature="81560:81680" ph="..." />
+                <marker date="1506829810998" expanded="true" signature="81560:81693" ph="..." />
+                <marker date="1506829810998" expanded="true" signature="81560:81708" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -830,6 +832,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4b66d127-a803-486b-80bd-3e8b8ab1059c" name="Default" comment="" />
@@ -1156,7 +1161,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1506829810998" expanded="true" signature="81560:81645" ph="..." />
+            <marker date="1506829810998" expanded="true" signature="81560:81662" ph="..." />
+            <marker date="1506829810998" expanded="true" signature="81560:81680" ph="..." />
+            <marker date="1506829810998" expanded="true" signature="81560:81693" ph="..." />
+            <marker date="1506829810998" expanded="true" signature="81560:81708" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
