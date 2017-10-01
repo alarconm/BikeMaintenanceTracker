@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<!-- This displays all the routes you can go, update the navigation in the fragments html-->
+<nav th:replace="fragments :: navigation"></nav>
+
+<a href="bike/add"><h2>Add a Bike</h2></a>
+
+</body>
+</html>
