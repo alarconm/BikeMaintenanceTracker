@@ -20,7 +20,7 @@ public class Bike {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 15, message = "You must give your bike a name")
+    @Size(min = 3, max = 15, message = "Bike needs to be 3-15 characters long")
     private String nameOfBike;
 
     // Constructors
