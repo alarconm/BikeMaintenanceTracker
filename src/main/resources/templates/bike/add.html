@@ -10,11 +10,18 @@
 
 <!--This will display a form and take the name of the bike for the user-->
 <form method="post"  th:object="${bike}">
+    <!--This will form will take in a user's bike name and  the miles traveled on a bike-->
     <div class="form-group">
         <label th:for="name">Name of the bike</label>
         <input class="form-control" th:field="*{nameOfBike}" />
         <span th:errors="*{nameOfBike}" class="error"></span>
     </div>
+    <div class="form-group">
+        <label th:for="name">Number of miles traveled</label>
+        <input class="form-control" th:field="*{milesTraveled}"/>
+        <span th:errors="*{milesTraveled}" class="error"></span>
+    </div>
+    <input type="submit" value="Add a Bike" />
 </form>
 </body>
 </html>

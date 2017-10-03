@@ -26,6 +26,7 @@ public class BikeController {
     @RequestMapping(value="")
     public String index(Model model){
         // TODO get all the bikes form the database and display though this route
+        // TODO pass the user names though the view to show who the bikes blw
         model.addAttribute("title","View Bikes");
         return "bike/index";
     }
@@ -45,15 +46,14 @@ public class BikeController {
 
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
-            model.addAttribute("title", "Add Bike");
-            model.addAttribute("bike", newBike);
+            model.addAttribute("title", "Add Bike"); // Pass this title to the view
             return "bike/add";
         }
-        // If the values are met the process form
-        bikeDao.save(newBike);
+        // If the values are met the process form and return the new to the index view
         model.addAttribute("bike",newBike);
-        model.addAttribute("title","Add Bike");
-        return "bike/add";
+        model.addAttribute("title","View Bikes");
+        bikeDao.save(newBike);
+        return "bike/index";
     }
 
 }
