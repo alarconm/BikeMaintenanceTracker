@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class User {
 
-    //TODO add real validation to user fields
+    //TODO add real validations to user fields
 
     @Id
     @GeneratedValue
