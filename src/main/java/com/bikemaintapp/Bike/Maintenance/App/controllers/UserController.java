@@ -9,7 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -49,12 +49,17 @@ public class UserController {
     public String displayAddUserForm(Model model) {
         model.addAttribute("title", "Create New Account");
         model.addAttribute(new User());
+
+
         return "user/add";
     }
 
+    //
+    //HttpServletRequest is for session management
+    //
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors,
-                                     Model model) {
+                                     Model model, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create New Account");
@@ -65,6 +70,9 @@ public class UserController {
         userDao.save(newUser);
         model.addAttribute("user", newUser);
         model.addAttribute("title", "User Login");
+
+        //Adds the username to the session
+        request.getSession().setAttribute("user", newUser.getName());
         return "user/index";
 
     }
