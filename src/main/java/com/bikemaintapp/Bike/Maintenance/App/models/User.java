@@ -1,20 +1,21 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
 
-    //TODO add real validation to user fields
+    //TODO add real validations to user fields
 
     @Id
     @GeneratedValue
     private int id;
 
+    @Column(unique = true)
     @NotNull
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters long")
     private String name;
@@ -29,7 +30,11 @@ public class User {
     @NotNull
     private String email;
 
-    //Empty contstructor needed for some Springboot/Hibernate magic
+    @OneToMany
+    @JoinColumn(name ="user_id")
+    private List<Bike> bikes = new ArrayList<>();
+
+    //Empty constructor needed for some Springboot/Hibernate magic
     public User() {}
 
     public User(String name) {

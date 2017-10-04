@@ -1,12 +1,12 @@
 package com.bikemaintapp.Bike.Maintenance.App.models.data;
 
-import com.bikemaintapp.Bike.Maintenance.App.models.User;
+
+import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface UserDao extends CrudRepository<User, Integer> {
-
+public interface BikeDao extends CrudRepository<Bike,Integer> {
 }

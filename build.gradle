@@ -29,5 +29,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('org.springframework.boot:spring-boot-devtools')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+// This allows you to refresh views with out having to restart/run
+bootRun {
+	addResources = true
 }
