@@ -1,11 +1,10 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -30,6 +29,10 @@ public class User {
 
     @NotNull
     private String email;
+
+    @OneToMany
+    @JoinColumn(name ="user_id")
+    private List<Bike> bikes = new ArrayList<>();
 
     //Empty constructor needed for some Springboot/Hibernate magic
     public User() {}
