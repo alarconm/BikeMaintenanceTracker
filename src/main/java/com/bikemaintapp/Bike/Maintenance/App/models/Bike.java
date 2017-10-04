@@ -3,6 +3,8 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 //TODO make this an abstract class that all types of bikes can model from
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,7 +25,7 @@ public class Bike {
     private String nameOfBike;
 
     @NotNull
-    @Size(min = 1, message = "please enter distance traveled in miles")
+    @Range(min = 1, message = "please enter distance traveled in miles")
     private int milesTraveled;
 
     // Relationships

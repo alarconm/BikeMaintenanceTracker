@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+<nav th:replace="fragments :: navigation"></nav>
 
 <h1 th:text="${title}">Default Title</h1>
 
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
-<nav th:replace="fragments :: navigation"></nav>
+
 
 <!--This will display a form and take the name of the bike for the user-->
 <form method="post"  th:object="${bike}">
