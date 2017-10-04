@@ -11,8 +11,16 @@
 
 <nav th:fragment="navigation">
     <a href="/user">Home</a> |
-    <a href="/bike">Bikes</a> |
-    <a href="/ride">Rides</a>
+    <span th:if="${session.user == null}">
+        <a href="/user/login">Login</a> |
+        <a href="/user/add">Create an Account</a>
+    </span>
+    <span th:if="${session.user !=null}">
+            <a href="/bike">Bikes</a> |
+            <a href="/ride">Rides</a> |
+            <a href="/user/logout">Logout</a>
+    </span>
+
 </nav>
 </body>
 </html>

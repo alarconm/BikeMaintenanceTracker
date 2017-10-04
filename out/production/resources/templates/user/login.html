@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+
 <h1 th:text="${title}">Default Title</h1>
 
 <form method="post"  th:object="${user}">
@@ -10,12 +12,14 @@
         <label th:for="name"> User Name:</label>
         <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
+        <span th:text="${usererror}"></span>
     </div>
 
     <div class="form-group">
         <label th:for="password">Password:</label>
         <input class="form-control" type="password" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
+        <span th:text="${passworderror}"></span>
     </div>
 
     <input type="submit" value="Log In" />
