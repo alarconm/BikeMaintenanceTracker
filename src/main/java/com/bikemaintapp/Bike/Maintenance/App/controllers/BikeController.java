@@ -3,6 +3,7 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +18,13 @@ import javax.validation.Valid;
 @RequestMapping("bike")
 public class BikeController {
 
-    // Link the bike DB
-    // TODO link rides and users to the bike
-    @Autowired
-    BikeDao bikeDao;
+    @Autowired // Create an instance of this class
+    private BikeDao bikeDao;
 
     // display all the Existing bike
     @RequestMapping(value="")
-    public String index(Model model){
-        // TODO get all the bikes form the database and display though this route
-        // TODO pass the user names though the view to show who the bikes blw
+    public String index(Model model, HttpServletRequest request){
+        model.addAttribute("bikes", bikeDao.findAll()); // Displays all bikes to the view. // TODO display bikes of a user
         model.addAttribute("title","View Bikes");
         return "bike/index";
     }
@@ -53,7 +51,7 @@ public class BikeController {
         model.addAttribute("bike",newBike);
         model.addAttribute("title","View Bikes");
         bikeDao.save(newBike);
-        return "bike/index";
+        return "redirect:";
     }
 
 }

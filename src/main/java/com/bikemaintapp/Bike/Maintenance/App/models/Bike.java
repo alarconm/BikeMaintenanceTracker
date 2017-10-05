@@ -30,17 +30,18 @@ public class Bike {
 
     // Relationships
     // There is one bike to every user, This is the unique id for users to add a bike to their account
-//    @OneToMany
-//    @JoinColumn(name ="bike_id")
-//    private List<User> users = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name ="bike_id")
+    private List<User> users = new ArrayList<>();
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Bike() {
     }
 
-    public Bike(String nameOfBike) {
+    public Bike(String nameOfBike, int milesTraveled) {
         this.nameOfBike = nameOfBike;
+        this.milesTraveled = milesTraveled;
     }
 
     // Setters & Getters
