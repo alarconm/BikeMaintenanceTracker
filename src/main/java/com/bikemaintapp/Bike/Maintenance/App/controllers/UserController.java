@@ -2,7 +2,6 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
-import com.mysql.fabric.xmlrpc.base.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

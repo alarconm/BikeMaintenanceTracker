@@ -25,8 +25,7 @@ public class BikeController {
     // display all the Existing bike
     @RequestMapping(value="")
     public String index(Model model){
-        // TODO get all the bikes form the database and display though this route
-        // TODO pass the user names though the view to show who the bikes blw
+        model.addAttribute("bikes", bikeDao.findAll()); // Displays all bikes to the view. // TODO display bikes of a user
         model.addAttribute("title","View Bikes");
         return "bike/index";
     }
