@@ -50,7 +50,16 @@ public class UserController {
 
                     User loggedInUser = userDao.findOne(user.getId());
                     request.getSession().setAttribute("user", loggedInUser);
+
+
+//TODO find the best way to do this
+//                    User usertest = (User) request.getSession().getAttribute("user");
+//                    userDao.findOne(usertest.getId());
+
+
                     return "redirect:/bike";
+
+
                 } else {
 
                     model.addAttribute("title", "Login");
