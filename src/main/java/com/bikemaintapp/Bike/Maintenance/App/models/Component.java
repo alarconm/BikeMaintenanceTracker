@@ -5,8 +5,6 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 //A bike component, such as brakes or derailleur
 
@@ -35,8 +33,7 @@ public class Component {
     // Relationships
     // There are many components, on one bike.
     @ManyToOne
-    @JoinColumn(name ="bike_id")
-    private List<Component> components = new ArrayList<>();
+    private Bike bike;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
