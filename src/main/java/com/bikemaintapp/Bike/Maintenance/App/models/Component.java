@@ -70,4 +70,20 @@ public class Component {
         this.milesTraveled = milesTraveled;
         this.componentMiles = this.componentMiles + this.milesTraveled;
     }
+
+    public int getMilesTraveled() {
+        return milesTraveled;
+    }
+
+    public void setComponentMiles(int componentMiles) {
+        this.componentMiles = componentMiles;
+    }
+
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
 }
