@@ -15,11 +15,11 @@
         and the miles to put on it-->
     <div class="form-group">
         <label th:for="name">Name of the component</label>
-        <input class="form-control" th:field="*{nameOfComponent}" />
-        <span th:errors="*{nameOfComponent}" class="error"></span>
+        <input class="form-control" th:field="*{componentName}" />
+        <span th:errors="*{componentName}" class="error"></span>
     </div>
     <div class="form-group">
-        <label th:for="name">Number of miles traveled</label>
+        <label th:for="miles">Number of miles traveled</label>
         <input class="form-control" th:field="*{milesTraveled}"/>
         <span th:errors="*{milesTraveled}" class="error"></span>
     </div>
