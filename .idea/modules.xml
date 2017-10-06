@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/BikeMaintenanceApp.iml" filepath="$PROJECT_DIR$/BikeMaintenanceApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BikeMaintenanceApp_main.iml" filepath="$PROJECT_DIR$/.idea/modules/BikeMaintenanceApp_main.iml" group="BikeMaintenanceApp" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BikeMaintenanceApp_test.iml" filepath="$PROJECT_DIR$/.idea/modules/BikeMaintenanceApp_test.iml" group="BikeMaintenanceApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker.iml" filepath="$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker_main.iml" filepath="$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker_main.iml" group="BikeMaintenanceTracker" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker_test.iml" filepath="$PROJECT_DIR$/.idea/modules/BikeMaintenanceTracker_test.iml" group="BikeMaintenanceTracker" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/unit3-BikeMaintenanceApp.iml" filepath="$PROJECT_DIR$/.idea/modules/unit3-BikeMaintenanceApp.iml" />
     </modules>
   </component>
