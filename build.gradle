@@ -14,6 +14,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+jar {
+	baseName = 'gs-securing-web'
+	version =  '0.1.0'
+}
+
 group = 'com.bikemaintapp'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -25,6 +30,9 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.security:spring-security-web')
+	compile('org.springframework.security:spring-security-config')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 	compile('mysql:mysql-connector-java')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
