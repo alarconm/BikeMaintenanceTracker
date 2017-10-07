@@ -53,7 +53,7 @@ public class UserController {
                     //If user name is found in database and the password entered matches the password of that user
                     //place the loggedInUser object named "user" into the session
                     User loggedInUser = userDao.findOne(user.getId());
-//                    request.getSession().setAttribute("user", loggedInUser);
+                    request.getSession().setAttribute("user", loggedInUser);
                     return "redirect:/bike";
 
                     //TODO find the best way to do this

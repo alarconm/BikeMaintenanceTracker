@@ -22,6 +22,7 @@
         <span th:text="${passworderror}"></span>
     </div>
 
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <input type="submit" value="Log In" />
 </form>
 </body>
