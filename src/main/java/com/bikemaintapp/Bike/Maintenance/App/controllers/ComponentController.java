@@ -1,6 +1,7 @@
 package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
+import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,7 @@ public class ComponentController {
     public String displayAddComponentForm(Model model){
         model.addAttribute("title", "Add Component");
         model.addAttribute(new Component());
+        model.addAttribute("componentTypes", ComponentType.values());
         return "component/add";
     }
 
