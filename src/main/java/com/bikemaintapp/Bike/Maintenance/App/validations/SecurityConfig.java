@@ -27,22 +27,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select user,password, enabled from users where name=?");
+                .usersByUsernameQuery("select name, password, verify_password from user where name=?");
+//                .authoritiesByUsernameQuery("u.name, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.name=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-          .authorizeRequests()
-                .antMatchers("user/login*").anonymous()
-                .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/user", "/user/add").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/user/login")
-                .defaultSuccessUrl("/user")
-                .failureUrl("/login.html?error=true")
+                .usernameParameter("name").passwordParameter("password")
                 .and()
-                .logout().logoutSuccessUrl("/user");
+                .logout()
+                .and()
+                .csrf().disable();
+
     }
 
 }

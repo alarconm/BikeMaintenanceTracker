@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -33,6 +34,10 @@ public class User {
     @OneToMany
     @JoinColumn(name ="user_id")
     private List<Bike> bikes = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     //Empty constructor needed for some Springboot/Hibernate magic
     public User() {}
@@ -76,4 +81,13 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
 }
