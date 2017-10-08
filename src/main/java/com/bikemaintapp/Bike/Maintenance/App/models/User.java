@@ -3,6 +3,7 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,11 @@ public class User {
 
     @NotNull
     private String email;
+
+    @NotNull
+    private String role;
+
+    private short enabled;
 
     @OneToMany
     @JoinColumn(name ="user_id")
@@ -82,6 +88,7 @@ public class User {
         this.email = email;
     }
 
+<<<<<<< HEAD
     public Set<Role> getRoles() {
         return roles;
     }
@@ -90,4 +97,28 @@ public class User {
         this.roles = roles;
     }
 
+=======
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<Bike> getBikes() {
+        return bikes;
+    }
+
+    public void setBikes(List<Bike> bikes) {
+        this.bikes = bikes;
+    }
+
+    public short getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(short enabled) {
+        this.enabled = enabled;
+    }
+>>>>>>> 7a4770c309824b58bf41b7fac10845c28f1f2452
 }
