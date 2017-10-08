@@ -9,21 +9,23 @@
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
 
 
-<!--This will display a form and take the name of the component-->
-<form method="post"  th:object="${component}">
+<!--This will display a form for the user to choose components-->
+
+<form method="post" style="max-width:600px;" th:object="${component}">
     <!--This form will take in the name of the component
         and the miles to put on it-->
     <div class="form-group">
         <label th:for="name">Type of component</label>
-        <input class="form-control" th:field="*{componentType}" />
+        <input type="checkbox" class="form-control" value="ComponentType" th:field="*{type}" /><!--
         <span th:errors="*{componentType}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="miles">Number of miles traveled</label>
         <input class="form-control" th:field="*{milesTraveled}"/>
-        <span th:errors="*{milesTraveled}" class="error"></span>
+        <span th:errors="*{milesTraveled}" class="error"></span>-->
     </div>
     <input type="submit" value="Add Component" />
 </form>
+
 </body>
 </html>
