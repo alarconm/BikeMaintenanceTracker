@@ -17,7 +17,7 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "user_id")
     @NotNull
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters long")
     private String name;
@@ -34,8 +34,6 @@ public class User {
 
     @NotNull
     private String role;
-
-    private short enabled;
 
     @OneToMany
     @JoinColumn(name ="user_id")
@@ -88,7 +86,6 @@ public class User {
         this.email = email;
     }
 
-<<<<<<< HEAD
     public Set<Role> getRoles() {
         return roles;
     }
@@ -97,7 +94,6 @@ public class User {
         this.roles = roles;
     }
 
-=======
     public String getRole() {
         return role;
     }
@@ -114,11 +110,5 @@ public class User {
         this.bikes = bikes;
     }
 
-    public short getEnabled() {
-        return enabled;
-    }
-    public void setEnabled(short enabled) {
-        this.enabled = enabled;
-    }
->>>>>>> 7a4770c309824b58bf41b7fac10845c28f1f2452
+
 }
