@@ -2,9 +2,11 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 //A bike component, such as brakes or derailleur
 
@@ -17,9 +19,20 @@ public class Component {
     @GeneratedValue // Auto generates the primary key
     private int id;
 
+    /*
+
+    //Let user enter name. Leaving this here temporarily
+    //in case we go back to this instead of using ENUMS
+
     @NotNull
     @Size(min = 3, max = 15, message = "Component name must be 3-15 characters long")
     private String componentName;
+    */
+
+
+
+    //ENUMS for frame, chain, etc
+    private ComponentType type;
 
     //Lifetime miles on the component
     private int componentMiles;
@@ -35,13 +48,15 @@ public class Component {
     @ManyToOne
     private Bike bike;
 
+
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Component() {
     }
 
-    public Component(String componentName, int milesTraveled) {
-        this.componentName = componentName;
+    public Component(int milesTraveled) {
+        //this();
+        //this.componentType = componentType;
         this.milesTraveled = milesTraveled;
     }
 
@@ -54,13 +69,18 @@ public class Component {
         this.id = id;
     }
 
-    public String getComponentName() {
-        return componentName;
-    }
+    /*
+
+    //Getters and Setters for componentName.
+    //Left them here for now in case we go back to componentName
+    //instead of ENUMS
+
+    public String getComponentName() { return componentName;    }
 
     public void setComponentName(String componentName) {
         this.componentName = componentName;
     }
+    */
 
     public int getComponentMiles() {
         return this.componentMiles;
@@ -71,19 +91,11 @@ public class Component {
         this.componentMiles = this.componentMiles + this.milesTraveled;
     }
 
-    public int getMilesTraveled() {
-        return milesTraveled;
+    public ComponentType getType() {
+        return type;
     }
 
-    public void setComponentMiles(int componentMiles) {
-        this.componentMiles = componentMiles;
-    }
-
-    public Bike getBike() {
-        return bike;
-    }
-
-    public void setBike(Bike bike) {
-        this.bike = bike;
+    public void setType(ComponentType type) {
+        this.type = type;
     }
 }
