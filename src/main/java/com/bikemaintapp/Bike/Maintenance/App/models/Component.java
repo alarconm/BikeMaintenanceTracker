@@ -36,7 +36,7 @@ public class Component {
     // There are many components, on one bike.
     @ManyToOne
     @JoinColumn(name ="bike_id")
-    private List<Component> components = new ArrayList<>();
+    private Bike bike;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate

@@ -12,6 +12,5 @@ import java.util.List;
 public interface RideDao extends CrudRepository<Ride, Integer>{
 
 
-    List<Ride> findRideByBikeID(int bikeID);
 }
 

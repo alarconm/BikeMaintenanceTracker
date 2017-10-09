@@ -2,6 +2,7 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
+import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class BikeController {
 
     // This view process the form from the bike form
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model){
+    public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model,HttpServletRequest request){
 
 
         // If the value is not met then return user to the add page
@@ -49,6 +50,8 @@ public class BikeController {
         }
         // If the values are met the process form and return the new to the index view
         model.addAttribute("bike",newBike);
+        User user = (User) request.getSession().getAttribute("user");
+        newBike.setUser(user);
         model.addAttribute("title","View Bikes");
         bikeDao.save(newBike);
         return "redirect:";
