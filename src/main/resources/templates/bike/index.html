@@ -13,10 +13,14 @@
 
 <!--TODO display all the bikes that the rider already has-->
 
+<h1 th:text="${#String.capitalize(username)} + 'Bikes'"></h1>
+
 <ul th:each="bike: ${bikes}">
     <li th:text="${bike.nameOfBike}"></li>
     <li th:text="${bike.milesTraveled}"></li>
+
 </ul>
+
 
 
 </body>

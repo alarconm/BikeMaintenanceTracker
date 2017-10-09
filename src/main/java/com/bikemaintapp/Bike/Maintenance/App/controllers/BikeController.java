@@ -2,7 +2,9 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
+import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
+import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +23,21 @@ public class BikeController {
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
 
+    @Autowired
+    private UserDao userDao;
+
     // display all the Existing bike
     @RequestMapping(value="")
     public String index(Model model, HttpServletRequest request){
-        model.addAttribute("bikes", bikeDao.findAll()); // Displays all bikes to the view. // TODO display bikes of a user
+
+
+        // User object
+        User sessionUserInfo = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
+        // User flow
+        model.addAttribute("username",sessionUserInfo.getName()); // pass the session user name to the view to display
+        model.addAttribute("bikes", bikeDao.findOne(sessionUserInfo.getId())); // Get the current session user id and only displays their bikes
+
+        // Bike Flow
         model.addAttribute("title","View Bikes");
         return "bike/index";
     }
