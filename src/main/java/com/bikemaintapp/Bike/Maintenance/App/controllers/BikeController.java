@@ -23,7 +23,7 @@ public class BikeController {
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
 
-    @Autowired
+    @Autowired // Instance of the user class
     private UserDao userDao;
 
     // display all the Existing bike
@@ -52,7 +52,7 @@ public class BikeController {
 
     // This view process the form from the bike form
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model){
+    public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model,HttpServletRequest request){
 
 
         // If the value is not met then return user to the add page
@@ -60,11 +60,12 @@ public class BikeController {
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
             return "bike/add";
         }
-        // If the values are met the process form and return the new to the index view
-        model.addAttribute("bike",newBike);
-        model.addAttribute("title","View Bikes");
-        bikeDao.save(newBike);
-        return "redirect:";
+
+        User sessionUserInfo = (User) request.getSession().getAttribute("user");
+        User userId = userDao.findOne(sessionUserInfo.getId()); // finds the user in database based off the session
+        newBike.setUser(userId); // sets the user id in the db based off session id
+        bikeDao.save(newBike); // add the user id as key in the DB
+        return "redirect:"; // redirect the user back to the index of app
     }
 
 }
