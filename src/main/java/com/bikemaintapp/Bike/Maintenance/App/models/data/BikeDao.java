@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 public interface BikeDao extends CrudRepository<Bike,Integer> {
 
-    List<Bike> findBikeByUser_id(User user);
+    List<Bike> findBikeByUser_Id(int userID);
 
 }

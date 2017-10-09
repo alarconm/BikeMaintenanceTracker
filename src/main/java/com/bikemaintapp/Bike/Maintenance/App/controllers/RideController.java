@@ -49,8 +49,10 @@ public class RideController {
         int userID = user.getId();
         System.out.println(userID);
 
+        //reverting to old method because this is not working right on page refresh
+        model.addAttribute("bikes",bikeDao.findBikeByUser_Id(userID));
         //Find bikes with that userID
-        model.addAttribute("bikes",user.getBikes());
+        //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
         model.addAttribute(new Ride());
         return "ride/add";
     }
