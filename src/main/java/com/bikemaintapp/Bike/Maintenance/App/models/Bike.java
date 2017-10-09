@@ -72,4 +72,8 @@ public class Bike {
     public void setMilesTraveled(int milesTraveled) {
         this.milesTraveled = milesTraveled;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
