@@ -36,6 +36,8 @@ public class RideController {
     @Required
     public String index(Model model){
         // TODO load ride data from db and display
+        model.addAttribute("rides", rideDao.findAll()); // Displays all bikes to the view. // TODO display bikes of a user
+        model.addAttribute("title","View Rides");
         return "ride/index";
     }
 
@@ -45,9 +47,12 @@ public class RideController {
         //Get userID from session
         User user = (User) request.getSession().getAttribute("user");
         int userID = user.getId();
+        System.out.println(userID);
 
-        //Find bikes with that userID
+        //reverting to old method because this is not working right on page refresh
         model.addAttribute("bikes",bikeDao.findBikeByUser_Id(userID));
+        //Find bikes with that userID
+        //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
         model.addAttribute(new Ride());
         return "ride/add";
     }
@@ -56,9 +61,11 @@ public class RideController {
     public String processAddRideForm(@ModelAttribute @Valid Ride newRide, Errors errors, Model model){
 
         if(errors.hasErrors()){
+            System.out.println("Error adding new ride");
             return "ride/add";
         }
         model.addAttribute("ride",newRide);
+
         rideDao.save(newRide);
         return "ride/index";
     }
