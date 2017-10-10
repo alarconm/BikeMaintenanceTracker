@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
-     rel="stylesheet"  type='text/css'>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 
@@ -15,60 +8,33 @@
     <!-- end css imports -->
 </head>
 <body class="container">
-    <h1 th:text="${title}"></h1>
+<nav th:replace="fragments :: navigation"></nav>
 
-<<<<<<< Updated upstream
+<h1 th:text="${title}"></h1>
+
 <!--This will display a form and take the name of the bike for the user-->
-<input method="post" th:object="${ride}">
-    <!--This will form will take in a user's bike name and  the miles traveled on a bike-->
+
+<form method="post"  th:object="${ride}">
     <div class="form-group">
-        <label th:for="name">Name of the bike</label>
-        <select>
+        <label th:for="name">Bike</label>
+        <select class="custom-select" th:field="${ride.bike}">
             <option th:each="bike : ${bikes}"
-                   th:text="${bike.nameOfBike}"></option>
+                    th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
         </select>
-    </div>
-
-
-<!-- Example single danger button -->
-<div class="btn-group">
-    <button type="button" class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Default bike
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-</div>
-
-
-<br>
-<br>
-<button type="submit" class="btn btn-primary btn-lg">Add Ride <i class="fa fa-plus" aria-hidden="true"></i>
-</button>
-</form>
-=======
-
-    <nav th:replace="fragments :: navigation"></nav>
-
-    <form method="post"  th:object="${bike}">
         <div class="form-group">
-            <label th:for="name">Bike</label>
-            <select class="custom-select">
-                <option th:each="bike : ${bikes}"
-                        th:text="${bike.nameOfBike}"></option>
-            </select>
+            <label th:for="miles-input" class="col-2 col-form-label">Miles</label>
+            <input class="form-control" th:field="${ride.miles}" type="number" value="0" id="miles-input"/>
+            <span th:errors="${ride.miles}" class="error"></span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-    <!-- Import jQuery, Popper, and Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    <!-- end js imports -->
+<!-- Import jQuery, Popper, and Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<!-- end js imports -->
 
->>>>>>> Stashed changes
 </body>
 </html>
