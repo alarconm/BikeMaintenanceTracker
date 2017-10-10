@@ -1,6 +1,6 @@
 # Bike Maintenance Tracker
 
-This Java/Springboot app help users track the wear and tear on bikes and their components. Providing them with a
+This Java/Springboot app help users track the wear and tear on bikes and their components. Providing users with a
 comprehensive view when worn out parts should be replaced or repaired.
 
 # Requirements
