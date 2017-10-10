@@ -16,8 +16,12 @@
         and the miles to put on it-->
     <div class="form-group">
         <label th:for="name">Type of component</label>
-        <input type="checkbox" class="form-control" value="ComponentType" th:field="*{type}" />
+
+        <div th:each="componentType : ${componentTypes}">
+            <label for="componentTypes" th:text="${componentType}"></label>
+            <input type="checkbox" class="form-control" th:field="${componentTypes}" value="${componentType.name}" id="componentTypes" />
         <span th:errors="*{type}" class="error"></span>
+        </div>
     </div>
     <!--
     <div class="form-group">
