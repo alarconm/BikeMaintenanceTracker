@@ -14,7 +14,7 @@
 <!--TODO display all the components already on the bike-->
 
 <ul th:each="component: ${components}">
-    <li th:text="${component.ComponentType}"></li>
+    <li th:text="${component.name}"></li>
     <li th:text="${component.milesTraveled}"></li>
 </ul>
 
