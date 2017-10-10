@@ -60,12 +60,22 @@ public class BikeController {
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
             return "bike/add";
         }
+<<<<<<< HEAD
+        // If the values are met the process form and return the new to the index view
+        model.addAttribute("bike",newBike);
+        User user = (User) request.getSession().getAttribute("user");
+        newBike.setUser(user);
+        model.addAttribute("title","View Bikes");
+        bikeDao.save(newBike);
+        return "redirect:";
+=======
 
         User sessionUserInfo = (User) request.getSession().getAttribute("user");
         User userId = userDao.findOne(sessionUserInfo.getId()); // finds the user in database based off the session
         newBike.setUser(userId); // sets the user id in the db based off session id
         bikeDao.save(newBike); // add the user id as key in the DB
         return "redirect:"; // redirect the user back to the index of app
+>>>>>>> refs/remotes/origin/master
     }
 
 }

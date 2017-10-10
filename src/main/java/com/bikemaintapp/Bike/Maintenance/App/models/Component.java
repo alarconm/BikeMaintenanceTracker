@@ -46,8 +46,13 @@ public class Component {
     // Relationships
     // There are many components, on one bike.
     @ManyToOne
+<<<<<<< HEAD
+    @JoinColumn(name ="bike_id")
+    private Bike bike;
+=======
     private Bike bike;
 
+>>>>>>> refs/remotes/origin/master
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
