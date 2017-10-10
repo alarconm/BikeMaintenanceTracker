@@ -18,7 +18,7 @@ import javax.validation.Valid;
 // Bike controller for creating a viewing bikes
 @Controller
 @RequestMapping("bike")
-public class BikeController {
+public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Controller {
 
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
@@ -30,7 +30,8 @@ public class BikeController {
     @RequestMapping(value="")
     public String index(Model model, HttpServletRequest request){
 
-
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
         // User object
         User sessionUserInfo = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
         // User flow
@@ -44,7 +45,10 @@ public class BikeController {
 
     // Display the bike add page and creates a bike object
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddBikeForm(Model model){
+    public String displayAddBikeForm(Model model, HttpServletRequest request){
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
         return "bike/add";
