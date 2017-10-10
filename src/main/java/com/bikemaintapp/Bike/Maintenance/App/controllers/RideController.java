@@ -35,7 +35,8 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
 
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
-        model.addAttribute("title","View Rides");
+
+        model.addAttribute("title",user.getName() + "'s Rides");
         return "ride/index";
     }
 
@@ -45,7 +46,6 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         //Kick them out if not logged in
         if(notAuthenticated(request))
             return "redirect:/user/login";
-
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("bikes",bikeDao.findBikeByUser_Id(user.getId()));
         //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
