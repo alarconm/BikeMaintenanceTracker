@@ -29,6 +29,7 @@ public class Bike {
     private int milesTraveled;
 
     // Relationships
+<<<<<<< HEAD
     // There is one bike to every user, This is the unique id for users to add a bike to their account
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="user_id")
@@ -52,6 +53,16 @@ public class Bike {
     public User getUser(){
         return this.user;
     }
+=======
+    // A user can have many bikes, but one user
+    @ManyToOne
+    private User user;
+
+    // There  are many components to a single bike.
+    @OneToMany
+    @JoinColumn(name = "bike_id")
+    private List<Component> component = new ArrayList<>();
+>>>>>>> refs/remotes/origin/master
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -86,5 +97,9 @@ public class Bike {
 
     public void setMilesTraveled(int milesTraveled) {
         this.milesTraveled = milesTraveled;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
