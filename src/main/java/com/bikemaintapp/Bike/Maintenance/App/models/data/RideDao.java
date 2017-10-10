@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface RideDao extends CrudRepository<Ride, Integer>{
-
-
+    List<Ride> findRideByUserId(int userID);
 }
 

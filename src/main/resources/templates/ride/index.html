@@ -22,8 +22,8 @@
     <th:block th:each="ride,i : ${rides}">
         <tr>
             <th scope="row" th:text="${i.count}">-1</th>
-            <td th:text="${ride.miles}"></td>
             <td th:text="${ride.bike.nameOfBike}"></td>
+            <td th:text="${ride.miles}"></td>
         </tr>
     </th:block>
     </tbody>

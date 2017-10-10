@@ -33,6 +33,9 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Bike> bikes;
 
+    @OneToMany(mappedBy = "user")
+    private List<Ride> rides;
+
     public void setBikes(List<Bike> bikes){
         this.bikes = bikes;
     }
@@ -42,6 +45,13 @@ public class User {
 
     public User(String name) {
         this.name = name;
+    }
+
+    public List<Ride> getRides(){
+        return rides;
+    }
+    public void setRides(List<Ride> rides){
+        this.rides = rides;
     }
 
     public List<Bike> getBikes(){

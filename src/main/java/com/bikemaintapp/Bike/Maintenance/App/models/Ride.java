@@ -24,23 +24,15 @@ public class Ride {
     @Range(min = 0,max = 9999, message = "")
     private double miles;
 
-
     // Relationships
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bike_id")
     private Bike bike;
 
-    //This is temporary i think. trying to figure out how to select bike object from add form
-   /* @NotNull
-    private int bikeWhich;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public int getBikeWhich(){
-        return  bikeWhich;
-    }
-    public void setBikeWhich(int bikeWhich){
-        this.bikeWhich = bikeWhich;
-    }
-*/
     public Ride(){
     }
 
@@ -55,6 +47,12 @@ public class Ride {
     }
     public void setMiles(Double miles){
         this.miles = miles;
+    }
+    public User getUser(){
+        return user;
+    }
+    public void setUser(User user){
+        this.user = user;
     }
     public Bike getBike(){
         return bike;
