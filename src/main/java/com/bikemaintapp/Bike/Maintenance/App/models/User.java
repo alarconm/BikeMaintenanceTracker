@@ -17,7 +17,7 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @Column(unique = true, name = "user_id")
+    @Column(unique = true, name="user_id")
     @NotNull
     @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters long")
     private String name;

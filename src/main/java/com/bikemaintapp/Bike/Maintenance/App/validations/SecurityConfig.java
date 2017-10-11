@@ -21,8 +21,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     javax.sql.DataSource dataSource;
@@ -32,9 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select user_id, password, verify_password from user where user_id=?")
-                .authoritiesByUsernameQuery("u.user_id, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.user_id=?")
-                .passwordEncoder(bCryptPasswordEncoder);
+                .usersByUsernameQuery("select email, password, verify_password from user where email=?")
+                .authoritiesByUsernameQuery("select email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where email=?");
+//                .passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
