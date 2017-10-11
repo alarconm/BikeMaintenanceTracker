@@ -26,6 +26,8 @@ public class Component {
     private String componentName;
     */
 
+    //TODO add relationship to framemaintenance - add notification flag
+
 
 
     //ENUMS for frame, chain, etc
