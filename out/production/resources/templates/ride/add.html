@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+
+    <!-- Bootstrap and font awesome css for making things pretty-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'></link>
+    <!-- end css imports -->
+</head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}"></h1>
+
+<!--This will display a form and take the name of the bike for the user-->
+
+<form method="post"  th:object="${ride}">
+    <div class="form-group">
+        <label th:for="name">Bike</label>
+        <select class="custom-select" th:field="${ride.bike}">
+            <option th:each="bike : ${bikes}"
+                    th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
+        </select>
+        <div class="form-group">
+            <label th:for="miles-input" class="col-2 col-form-label">Miles</label>
+            <input class="form-control" th:field="${ride.miles}" type="number" value="0" id="miles-input"/>
+            <span th:errors="${ride.miles}" class="error"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- Import jQuery, Popper, and Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<!-- end js imports -->
+
+</body>
+</html>

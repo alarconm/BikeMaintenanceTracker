@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 
 @Entity
 public class Ride {
