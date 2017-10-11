@@ -15,13 +15,23 @@
 
 <h2 th:text="${username} + ' Bikes'"></h2>
 
-<ul th:each="bike: ${bikes}">
-    <li th:text="${bike.nameOfBike}"></li>
-    <li th:text="${bike.milesTraveled}"></li>
+<table class="table">
+    <thead>
 
-</ul>
-
-
+    <tr>
+        <th>Bike</th>
+        <th>Mileage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="bike,i : ${bikes}">
+        <tr>
+            <td th:text="${bike.nameOfBike}"></td>
+            <td th:text="${bike.milesTraveled}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
 
 </body>
 </html>

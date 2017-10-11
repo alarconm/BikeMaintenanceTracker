@@ -2,10 +2,12 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 
 @Entity
 public class Ride {
@@ -14,11 +16,7 @@ public class Ride {
     @GeneratedValue
     private int id;
 
-    //Ride needs a bikeID
-    @NotNull
-    private int bikeID;
-
-    @NotNull
+    //@NotNull
     private String nameOfRide;
 
     //min should be enforced as greater than 0 but @Range will only take ints
@@ -27,17 +25,40 @@ public class Ride {
     @Range(min = 0,max = 9999, message = "")
     private double miles;
 
+    // Relationships
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bike_id")
+    private Bike bike;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Ride(){
     }
 
     // TODO some kind of generated name for rides if user doesnt enter one
-    public Ride(String nameOfRide,String nameOfBike) {
+    public Ride(String nameOfRide, Bike bike) {
         this.nameOfRide = nameOfRide;
-        //fetch bikeID from bikename
+        this.bike = bike;
     }
 
-    public Ride(String nameOfRide,int bikeID){
-        this.nameOfRide = nameOfRide;
-        this.bikeID = bikeID;
+    public double getMiles(){
+        return miles;
+    }
+    public void setMiles(Double miles){
+        this.miles = miles;
+    }
+    public User getUser(){
+        return user;
+    }
+    public void setUser(User user){
+        this.user = user;
+    }
+    public Bike getBike(){
+        return bike;
+    }
+    public void setBike(Bike bike){
+        this.bike = bike;
     }
 }

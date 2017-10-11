@@ -18,7 +18,7 @@ import javax.validation.Valid;
 // Bike controller for creating a viewing bikes
 @Controller
 @RequestMapping("bike")
-public class BikeController {
+public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Controller {
 
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
@@ -30,7 +30,8 @@ public class BikeController {
     @RequestMapping(value="")
     public String index(Model model, HttpServletRequest request){
 
-
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
         // User object
         User sessionUserInfo = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
         // User flow
@@ -43,7 +44,10 @@ public class BikeController {
 
     // Display the bike add page and creates a bike object
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddBikeForm(Model model){
+    public String displayAddBikeForm(Model model, HttpServletRequest request){
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
         return "bike/add";
@@ -59,12 +63,14 @@ public class BikeController {
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
             return "bike/add";
         }
+        // If the values are met the process form and return the new to the index view
+        model.addAttribute("bike",newBike);
+        User user = (User) request.getSession().getAttribute("user");
+        newBike.setUser(user);
+        model.addAttribute("title","View Bikes");
+        bikeDao.save(newBike);
+        return "redirect:";
 
-        User sessionUserInfo = (User) request.getSession().getAttribute("user");
-        User userId = userDao.findOne(sessionUserInfo.getId()); // finds the user in database based off the session
-        newBike.setUser(userId); // sets the user id in the db based off session id
-        bikeDao.save(newBike); // add the user id as key in the DB
-        return "redirect:"; // redirect the user back to the index of app
     }
     // Direct users to individual bikes in the view
     @RequestMapping(value = "main", method = RequestMethod.GET)

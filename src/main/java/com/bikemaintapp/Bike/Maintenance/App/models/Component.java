@@ -2,10 +2,7 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 //A bike component, such as brakes or derailleur
@@ -46,8 +43,8 @@ public class Component {
     // Relationships
     // There are many components, on one bike.
     @ManyToOne
+    @JoinColumn(name ="bike_id")
     private Bike bike;
-
 
     // Constructors
     // Default constructors required for Springboot/Hibernate

@@ -30,15 +30,32 @@ public class User {
     @NotNull
     private String email;
 
-    @OneToMany
-    @JoinColumn(name ="user_id")
-    private List<Bike> bikes = new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Bike> bikes;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ride> rides;
+
+    public void setBikes(List<Bike> bikes){
+        this.bikes = bikes;
+    }
 
     //Empty constructor needed for some Springboot/Hibernate magic
     public User() {}
 
     public User(String name) {
         this.name = name;
+    }
+
+    public List<Ride> getRides(){
+        return rides;
+    }
+    public void setRides(List<Ride> rides){
+        this.rides = rides;
+    }
+
+    public List<Bike> getBikes(){
+        return bikes;
     }
 
     public int getId() {
