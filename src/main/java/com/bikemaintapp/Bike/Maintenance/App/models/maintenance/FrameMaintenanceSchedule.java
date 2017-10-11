@@ -20,8 +20,6 @@ public class FrameMaintenanceSchedule {
     private int milesSinceMaint500 = 0;
     private int milesSinceMaint5000 = 0;
     private int undoMiles;
-    private String maintenance500;
-    private String maintenance5000;
 
     public void addMiles(int miles) {
         milesSinceMaint500 += miles;
@@ -69,22 +67,6 @@ public class FrameMaintenanceSchedule {
 
     public int getUndoMiles() {
         return undoMiles;
-    }
-
-    public String getMaintenance500() {
-        return maintenance500;
-    }
-
-    public void setMaintenance500(String maintenance500) {
-        this.maintenance500 = maintenance500;
-    }
-
-    public String getMaintenance5000() {
-        return maintenance5000;
-    }
-
-    public void setMaintenance5000(String maintenance5000) {
-        this.maintenance5000 = maintenance5000;
     }
 
     public Component getComponent() {
