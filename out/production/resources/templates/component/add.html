@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 th:text="${title}">Default Title</h1>
+
+<!-- This displays all the routes you can go, update the navigation in the fragments html-->
+
+
+<!--This will display a form for the user to choose components-->
+
+<form method="post" style="max-width:600px;" th:object="${component}">
+    <!--This form will take in the name of the component
+        and the miles to put on it-->
+    <div class="form-group">
+        <label th:for="name">Type of component</label>
+
+        <div th:each="componentType : ${componentTypes}">
+            <label for="componentTypes" th:text="${componentType}"></label>
+            <input type="checkbox" class="form-control" th:field="${componentTypes}" value="${componentType.name}" id="componentTypes" />
+        <span th:errors="*{type}" class="error"></span>
+        </div>
+    </div>
+    <!--
+    <div class="form-group">
+        <label th:for="miles">Number of miles traveled</label>
+        <input class="form-control" th:field="*{milesTraveled}"/>
+        <span th:errors="*{milesTraveled}" class="error"></span>
+    </div>
+    -->
+    <input type="submit" value="Add Component" />
+</form>
+
+</body>
+</html>
