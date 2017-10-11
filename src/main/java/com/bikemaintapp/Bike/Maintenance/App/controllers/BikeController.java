@@ -34,11 +34,10 @@ public class BikeController {
         // User object
         User sessionUserInfo = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
         // User flow
-        model.addAttribute("username",sessionUserInfo.getName()); // pass the session user name to the view to display
-        model.addAttribute("bikes", bikeDao.findOne(sessionUserInfo.getId())); // Get the current session user id and only displays their bikes
+        model.addAttribute("title",sessionUserInfo.getName()); // Display the user name on the title page
 
         // Bike Flow
-        model.addAttribute("title","View Bikes");
+        model.addAttribute("bikes", bikeDao.findBikeByUser_Id(sessionUserInfo.getId())); // Gets all the bikes of the current session user
         return "bike/index";
     }
 
@@ -66,6 +65,11 @@ public class BikeController {
         newBike.setUser(userId); // sets the user id in the db based off session id
         bikeDao.save(newBike); // add the user id as key in the DB
         return "redirect:"; // redirect the user back to the index of app
+    }
+    // Direct users to individual bikes in the view
+    @RequestMapping(value = "main", method = RequestMethod.GET)
+    public String displayIndividualBikes(Model model){
+        return "bike/main";
     }
 
 }

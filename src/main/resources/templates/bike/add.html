@@ -17,11 +17,6 @@
         <input class="form-control" th:field="*{nameOfBike}" />
         <span th:errors="*{nameOfBike}" class="error"></span>
     </div>
-    <div class="form-group">
-        <label th:for="name">Number of miles traveled</label>
-        <input class="form-control" th:field="*{milesTraveled}"/>
-        <span th:errors="*{milesTraveled}" class="error"></span>
-    </div>
     <input type="submit" value="Add a Bike" />
 </form>
 </body>

@@ -24,10 +24,6 @@ public class Bike {
     @Size(min = 3, max = 15, message = "Bike needs to be 3-15 characters long")
     private String nameOfBike;
 
-    @NotNull
-    @Range(min = 1, message = "please enter distance traveled in miles")
-    private int milesTraveled;
-
     // Relationships
     // A user can have many bikes, but one user
     @ManyToOne
@@ -43,9 +39,8 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(String nameOfBike, int milesTraveled) {
+    public Bike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-        this.milesTraveled = milesTraveled;
     }
 
     // Setters & Getters
@@ -63,14 +58,6 @@ public class Bike {
 
     public void setNameOfBike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-    }
-
-    public int getMilesTraveled() {
-        return milesTraveled;
-    }
-
-    public void setMilesTraveled(int milesTraveled) {
-        this.milesTraveled = milesTraveled;
     }
 
     public void setUser(User user) {

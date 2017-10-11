@@ -12,6 +12,6 @@ import java.util.List;
 @Transactional
 public interface BikeDao extends CrudRepository<Bike,Integer> {
 
-    List<Bike> findBikeByUser_Id(int bikeID);
+    List<Bike> findBikeByUser_Id(int bikeID); // This finds bike based off user/session id
 
 }
