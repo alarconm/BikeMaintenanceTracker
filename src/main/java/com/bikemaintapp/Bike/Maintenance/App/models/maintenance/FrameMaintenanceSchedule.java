@@ -35,6 +35,8 @@ public class FrameMaintenanceSchedule {
 
     }
 
+    public FrameMaintenanceSchedule() {}
+
     public String notifyMaint(int miles) {
 
         if (miles >= 500 && miles < 5000) {

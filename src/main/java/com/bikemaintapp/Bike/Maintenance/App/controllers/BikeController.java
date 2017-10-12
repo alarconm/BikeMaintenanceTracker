@@ -2,6 +2,8 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
+import com.bikemaintapp.Bike.Maintenance.App.models.Component;
+import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
@@ -51,6 +53,8 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
+        model.addAttribute(new Component());
+        model.addAttribute("componentTypes", ComponentType.values());
         return "bike/add";
     }
 
