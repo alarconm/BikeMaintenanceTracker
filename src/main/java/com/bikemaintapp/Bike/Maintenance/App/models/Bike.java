@@ -25,10 +25,6 @@ public class Bike {
     @Size(min = 3, max = 15, message = "Bike needs to be 3-15 characters long")
     private String nameOfBike;
 
-    @NotNull
-    @Range(min = 1, message = "please enter distance traveled in miles")
-    private int milesTraveled;
-
     // Relationships
 
     // There is one bike to every user, This is the unique id for users to add a bike to their account
@@ -58,9 +54,8 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(String nameOfBike, int milesTraveled) {
+    public Bike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-        this.milesTraveled = milesTraveled;
     }
 
     //One option for tracking miles
@@ -102,14 +97,6 @@ public class Bike {
 
     public void setNameOfBike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-    }
-
-    public int getMilesTraveled() {
-        return milesTraveled;
-    }
-
-    public void setMilesTraveled(int milesTraveled) {
-        this.milesTraveled = milesTraveled;
     }
 
     public void setUser(User user) {
