@@ -96,7 +96,7 @@ public class UserController {
         return "user/add";
     }
 
-    //
+
     //HttpServletRequest is for session management
     //process the user creation form
     @RequestMapping(value = "add", method = RequestMethod.POST)

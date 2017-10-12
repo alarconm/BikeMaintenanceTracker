@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -62,8 +63,23 @@ public class Bike {
         this.milesTraveled = milesTraveled;
     }
 
+    //One option for tracking miles
+    //Should have less potential for errors
+    public int countMiles(){
+
+        Iterator iterator = rides.iterator();
+        int total = 0;
+        while(iterator.hasNext()) {
+            Ride tempRide = (Ride) iterator.next();
+            total += (int) tempRide.getMiles();
+        }
+        return total;
+    }
+
+    //Temporary function for me to check on whats going on without real debug
     public void printBikeName(){
         System.out.println(this.nameOfBike);
+        System.out.println(countMiles());
     }
     //Called by /ride/add to add mileage.
     //This function should be able to pass this onto the bikes Component list.
