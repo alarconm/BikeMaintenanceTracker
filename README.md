@@ -32,4 +32,6 @@ comprehensive view when worn out parts should be replaced or repaired.
 # Wireframes
 
 <h5>User log-in and bike add</h5>
-<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/IMG_1944.JPG?raw=true">
+<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/IMG_1944.JPG?raw=true" height="480em" width="640em">
+<h5>*update bike view wireframe</h5>
+<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/updated_bike_view_wireframe_10_12.jpg?raw=true" height="480em" width="640em">
