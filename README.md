@@ -30,3 +30,6 @@ comprehensive view when worn out parts should be replaced or repaired.
 </ol>
 
 # Wireframes
+
+<h5>User log-in and bike add</h5>
+<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/IMG_1944.JPG?raw=true">
