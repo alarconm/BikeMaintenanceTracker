@@ -18,10 +18,8 @@ public abstract class MaintenanceSchedule {
     private Component component;
 
     //This these in subclasses
-    private String maintInstructionsOne = "Default message for instructionsOne";
-    private String maintInstructionsTwo = "Default message for instructionsTwo";
-    private String maintInstructionsThree = "Default message for instructionsThree";
     private int[] interval = null;
+    private String[] maintInstructions = null;
 
     //each variable is tied to maintenance performed at the specific mileage interval
     /*This array is replacing milesSinceIntervalOne,milesSinceIntervalTwo and milesSinceIntervalThree.
@@ -36,10 +34,13 @@ public abstract class MaintenanceSchedule {
 
         undoMiles = miles;
 
-        for(int i=0;i < 3;i++){
+        //This runs once for each element in interval[]
+        for(int i=0;i < interval.length;i++){
             milesSinceMaintInterval[i] += miles;  //replacing milesSinceMaintIntervalOne += miles;
             if(milesSinceMaintInterval[i] >= interval[i]){
-                notifyMaint(milesSinceMaintInterval[i]); //TODO do somethign with what notifyMaint() returns
+                //notifyMaint(milesSinceMaintInterval[i]); //TODO do somethign with what notifyMaint() returns
+
+                //return maintInstructions[i]; //We can just return the instruction matching the index of this interval
             }
         }
     }
@@ -50,28 +51,41 @@ public abstract class MaintenanceSchedule {
 
     // if the mileage on a component hits the maximum for a maintenance interval it will call this method
     // then it will return the string explaining the maintenance that needs to be performed.
-    //TODO Fix this- repeating mileage check of addMiles() and returned values not going anywhere
+    //TODO returned values not going anywhere
     //Todo figure out if this should be overridden per subclass for different combinations of messages
     public String notifyMaint(int miles) {
 
-        if (miles >= interval[0] && miles < interval[1]) {
-            return maintInstructionsOne;
-        } else if (miles >= interval[1] && miles < interval[2]) {
-            return maintInstructionsTwo;
+        if (miles < interval[1]) {
+            return maintInstructions[0];
+        } else if (miles < interval[2]) {
+            return maintInstructions[1];
         } else {
-            return maintInstructionsThree;
+            return maintInstructions[2];
         }
     }
 
     //This is for our subclasses to set their maintenance instructions
     protected void setInstructions(String one,String two,String three){
-        maintInstructionsOne = one;
-        maintInstructionsTwo = two;
-        maintInstructionsThree = three;
+        maintInstructions = new String[] {one,two,three};
     }
     //This is for our subclasses to set their mileage intervals
     protected void setInterval(int one, int two, int three){
         interval = new int[] {one,two,three};
+    }
+    //TODO get rid of these overloaded functions. Should make a new class holding interval
+    //TODO numbers and instructions as one object, and then keep a list of those. then could have a simple add() in the subclasses and no overloading
+    //We could also make a more dynamic setter that accepts arrays, but then the subclasses arent as readable because you lose some IDE notes
+    protected void setInstructions(String one,String two){
+        maintInstructions = new String[] {one,two};
+    }
+    protected void setInterval(int one, int two){
+        interval = new int[] {one,two};
+    }
+    protected void setInstructions(String one){
+        maintInstructions = new String[] {one};
+    }
+    protected void setInterval(int one){
+        interval = new int[] {one};
     }
 
     //Setters and Getters
