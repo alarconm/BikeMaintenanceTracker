@@ -8,13 +8,8 @@ public class DriveTrainMaintenanceSchedule extends MaintenanceSchedule{
 
     public DriveTrainMaintenanceSchedule(){
 
-        //Messages
-        setInstructions(
-                "Lube chain, cassette and pedals",
-                "Perform full cleaning of chain and cassette. Re-lube all parts",
-                "Replace chain and cassette");
-        //Set these three bits with the mileage between intervals
-        setInterval(100,500,500);
+        addInterval(100,"Lube chain, cassette and pedals");
+        addInterval(500,"Perform full cleaning of chain and cassette. Re-lube all parts");
+        addInterval(5000,"Replace chain and cassette");
     }
-
 }

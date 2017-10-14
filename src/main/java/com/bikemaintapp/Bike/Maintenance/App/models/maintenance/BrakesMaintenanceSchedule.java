@@ -7,14 +7,9 @@ import javax.persistence.Entity;
 public class BrakesMaintenanceSchedule extends MaintenanceSchedule{
 
     public BrakesMaintenanceSchedule(){
-
-        //Messages
-        setInstructions(
-                "Check brake cables, increase tension if needed",
-                "Lubricate cables, increase tension if needed",
-                "Lubricate cables, increase tension if needed");
-        //Set these three bits with the mileage between intervals
-        setInterval(100,500,2500);
+        addInterval(100,"Check brake cables, increase tension if needed");
+        addInterval(500,"Lubricate cables, increase tension if needed");
+        addInterval(2500,"Check brake pads and replace if worn out");
     }
 
 }

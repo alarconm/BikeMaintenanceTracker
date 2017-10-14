@@ -8,12 +8,8 @@ public class TiresMaintenanceSchedule extends MaintenanceSchedule{
 
     public TiresMaintenanceSchedule(){
 
-        //Messages
-        setInstructions(
-                "check pressure and inspect for any cracks",
-                "Replace tires if tread is fully worn down");
-        //Set these with the mileage between intervals
-        setInterval(100,2500);
+        addInterval(100,"check pressure and inspect for any cracks");
+        addInterval(2500,"Replace tires if tread is fully worn down");
     }
 }
 

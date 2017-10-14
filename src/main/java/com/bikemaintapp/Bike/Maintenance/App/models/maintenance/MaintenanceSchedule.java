@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public abstract class MaintenanceSchedule {
@@ -17,14 +20,10 @@ public abstract class MaintenanceSchedule {
     @OneToOne
     private Component component;
 
-    //This these in subclasses
-    private int[] interval = null;
-    private String[] maintInstructions = null;
-
-    //each variable is tied to maintenance performed at the specific mileage interval
-    /*This array is replacing milesSinceIntervalOne,milesSinceIntervalTwo and milesSinceIntervalThree.
-      milesSinceIntervalOne is now the first element in the array, and so on*/
-    private int[] milesSinceMaintInterval = {0,0,0};
+    //These lists could should maybe all be together in a subclass...but its fine
+    private List<Integer> intervals = new ArrayList<Integer>();
+    private List<String> maintInstructions = new ArrayList<String>();
+    private List<Integer> milesSinceMaintInterval = new ArrayList<Integer>();
 
     // this holds the last entered mileage so that an undo/remove last ride button can be used
     private int undoMiles;
@@ -33,14 +32,17 @@ public abstract class MaintenanceSchedule {
     public void addMiles(int miles) {
 
         undoMiles = miles;
+        //This runs once for each element in intervals[]
+        for(int i=0;i < intervals.size();i++){
+            int temp = milesSinceMaintInterval.get(i) + miles;
+            milesSinceMaintInterval.set(i,temp);
 
-        //This runs once for each element in interval[]
-        for(int i=0;i < interval.length;i++){
-            milesSinceMaintInterval[i] += miles;  //replacing milesSinceMaintIntervalOne += miles;
-            if(milesSinceMaintInterval[i] >= interval[i]){
-                //notifyMaint(milesSinceMaintInterval[i]); //TODO do somethign with what notifyMaint() returns
+            if(milesSinceMaintInterval.get(i) >= intervals.get(i)){
+                //We can just return the instruction matching the index of this interval without further comparisons
+                //return maintInstructions[i];
 
-                //return maintInstructions[i]; //We can just return the instruction matching the index of this interval
+                //But we may need further processing or some other actions so lets keep this call for now
+                notifyMaint(i);
             }
         }
     }
@@ -64,6 +66,42 @@ public abstract class MaintenanceSchedule {
         }
     }
 
+    protected void addInterval(int miles, String instructions){
+        intervals.add(miles);
+        maintInstructions.add(instructions);
+        milesSinceMaintInterval.add(0);
+    }
+
+    //Setters and Getters
+    public int getId() {
+        return id;
+    }
+
+    public Component getComponent() {
+        return component;
+    }
+
+    public void setComponent(Component component) {
+        this.component = component;
+    }
+    public int getMilesSinceMaintInterval(int i) {
+        return milesSinceMaintInterval.get(i);
+    }
+
+    public void setMilesSinceMaintInterval(int i,int milesSinceMaint) {
+        int temp = milesSinceMaintInterval.get(i);
+        milesSinceMaintInterval.set(i,milesSinceMaint);
+    }
+    public int getUndoMiles() {
+        return undoMiles;
+    }
+
+    public void setUndoMiles(int undoMiles) {
+        this.undoMiles = undoMiles;
+    }
+
+
+    /* old overload methods i was using
     //This is for our subclasses to set their maintenance instructions
     protected void setInstructions(String one,String two,String three){
         maintInstructions = new String[] {one,two,three};
@@ -87,31 +125,5 @@ public abstract class MaintenanceSchedule {
     protected void setInterval(int one){
         interval = new int[] {one};
     }
-
-    //Setters and Getters
-    public int getId() {
-        return id;
-    }
-
-    public Component getComponent() {
-        return component;
-    }
-
-    public void setComponent(Component component) {
-        this.component = component;
-    }
-    public int getMilesSinceMaintInterval(int i) {
-        return milesSinceMaintInterval[i];
-    }
-
-    public void setMilesSinceMaintInterval(int i,int milesSinceMaint) {
-        this.milesSinceMaintInterval[i] = milesSinceMaint;
-    }
-    public int getUndoMiles() {
-        return undoMiles;
-    }
-
-    public void setUndoMiles(int undoMiles) {
-        this.undoMiles = undoMiles;
-    }
+    */
 }

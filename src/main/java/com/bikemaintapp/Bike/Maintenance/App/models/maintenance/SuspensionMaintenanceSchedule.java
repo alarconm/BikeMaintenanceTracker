@@ -8,12 +8,8 @@ public class SuspensionMaintenanceSchedule extends MaintenanceSchedule{
 
     public SuspensionMaintenanceSchedule(){
 
-        //Messages
-        setInstructions(
-                "Clean and lubricate suspension",
-                "Full suspension teardown and rebuild");
-        //Set these with the mileage between intervals
-        setInterval(100,500);
+        addInterval(100,"Clean and lubricate suspension");
+        addInterval(500,"Full suspension teardown and rebuild");
     }
 }
 
