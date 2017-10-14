@@ -17,7 +17,10 @@ public enum ComponentType {
 
     FRAME ("Frame"),
     BRAKES ("Brakes"),
-    CHAIN ("Chain");
+    DRIVETRAIN ("Drivetrain"),
+    TIRES ("Tires"),
+    WHEELS ("Wheels"),
+    SUSPENSION ("Suspension");
 
     private final String name;
 
