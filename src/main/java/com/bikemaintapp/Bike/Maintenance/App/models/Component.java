@@ -1,5 +1,6 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
+import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.FrameMaintenanceSchedule;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -26,6 +27,8 @@ public class Component {
     private String componentName;
     */
 
+    //TODO add relationship to framemaintenance - add notification flag
+
 
 
     //ENUMS for frame, chain, etc
@@ -45,6 +48,9 @@ public class Component {
     @ManyToOne
     @JoinColumn(name ="bike_id")
     private Bike bike;
+
+    @OneToOne
+    private FrameMaintenanceSchedule frameMaintenanceSchedule;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate

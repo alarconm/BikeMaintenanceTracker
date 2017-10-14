@@ -44,7 +44,7 @@ public class User {
     public User() {}
 
     public User(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public List<Ride> getRides(){
@@ -67,7 +67,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
 
     public String getPassword() {
