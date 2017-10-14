@@ -17,10 +17,12 @@ public class TiresMaintenanceSchedule {
     @OneToOne
     private Component component;
 
+    // each variable is tied to maintenance performed at the specific mileage interval
     private int milesSinceMaint100 = 0;
     private int milesSinceMaint2500 = 0;
     private int undoMiles; //holds the last entered ride so that an undo button can be used.
 
+    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     public void addMiles(int miles) {
         milesSinceMaint100 += miles;
         milesSinceMaint2500 += miles;
@@ -32,11 +34,11 @@ public class TiresMaintenanceSchedule {
         if (milesSinceMaint2500 >= 2500) {
             notifyMaint(2500);
         }
-
     }
-
     public TiresMaintenanceSchedule() {}
 
+    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
+    // then it will return the string explaining the maintenance that needs to be performed
     public String notifyMaint(int miles) {
 
         if (miles >= 100 && miles < 2500) {
@@ -44,7 +46,6 @@ public class TiresMaintenanceSchedule {
         } else {
             return "Replace tires if tread is fully worn down";
         }
-
     }
 
     public int getId() {

@@ -14,14 +14,16 @@ public class BrakesMaintenanceSchedule {
     @GeneratedValue // Auto generates primary key
     private int id;
 
-    @OneToOne
+    @OneToOne // Each component has a maintenance schedule attached to it
     private Component component;
 
+    // each variable is tied to maintenance performed at the specific mileage interval
     private int milesSinceMaint100 = 0;
     private int milesSinceMaint500 = 0;
     private int milesSinceMaint2500 = 0;
-    private int undoMiles;
+    private int undoMiles; // this holds the last entered mileage so that an undo/remove last ride button can be used
 
+    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     public void addMiles(int miles) {
         milesSinceMaint100 += miles;
         milesSinceMaint500 += miles;
@@ -41,8 +43,8 @@ public class BrakesMaintenanceSchedule {
 
     }
 
-    public BrakesMaintenanceSchedule() {}
-
+    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
+    // then it will return the string explaining the maintenance that needs to be performed
     public String notifyMaint(int miles) {
 
         if (miles >= 500 && miles < 2500) {
@@ -53,6 +55,8 @@ public class BrakesMaintenanceSchedule {
             return "Check brake pads and replace if worn out";
         }
     }
+
+    public BrakesMaintenanceSchedule() {}
 
     public int getId() {
         return id;

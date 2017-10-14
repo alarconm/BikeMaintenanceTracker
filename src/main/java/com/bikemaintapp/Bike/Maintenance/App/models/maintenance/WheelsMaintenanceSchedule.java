@@ -20,6 +20,7 @@ public class WheelsMaintenanceSchedule {
     private int milesSinceMaint500 = 0;
     private int undoMiles; //holds the last entered ride so that an undo button can be used.
 
+    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     public void addMiles(int miles) {
         milesSinceMaint500 += miles;
         undoMiles = miles;
@@ -31,6 +32,8 @@ public class WheelsMaintenanceSchedule {
 
     public WheelsMaintenanceSchedule() {}
 
+    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
+    // then it will return the string explaining the maintenance that needs to be performed
     public String notifyMaint(int miles) {
         return "Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels";
     }

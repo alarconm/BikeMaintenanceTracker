@@ -17,11 +17,13 @@ public class DriveTrainMaintenanceSchedule {
     @OneToOne
     private Component component;
 
+    // each variable is tied to maintenance performed at the specific mileage interval
     private int milesSinceMaint100 = 0;
     private int milesSinceMaint500 = 0;
     private int milesSinceMaint5000 = 0;
-    private int undoMiles;
+    private int undoMiles; // this holds the last entered mileage so that an undo/remove last ride button can be used
 
+    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     public void addMiles(int miles) {
         milesSinceMaint100 += miles;
         milesSinceMaint500 += miles;
@@ -42,6 +44,9 @@ public class DriveTrainMaintenanceSchedule {
 
     public DriveTrainMaintenanceSchedule() {
     }
+
+    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
+    // then it will return the string explaining the maintenance that needs to be performed
 
     public String notifyMaint(int miles) {
 

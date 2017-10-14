@@ -17,10 +17,12 @@ public class SuspensionMaintenanceSchedule {
     @OneToOne
     private Component component;
 
+    // each variable is tied to maintenance performed at the specific mileage interval
     private int milesSinceMaint500 = 0;
     private int milsSinceMaint1000 = 0;
     private int undoMiles; //holds the last entered ride so that an undo button can be used.
 
+    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     public void addMiles(int miles) {
         milesSinceMaint500 += miles;
         milsSinceMaint1000 += miles;
@@ -36,6 +38,8 @@ public class SuspensionMaintenanceSchedule {
 
     public SuspensionMaintenanceSchedule() {}
 
+    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
+    // then it will return the string explaining the maintenance that needs to be performed
     public String notifyMaint(int miles) {
 
         if (miles >= 500 && miles < 1000) {
