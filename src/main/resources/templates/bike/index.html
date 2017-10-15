@@ -4,7 +4,7 @@
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${#strings.capitalize(title)}">Default Title</h1>
 
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
 
@@ -14,7 +14,7 @@
 <h2>Your bikes</h2>
 <!--This will list all the bikes of a specific user.-->
 <ul th:each="bike: ${bikes}">
-    <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${bike.nameOfBike}"></a>
+    <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
     <!--links to a bikes page based off the id-->
 </ul>
 
