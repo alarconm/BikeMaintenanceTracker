@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-
+import java.util.List;
 
 
 // Bike controller for creating a viewing bikes
@@ -43,7 +43,8 @@ public class ComponentController {
 
     // This view processes the component form
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddComponentForm(@ModelAttribute @Valid Component newComponent, Errors errors, Model model){
+    public String processAddComponentForm(@ModelAttribute @Valid Component newComponent, Errors errors, Model model,
+                                          List<Component> components){
 
 
         // If the value is not correct then return user to the add page
