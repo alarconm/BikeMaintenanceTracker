@@ -21,8 +21,11 @@ public abstract class MaintenanceSchedule {
     private Component component;
 
     //These lists could should maybe all be together in a subclass...but its fine
+    @ElementCollection(targetClass=Integer.class)
     private List<Integer> intervals = new ArrayList<Integer>();
+    @ElementCollection(targetClass=String.class)
     private List<String> maintInstructions = new ArrayList<String>();
+    @ElementCollection(targetClass=Integer.class)
     private List<Integer> milesSinceMaintInterval = new ArrayList<Integer>();
 
     // this holds the last entered mileage so that an undo/remove last ride button can be used
