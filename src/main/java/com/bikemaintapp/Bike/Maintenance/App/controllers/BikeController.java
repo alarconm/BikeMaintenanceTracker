@@ -6,15 +6,15 @@ import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
+import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
 // Bike controller for creating a viewing bikes
@@ -28,6 +28,9 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
     @Autowired // Instance of the user class
     private UserDao userDao;
 
+    @Autowired
+    private ComponentDao componentDao;
+
     // display all the Existing bike
     @RequestMapping(value="")
     public String index(Model model, HttpServletRequest request){
@@ -35,13 +38,12 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
         if(notAuthenticated(request))
             return "redirect:/user/login";
         // User object
-        User sessionUserInfo = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
+        User user = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
         // User flow
-        model.addAttribute("username",sessionUserInfo.getName()); // pass the session user name to the view to display
-        model.addAttribute("bikes", bikeDao.findOne(sessionUserInfo.getId())); // Get the current session user id and only displays their bikes
+        model.addAttribute("title",user.getName() + "'s Bikes"); // Display the user name on the title page
 
         // Bike Flow
-        model.addAttribute("title","View Bikes");
+        model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId())); // Gets all the bikes of the current session user
         return "bike/index";
     }
 
@@ -69,13 +71,22 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
-        model.addAttribute("bike",newBike);
-        User user = (User) request.getSession().getAttribute("user");
+        model.addAttribute("bike",newBike); // Pass bike object into the view
+        User user = (User) request.getSession().getAttribute("user"); // Get the session user
         newBike.setUser(user);
-        model.addAttribute("title","View Bikes");
         bikeDao.save(newBike);
         return "redirect:";
 
     }
+    @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
+    public String viewMenu(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        model.addAttribute("title", bike.getNameOfBike());
+
+        return "bike/main";
+    }
+
+
 
 }
