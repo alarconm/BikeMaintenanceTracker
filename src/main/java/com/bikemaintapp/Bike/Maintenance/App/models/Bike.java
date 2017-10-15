@@ -50,7 +50,7 @@ public class Bike {
     public User getUser(){
         return this.user;
     }
-    
+
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Bike() {
