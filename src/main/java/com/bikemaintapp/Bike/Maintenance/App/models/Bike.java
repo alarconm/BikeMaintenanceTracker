@@ -79,7 +79,7 @@ public class Bike {
     //Called by /ride/add to add mileage.
     //This function should be able to pass this onto the bikes Component list.
     public void addMiles(int miles){
-        this.milesTraveled += miles;
+        //this.milesTraveled += miles;
     }
 
     // Setters & Getters

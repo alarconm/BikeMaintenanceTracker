@@ -2,10 +2,7 @@ package com.bikemaintapp.Bike.Maintenance.App.models.maintenance;
 
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,15 +55,15 @@ public abstract class MaintenanceSchedule {
     // then it will return the string explaining the maintenance that needs to be performed.
     //TODO returned values not going anywhere
     //Todo figure out if this should be overridden per subclass for different combinations of messages
-    public String notifyMaint(int miles) {
+    public void notifyMaint(int miles) {
 
-        if (miles < interval[1]) {
+        /*if (miles < interval[1]) {
             return maintInstructions[0];
         } else if (miles < interval[2]) {
             return maintInstructions[1];
         } else {
             return maintInstructions[2];
-        }
+        }*/
     }
 
     protected void addInterval(int miles, String instructions){
