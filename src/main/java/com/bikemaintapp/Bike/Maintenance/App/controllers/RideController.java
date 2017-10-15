@@ -62,6 +62,9 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         model.addAttribute("ride",newRide);
         User user = (User) request.getSession().getAttribute("user");
         newRide.setUser(user);
+
+        newRide.getBike().addMiles((int)newRide.getMiles());
+        newRide.getBike().printBikeName();
         rideDao.save(newRide);
         return "redirect:";
     }

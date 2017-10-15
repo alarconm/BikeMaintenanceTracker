@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -23,10 +24,6 @@ public class Bike {
     @NotNull
     @Size(min = 3, max = 15, message = "Bike needs to be 3-15 characters long")
     private String nameOfBike;
-
-    @NotNull
-    @Range(min = 1, message = "please enter distance traveled in miles")
-    private int milesTraveled;
 
     // Relationships
 
@@ -56,9 +53,32 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(String nameOfBike, int milesTraveled) {
+    public Bike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-        this.milesTraveled = milesTraveled;
+    }
+
+    //One option for tracking miles
+    //Should have less potential for errors
+    public int countMiles(){
+
+        Iterator iterator = rides.iterator();
+        int total = 0;
+        while(iterator.hasNext()) {
+            Ride tempRide = (Ride) iterator.next();
+            total += (int) tempRide.getMiles();
+        }
+        return total;
+    }
+
+    //Temporary function for me to check on whats going on without real debug
+    public void printBikeName(){
+        System.out.println(this.nameOfBike);
+        System.out.println(countMiles());
+    }
+    //Called by /ride/add to add mileage.
+    //This function should be able to pass this onto the bikes Component list.
+    public void addMiles(int miles){
+        //this.milesTraveled += miles;
     }
 
     // Setters & Getters
@@ -76,14 +96,6 @@ public class Bike {
 
     public void setNameOfBike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
-    }
-
-    public int getMilesTraveled() {
-        return milesTraveled;
-    }
-
-    public void setMilesTraveled(int milesTraveled) {
-        this.milesTraveled = milesTraveled;
     }
 
     public void setUser(User user) {
