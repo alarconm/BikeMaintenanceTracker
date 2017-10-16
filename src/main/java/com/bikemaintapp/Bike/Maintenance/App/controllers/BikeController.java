@@ -92,22 +92,22 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
         return "redirect:";
 
     }
-    @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @PathVariable int bikeId) {
-
-        // Display the total amount of mile for the bike in
-        List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
-        double totalMilesTraveled = 0;
-        for (Ride miles : bikeMiles){
-            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
-        }
-
-        model.addAttribute("totalTraveled",totalMilesTraveled);
-        Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
-        model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
-
-        return "bike/main";
-    }
+//    @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
+//    public String viewMenu(Model model, @PathVariable int bikeId) {
+//
+//        // Display the total amount of mile for the bike in
+//        //List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
+////        double totalMilesTraveled = 0;
+////        for (Ride miles : bikeMiles){
+////            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
+////        }
+//
+//        model.addAttribute("totalTraveled",totalMilesTraveled);
+//        Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
+//        model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
+//
+//        return "bike/main";
+//    }
 
 
 
