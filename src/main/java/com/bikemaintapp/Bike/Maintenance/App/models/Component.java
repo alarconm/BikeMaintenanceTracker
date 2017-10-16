@@ -29,6 +29,8 @@ public class Component {
 
     //TODO add relationship to framemaintenance - add notification flag
 
+    //flag for the view to see if component currently needs maintenance or not
+    private boolean needsMaintenance = false;
 
 
     //ENUMS for frame, chain, etc
@@ -101,4 +103,16 @@ public class Component {
     public void setType(ComponentType type) {
         this.type = type;
     }
+
+    public boolean getNeedsMaintenance() {
+        return needsMaintenance;
+    }
+
+    public void setNeedsMaintenance(boolean needsMaintenance) {
+        this.needsMaintenance = needsMaintenance;
+    }
 }
+
+
+
+

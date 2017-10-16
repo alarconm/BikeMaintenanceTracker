@@ -96,16 +96,21 @@ public class UserController {
         return "user/add";
     }
 
-    //
+
     //HttpServletRequest is for session management
     //process the user creation form
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors,
-                                     Model model, HttpServletRequest request) {
+                                     Model model, HttpServletRequest request, String verifyPassword) {
 
-        if (errors.hasErrors()) {
+        if (errors.hasErrors() || !verifyPassword.equals(newUser.getPassword())) {
             model.addAttribute("title", "Create New Account");
             model.addAttribute("user", newUser);
+
+            if (!verifyPassword.equals(newUser.getPassword())) {
+                model.addAttribute("passwordError",
+                        "You must enter the same password both times");
+            }
             return "user/add";
         }
 

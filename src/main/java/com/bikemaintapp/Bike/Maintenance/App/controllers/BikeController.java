@@ -18,6 +18,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+
 import java.util.List;
 
 // Bike controller for creating a viewing bikes
@@ -59,9 +61,15 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
         if(notAuthenticated(request))
             return "redirect:/user/login";
 
+        //Create an arraylist of components - one for each type of component for the view
+        ArrayList<Component> components = new ArrayList<>();
+        for (int i = 0; i < ComponentType.values().length; i++) {
+            components.add(new Component());
+        }
+
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
-        model.addAttribute(new Component());
+        model.addAttribute("components", components);
         model.addAttribute("componentTypes", ComponentType.values());
         return "bike/add";
     }
