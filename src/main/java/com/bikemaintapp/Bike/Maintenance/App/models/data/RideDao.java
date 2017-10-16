@@ -11,5 +11,6 @@ import java.util.List;
 @Transactional
 public interface RideDao extends CrudRepository<Ride, Integer>{
     List<Ride> findRideByUserId(int userID);
+    List<Ride> findRideByBikeId(int bikeID);
 }
 
