@@ -1,6 +1,6 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
-import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.FrameMaintenanceSchedule;
+import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -28,6 +28,8 @@ public class Component {
     */
 
     //TODO add relationship to framemaintenance - add notification flag
+    @OneToOne
+    private MaintenanceSchedule maintenanceSchedule;
 
     //flag for the view to see if component currently needs maintenance or not
     private boolean needsMaintenance = false;
@@ -51,8 +53,20 @@ public class Component {
     @JoinColumn(name ="bike_id")
     private Bike bike;
 
+    //TODO figure out how to do this without creating a table for each?
+    //set up relationship with maintenance schedule based on component type
     @OneToOne
     private FrameMaintenanceSchedule frameMaintenanceSchedule;
+    @OneToOne
+    private TiresMaintenanceSchedule tiresMaintenanceSchedule;
+    @OneToOne
+    private DriveTrainMaintenanceSchedule driveTrainMaintenanceSchedule;
+    @OneToOne
+    private SuspensionMaintenanceSchedule suspensionMaintenanceSchedule;
+    @OneToOne
+    private WheelsMaintenanceSchedule wheelsMaintenanceSchedule;
+    @OneToOne
+    private BrakesMaintenanceSchedule brakesMaintenanceSchedule;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -110,6 +124,45 @@ public class Component {
 
     public void setNeedsMaintenance(boolean needsMaintenance) {
         this.needsMaintenance = needsMaintenance;
+    }
+
+    public MaintenanceSchedule getMaintenanceSchedule() {
+        return maintenanceSchedule;
+    }
+
+    //Set the maintenance schedule based on what type of component it is
+    public void setMaintenanceSchedule(ComponentType componentType) {
+
+        switch (componentType) {
+            case FRAME:
+                this.maintenanceSchedule = frameMaintenanceSchedule;
+                break;
+
+            case TIRES:
+                this.maintenanceSchedule = tiresMaintenanceSchedule;
+                break;
+
+            case BRAKES:
+                this.maintenanceSchedule = brakesMaintenanceSchedule;
+                break;
+
+            case WHEELS:
+                this.maintenanceSchedule = wheelsMaintenanceSchedule;
+                break;
+
+            case DRIVETRAIN:
+                this.maintenanceSchedule = driveTrainMaintenanceSchedule;
+                break;
+
+            case SUSPENSION:
+                this.maintenanceSchedule = suspensionMaintenanceSchedule;
+                break;
+
+                default:
+                    this.maintenanceSchedule = maintenanceSchedule;
+                    break;
+        }
+
     }
 }
 
