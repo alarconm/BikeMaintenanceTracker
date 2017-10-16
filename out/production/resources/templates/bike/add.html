@@ -24,7 +24,7 @@
             <select class="form-control" name="componentType">
                 <option th:each="type : ${componentTypes}"
                         th:text="${type.name}"
-                        th:value="${type.name}"></option>
+                        th:value="*{components}"></option>
             </select>
         </div>
     </div>
