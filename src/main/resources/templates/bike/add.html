@@ -18,15 +18,22 @@
         <span th:errors="*{nameOfBike}" class="error"></span>
     </div>
 
-    <div th:each="component : ${components}">
         <div class="form-group">
             <label th:for="type">Component</label>
-            <select class="form-control" name="componentType">
+            <select class="form-control" name="componentType" th:field="*{components[0]}">
                 <option th:each="type : ${componentTypes}"
                         th:text="${type.name}"
-                        th:value="*{components}"></option>
+                        th:value="${bike.components[0].id}"></option>
             </select>
         </div>
+
+    <div class="form-group">
+        <label th:for="type">Component</label>
+        <select class="form-control" name="componentType" th:field="*{components[1]}">
+            <option th:each="type : ${componentTypes}"
+                    th:text="${type.name}"
+                    th:value="${bike.components[1].id}"></option>
+        </select>
     </div>
     <input type="submit" value="Add a Bike" />
 </form>

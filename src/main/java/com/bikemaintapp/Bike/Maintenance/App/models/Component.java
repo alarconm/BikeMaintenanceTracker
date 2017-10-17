@@ -64,6 +64,10 @@ public class Component {
         this.milesTraveled = milesTraveled;
     }
 
+    public Component(ComponentType type) {
+        this.type = type;
+    }
+
     // Setters & Getters
     public int getId() {
         return id;
