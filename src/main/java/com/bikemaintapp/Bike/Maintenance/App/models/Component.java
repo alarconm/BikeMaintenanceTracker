@@ -27,10 +27,6 @@ public class Component {
     private String componentName;
     */
 
-    //TODO add relationship to framemaintenance - add notification flag
-    @OneToOne
-    private MaintenanceSchedule maintenanceSchedule;
-
     //flag for the view to see if component currently needs maintenance or not
     private boolean needsMaintenance = false;
 
@@ -53,20 +49,9 @@ public class Component {
     @JoinColumn(name ="bike_id")
     private Bike bike;
 
-    //TODO figure out how to do this without creating a table for each?
     //set up relationship with maintenance schedule based on component type
     @OneToOne
-    private FrameMaintenanceSchedule frameMaintenanceSchedule;
-    @OneToOne
-    private TiresMaintenanceSchedule tiresMaintenanceSchedule;
-    @OneToOne
-    private DriveTrainMaintenanceSchedule driveTrainMaintenanceSchedule;
-    @OneToOne
-    private SuspensionMaintenanceSchedule suspensionMaintenanceSchedule;
-    @OneToOne
-    private WheelsMaintenanceSchedule wheelsMaintenanceSchedule;
-    @OneToOne
-    private BrakesMaintenanceSchedule brakesMaintenanceSchedule;
+    private MaintenanceSchedule maintenanceSchedule;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -135,27 +120,27 @@ public class Component {
 
         switch (componentType) {
             case FRAME:
-                this.maintenanceSchedule = frameMaintenanceSchedule;
+                this.maintenanceSchedule = new FrameMaintenanceSchedule();
                 break;
 
             case TIRES:
-                this.maintenanceSchedule = tiresMaintenanceSchedule;
+                this.maintenanceSchedule = new TiresMaintenanceSchedule();
                 break;
 
             case BRAKES:
-                this.maintenanceSchedule = brakesMaintenanceSchedule;
+                this.maintenanceSchedule = new BrakesMaintenanceSchedule();
                 break;
 
             case WHEELS:
-                this.maintenanceSchedule = wheelsMaintenanceSchedule;
+                this.maintenanceSchedule = new WheelsMaintenanceSchedule();
                 break;
 
             case DRIVETRAIN:
-                this.maintenanceSchedule = driveTrainMaintenanceSchedule;
+                this.maintenanceSchedule = new DriveTrainMaintenanceSchedule();
                 break;
 
             case SUSPENSION:
-                this.maintenanceSchedule = suspensionMaintenanceSchedule;
+                this.maintenanceSchedule = new SuspensionMaintenanceSchedule();
                 break;
 
                 default:
