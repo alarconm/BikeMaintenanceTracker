@@ -61,15 +61,9 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
         if(notAuthenticated(request))
             return "redirect:/user/login";
 
-        //Create an arraylist of components - one for each type of component for the view
-        ArrayList<Component> components = new ArrayList<>();
-        for (int i = 0; i < ComponentType.values().length; i++) {
-            components.add(new Component());
-        }
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
-        model.addAttribute("components", components);
         model.addAttribute("componentTypes", ComponentType.values());
         return "bike/add";
     }
@@ -82,6 +76,8 @@ public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.contro
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
+            model.addAttribute(new Bike());
+            model.addAttribute("componentTypes", ComponentType.values());
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
