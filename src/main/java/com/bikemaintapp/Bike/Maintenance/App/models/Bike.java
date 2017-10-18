@@ -38,15 +38,15 @@ public class Bike {
     @OneToMany(mappedBy = "bike")
     private List<Component> components;
 
-    public void setComponents(List<Component> components){
-        this.components = components;
-    }
-    public List<Component> getComponents(){
-        return this.components;
-    }
-    public User getUser(){
-        return this.user;
-    }
+//    public void setComponents(List<Component> components){
+//        this.components = components;
+//    }
+//    public List<Component> getComponents(){
+//        return this.components;
+//    }
+//    public User getUser(){
+//        return this.user;
+//    }
 
     // Constructors
     // Default constructors required for Springboot/Hibernate

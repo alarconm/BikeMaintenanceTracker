@@ -1,11 +1,7 @@
 package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
 
-import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
-import com.bikemaintapp.Bike.Maintenance.App.models.Ride;
-import com.bikemaintapp.Bike.Maintenance.App.models.Component;
-import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
-import com.bikemaintapp.Bike.Maintenance.App.models.User;
+import com.bikemaintapp.Bike.Maintenance.App.models.*;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.RideDao;
@@ -63,15 +59,14 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
             return "redirect:/user/login";
 
         //Create an arraylist of components - one for each type of component for the view
-        ArrayList<Component> components = new ArrayList<>();
-        for (int i = 0; i < ComponentType.values().length; i++) {
-            components.add(new Component());
-        }
+//        ArrayList<Component> components = new ArrayList<>();
+//        for (int i = 0; i < ComponentType.values().length; i++) {
+//            components.add(new Component());
+//        }
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
-        model.addAttribute("components", components);
-        model.addAttribute("componentTypes", ComponentType.values());
+        model.addAttribute(new Component_Test());
         return "bike/add";
     }
 
@@ -93,23 +88,20 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "redirect:";
 
     }
-//    @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
-//    public String viewMenu(Model model, @PathVariable int bikeId) {
-//
-//        // Display the total amount of mile for the bike in
-//        //List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
-////        double totalMilesTraveled = 0;
-////        for (Ride miles : bikeMiles){
-////            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
-////        }
-//
-//        model.addAttribute("totalTraveled",totalMilesTraveled);
-//        Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
-//        model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
-//
-//        return "bike/main";
-//    }
+    @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
+    public String viewMenu(Model model, @PathVariable int bikeId) {
 
+        // Display the total amount of mile for the bike in
+        List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
+        double totalMilesTraveled = 0;
+        for (Ride miles : bikeMiles){
+            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
+        }
 
+        model.addAttribute("totalTraveled",totalMilesTraveled);
+        Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
+        model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
 
+        return "bike/main";
+    }
 }
