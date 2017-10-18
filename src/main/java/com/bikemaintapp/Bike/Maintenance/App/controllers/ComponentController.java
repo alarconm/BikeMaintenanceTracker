@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,6 +70,14 @@ public class ComponentController {
 
     @RequestMapping(value = "add-component/{bikeId}", method = RequestMethod.GET)
     public String addComponent(Model model, @PathVariable int bikeId) {
+
+        //create default components
+        componentDao.save(new Component(ComponentType.BRAKES));
+        componentDao.save(new Component(ComponentType.DRIVETRAIN));
+        componentDao.save(new Component(ComponentType.FRAME));
+        componentDao.save(new Component(ComponentType.SUSPENSION));
+        componentDao.save(new Component(ComponentType.TIRES));
+        componentDao.save(new Component(ComponentType.WHEELS));
 
         Bike bike = bikeDao.findOne(bikeId);
         AddComponentForm form = new AddComponentForm(componentDao.findAll(), bike);

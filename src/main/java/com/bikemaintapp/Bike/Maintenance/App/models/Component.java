@@ -39,8 +39,6 @@ public class Component {
 
     //Not sure if we will let user enter miles,
     //or pull it from Bike.milesTraveled
-    @NotNull
-    @Range(min = 1, message = "How many miles would you like to add to this component?")
     private int milesTraveled;
 
     // Relationships
