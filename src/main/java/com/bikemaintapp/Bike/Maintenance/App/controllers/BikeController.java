@@ -62,16 +62,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         if(notAuthenticated(request))
             return "redirect:/user/login";
 
-        //Create an arraylist of components - one for each type of component for the view
-        ArrayList<Component> components = new ArrayList<>();
-        for (int i = 0; i < ComponentType.values().length; i++) {
-            components.add(new Component());
-        }
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
-        model.addAttribute("components", components);
-        model.addAttribute("componentTypes", ComponentType.values());
+//        model.addAttribute("componentTypes", ComponentType.values());
         return "bike/add";
     }
 
@@ -83,6 +77,8 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
+            model.addAttribute(new Bike());
+//            model.addAttribute("componentTypes", ComponentType.values());
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
@@ -90,26 +86,25 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         User user = (User) request.getSession().getAttribute("user"); // Get the session user
         newBike.setUser(user);
         bikeDao.save(newBike);
-        return "redirect:";
+        return "redirect:/component/add-component/" + newBike.getId();
 
     }
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int bikeId) {
 
-        // Display the total amount of mile for the bike in
-        List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
-        double totalMilesTraveled = 0;
-        for (Ride miles : bikeMiles){
-            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
-        }
+//         Display the total amount of mile for the bike in
+//        List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
+//        double totalMilesTraveled = 0;
+//        for (Ride miles : bikeMiles){
+//            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
+//        }
 
-        model.addAttribute("totalTraveled",totalMilesTraveled);
+//        model.addAttribute("totalTraveled",totalMilesTraveled);
         Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
         model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
+        model.addAttribute("bike", bike);
 
         return "bike/main";
     }
-
-
 
 }
