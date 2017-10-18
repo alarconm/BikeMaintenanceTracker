@@ -44,7 +44,6 @@ public class Component {
     // Relationships
     // There are many components, on one bike.
     @ManyToOne
-    @JoinColumn(name ="bike_id")
     private Bike bike;
 
     //set up relationship with maintenance schedule based on component type

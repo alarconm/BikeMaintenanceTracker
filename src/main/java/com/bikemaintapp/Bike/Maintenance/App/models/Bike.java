@@ -35,18 +35,10 @@ public class Bike {
     @OneToMany(mappedBy = "bike",fetch = FetchType.EAGER)
     private List<Ride> rides;
 
-    @OneToMany(mappedBy = "bike")
+    @OneToMany
+    @JoinColumn(name ="bike_id")
     private List<Component> components;
 
-    public void setComponents(List<Component> components){
-        this.components = components;
-    }
-    public List<Component> getComponents(){
-        return this.components;
-    }
-    public User getUser(){
-        return this.user;
-    }
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -106,4 +98,15 @@ public class Bike {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setComponents(List<Component> components){
+        this.components = components;
+    }
+    public List<Component> getComponents(){
+        return this.components;
+    }
+    public User getUser(){
+        return this.user;
+    }
+
 }
