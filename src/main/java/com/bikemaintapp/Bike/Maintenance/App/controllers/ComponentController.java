@@ -1,13 +1,17 @@
 package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
+import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
+import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
+import com.bikemaintapp.Bike.Maintenance.App.models.forms.AddComponentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,6 +27,9 @@ public class ComponentController {
     // Link the component DB to the bike
     @Autowired
     ComponentDao componentDao;
+
+    @Autowired
+    BikeDao bikeDao;
 
     // display all the existing components
     @RequestMapping(value="")
@@ -57,6 +64,36 @@ public class ComponentController {
         model.addAttribute("title","View Components");
         componentDao.save(newComponent);
         return "component/index";
+
+    }
+
+    @RequestMapping(value = "add-component/{bikeId}", method = RequestMethod.GET)
+    public String addComponent(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        AddComponentForm form = new AddComponentForm(componentDao.findAll(), bike);
+
+        model.addAttribute("title", "Add component to bike");
+        model.addAttribute("form", form);
+        model.addAttribute("bike", bike);
+
+        return "component/add-component";
+    }
+
+    @RequestMapping(value = "add-component", method = RequestMethod.POST)
+    public String addComponent(Model model, @ModelAttribute @Valid AddComponentForm form, Errors errors) {
+
+        if(errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "component/add-component";
+        }
+
+        Bike bike = bikeDao.findOne(form.getBikeId());
+        Component component = componentDao.findOne(form.getComponentId());
+        bike.addComponent(component);
+        bikeDao.save(bike);
+
+        return "redirect:/bike/main/" + bike.getId();
     }
 
 }
