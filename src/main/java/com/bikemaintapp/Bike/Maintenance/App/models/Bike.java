@@ -73,6 +73,11 @@ public class Bike {
         //this.milesTraveled += miles;
     }
 
+    //used to add a component to the bike
+    public void addComponent(Component component) {
+        components.add(component);
+    }
+
     // Setters & Getters
     public int getId() {
         return this.id;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" th:object="${form}" action="/component/add-component">
+
+    <div class="form-group">
+        <select class="form-control" name="componentId">
+            <option th:each="component : *{components}"
+                    th:text="${component.type.name}"
+                    th:value="${component.id}">
+            </option>
+        </select>
+    </div>
+
+    <input type="hidden" name="bikeId" th:value="*{bike.id}" />
+
+    <button class="btn btn-default">Add Component to the bike</button>
+
+</form>
+</body>
+</html>
