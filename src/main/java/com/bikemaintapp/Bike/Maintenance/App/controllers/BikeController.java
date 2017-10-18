@@ -25,7 +25,8 @@ import java.util.List;
 // Bike controller for creating a viewing bikes
 @Controller
 @RequestMapping("bike")
-public class BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Controller {
+public class
+BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Controller {
 
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
