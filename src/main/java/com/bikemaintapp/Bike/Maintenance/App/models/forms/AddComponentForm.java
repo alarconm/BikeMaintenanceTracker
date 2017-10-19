@@ -54,4 +54,6 @@ public class AddComponentForm {
     public void setComponentId(int componentId) {
         this.componentId = componentId;
     }
+
+
 }
