@@ -47,6 +47,12 @@ public abstract class MaintenanceSchedule {
         }
     }
 
+    //TODO look through all the parts intervals and return the lowest value
+    //TODO or maybe something to return mileage details about ALL intervals
+    public int getMilesSinceLastMaint(){
+        return milesSinceMaintInterval.get(0);
+    }
+    
     public MaintenanceSchedule() {
 
     }
