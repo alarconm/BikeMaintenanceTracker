@@ -21,9 +21,8 @@ public class UserController {
     UserDao userDao;
 
     @RequestMapping(value = "")
-    public String index(Model model) {
-        model.addAttribute("title", "User Login");
-        return "user/index";
+    public String index() {
+        return "redirect:/user/login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
