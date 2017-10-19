@@ -78,3 +78,10 @@ nav {
 .icon-addon:hover .fa {
     color: #2580db;
 }
+
+.loginBox {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

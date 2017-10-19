@@ -20,9 +20,10 @@
 
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <script type="text/javascript" th:src="@{/>js/script.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 </head>
 <body class="container">
-
 
 <nav th:fragment="navigation" class="navbar navbar-toggleable-md navbar-inverse" style="background-color: #6abf57;">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +31,7 @@
     </button>
     <a class="navbar-brand" href="#"><i class="fa fa-bicycle fa-2x" aria-hidden="true"></i></a>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
             <th:block th:if="${session.user == null}">
                 <li class="nav-item active" >
