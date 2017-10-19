@@ -3,6 +3,7 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
+import com.bikemaintapp.Bike.Maintenance.App.models.DefaultComponents;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.forms.AddComponentForm;
@@ -28,6 +29,9 @@ public class ComponentController {
     // Link the component DB to the bike
     @Autowired
     ComponentDao componentDao;
+
+    @Autowired
+    DefaultComponents defaultComponents;
 
     @Autowired
     BikeDao bikeDao;
@@ -71,16 +75,12 @@ public class ComponentController {
     @RequestMapping(value = "add-component/{bikeId}", method = RequestMethod.GET)
     public String addComponent(Model model, @PathVariable int bikeId) {
 
-        //create default components
-        componentDao.save(new Component(ComponentType.BRAKES));
-        componentDao.save(new Component(ComponentType.DRIVETRAIN));
-        componentDao.save(new Component(ComponentType.FRAME));
-        componentDao.save(new Component(ComponentType.SUSPENSION));
-        componentDao.save(new Component(ComponentType.TIRES));
-        componentDao.save(new Component(ComponentType.WHEELS));
+        //create default components to display list of types
+        defaultComponents.saveDefaults();
+        Iterable<Component> components =  componentDao.findAll();
 
         Bike bike = bikeDao.findOne(bikeId);
-        AddComponentForm form = new AddComponentForm(componentDao.findAll(), bike);
+        AddComponentForm form = new AddComponentForm(components, bike);
 
         model.addAttribute("title", "Add component to bike");
         model.addAttribute("form", form);

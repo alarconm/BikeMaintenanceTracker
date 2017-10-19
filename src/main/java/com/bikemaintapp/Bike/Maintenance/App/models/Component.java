@@ -47,7 +47,7 @@ public class Component {
     private Bike bike;
 
     //set up relationship with maintenance schedule based on component type
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private MaintenanceSchedule maintenanceSchedule;
 
     // Constructors
@@ -63,6 +63,8 @@ public class Component {
 
     public Component(ComponentType type) {
         this.type = type;
+        //Create the maintenance schedule based on what type of component it is
+        setMaintenanceSchedule(type);
     }
 
     // Setters & Getters
@@ -73,19 +75,6 @@ public class Component {
     public void setId(int id) {
         this.id = id;
     }
-
-    /*
-
-    //Getters and Setters for componentName.
-    //Left them here for now in case we go back to componentName
-    //instead of ENUMS
-
-    public String getComponentName() { return componentName;    }
-
-    public void setComponentName(String componentName) {
-        this.componentName = componentName;
-    }
-    */
 
     public int getComponentMiles() {
         return this.componentMiles;

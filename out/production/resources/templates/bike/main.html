@@ -9,8 +9,19 @@
 <p>Total Miles Traveled</p>
 <p th:text="${totalTraveled}"></p>
 <h2>Components:</h2>
-<p th:text="${bike.components}"></p>
+
+    <div th:each="component : ${bike.components}">
+        <h3 th:text="${component.type.name}"></h3>
+        <h4>Miles since last Maintenance:</h4>
+    <div th:text="${component.maintenanceSchedule}">
+    </div>
+    </div>
+<hr />
+<a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a>
 <!--Display the name of a single bike-->
+
+<!--TODO add the ability for users to upload image of their bike-->
+<!--Place holder image-->
 
 <!--Display all the components and the miles-->
 
