@@ -13,7 +13,7 @@
     <div th:each="component : ${bike.components}">
         <h3 th:text="${component.type.name}"></h3>
         <h4>Miles since last Maintenance:</h4>
-    <div th:text="${component.maintenanceSchedule.getMilesSinceLastMaint()}">
+    <div th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}">
     </div>
     </div>
 <hr />
