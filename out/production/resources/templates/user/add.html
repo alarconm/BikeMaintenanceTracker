@@ -9,26 +9,22 @@
 
 <form method="post"  th:object="${user}">
     <div class="form-group">
-        <label th:for="name"> User Name:</label>
-        <input class="form-control" th:field="*{name}" />
+        <input class="form-control" placeholder="Username" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label th:for="password">Password:</label>
-        <input class="form-control" type="password"  th:field="*{password}" />
+        <input class="form-control" placeholder="Password" type="password"  th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label for="verifyPassword">Enter Password Again:</label>
-        <input class="form-control" type="password" name="verifyPassword" id="verifyPassword" />
+        <input class="form-control" placeholder="Confirm Password" type="password" name="verifyPassword" id="verifyPassword" />
         <span th:text="${passwordError}"></span>
     </div>
 
     <div class="form-group">
-        <label th:for="email">Email:</label>
-        <input class="form-control" th:type="email" th:field="*{email}" />
+        <input class="form-control" placeholder="Email Address" th:type="email" th:field="*{email}" />
         <span th:errors="*{email}" class="error"></span>
     </div>
 
