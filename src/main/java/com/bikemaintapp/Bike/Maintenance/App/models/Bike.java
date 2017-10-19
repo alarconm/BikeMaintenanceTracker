@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -34,18 +35,9 @@ public class Bike {
     @OneToMany(mappedBy = "bike",fetch = FetchType.EAGER)
     private List<Ride> rides;
 
-    @OneToMany(mappedBy = "bike")
+    @OneToMany
+    @JoinColumn(name ="bike_id")
     private List<Component> components;
-
-    public void setComponents(List<Component> components){
-        this.components = components;
-    }
-    public List<Component> getComponents(){
-        return this.components;
-    }
-    public User getUser(){
-        return this.user;
-    }
 
 
     // Constructors
@@ -55,6 +47,35 @@ public class Bike {
 
     public Bike(String nameOfBike) {
         this.nameOfBike = nameOfBike;
+    }
+
+    //One option for tracking miles
+    //Should have less potential for errors
+    public int countMiles(){
+
+        Iterator iterator = rides.iterator();
+        int total = 0;
+        while(iterator.hasNext()) {
+            Ride tempRide = (Ride) iterator.next();
+            total += (int) tempRide.getMiles();
+        }
+        return total;
+    }
+
+    //Temporary function for me to check on whats going on without real debug
+    public void printBikeName(){
+        System.out.println(this.nameOfBike);
+        System.out.println(countMiles());
+    }
+    //Called by /ride/add to add mileage.
+    //This function should be able to pass this onto the bikes Component list.
+    public void addMiles(int miles){
+        //this.milesTraveled += miles;
+    }
+
+    //used to add a component to the bike
+    public void addComponent(Component component) {
+        components.add(component);
     }
 
     // Setters & Getters
@@ -77,4 +98,15 @@ public class Bike {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public void setComponents(List<Component> components){
+        this.components = components;
+    }
+    public List<Component> getComponents(){
+        return this.components;
+    }
+    public User getUser(){
+        return this.user;
+    }
+
 }

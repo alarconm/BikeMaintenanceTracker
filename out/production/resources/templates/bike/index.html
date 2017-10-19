@@ -4,34 +4,19 @@
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="${title}">Default Title</h1>
+<h1 th:text="${#strings.capitalize(title)}">Default Title</h1>
 
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
 
 
-<a href="bike/add"><h2>Add a Bike</h2></a>
+<a href="/bike/add"><h5>Add a Bike</h5></a>
 
-<!--TODO display all the bikes that the rider already has-->
-
-<h2 th:text="${username} + ' Bikes'"></h2>
-
-<table class="table">
-    <thead>
-
-    <tr>
-        <th>Bike</th>
-        <th>Mileage</th>
-    </tr>
-    </thead>
-    <tbody>
-    <th:block th:each="bike,i : ${bikes}">
-        <tr>
-            <td th:text="${bike.nameOfBike}"></td>
-            <td th:text="${bike.milesTraveled}"></td>
-        </tr>
-    </th:block>
-    </tbody>
-</table>
+<h2>Your bikes</h2>
+<!--This will list all the bikes of a specific user.-->
+<ul th:each="bike: ${bikes}">
+    <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
+    <!--links to a bikes page based off the id-->
+</ul>
 
 </body>
 </html>

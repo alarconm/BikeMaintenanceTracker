@@ -1,5 +1,6 @@
 package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
+import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 import com.bikemaintapp.Bike.Maintenance.App.models.Ride;
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("ride")
@@ -62,6 +64,16 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         model.addAttribute("ride",newRide);
         User user = (User) request.getSession().getAttribute("user");
         newRide.setUser(user);
+
+        newRide.getBike().addMiles((int)newRide.getMiles());
+        newRide.getBike().printBikeName();
+
+        //list to get components from bike - only looking at first one for now to test it
+        List<Component> components = newRide.getBike().getComponents();
+        //call add miles from the component maintenanceschedule to add the miles from ride to the component's
+        //maintenance tracking
+        components.get(0).getMaintenanceSchedule().addMiles((int)newRide.getMiles());
+
         rideDao.save(newRide);
         return "redirect:";
     }

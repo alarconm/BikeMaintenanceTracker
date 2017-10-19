@@ -25,9 +25,6 @@ public class User {
     private String password;
 
     @NotNull
-    private String verifyPassword;
-
-    @NotNull
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
@@ -76,14 +73,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
     }
 
     public String getEmail() {

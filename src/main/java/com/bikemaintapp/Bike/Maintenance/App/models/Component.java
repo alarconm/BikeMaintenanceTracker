@@ -1,6 +1,6 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
-import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.FrameMaintenanceSchedule;
+import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -27,8 +27,8 @@ public class Component {
     private String componentName;
     */
 
-    //TODO add relationship to framemaintenance - add notification flag
-
+    //flag for the view to see if component currently needs maintenance or not
+    private boolean needsMaintenance = false;
 
 
     //ENUMS for frame, chain, etc
@@ -39,18 +39,16 @@ public class Component {
 
     //Not sure if we will let user enter miles,
     //or pull it from Bike.milesTraveled
-    @NotNull
-    @Range(min = 1, message = "How many miles would you like to add to this component?")
     private int milesTraveled;
 
     // Relationships
     // There are many components, on one bike.
     @ManyToOne
-    @JoinColumn(name ="bike_id")
     private Bike bike;
 
-    @OneToOne
-    private FrameMaintenanceSchedule frameMaintenanceSchedule;
+    //set up relationship with maintenance schedule based on component type
+    @OneToOne(cascade = {CascadeType.ALL})
+    private MaintenanceSchedule maintenanceSchedule;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -63,6 +61,12 @@ public class Component {
         this.milesTraveled = milesTraveled;
     }
 
+    public Component(ComponentType type) {
+        this.type = type;
+        //Create the maintenance schedule based on what type of component it is
+        setMaintenanceSchedule(type);
+    }
+
     // Setters & Getters
     public int getId() {
         return id;
@@ -71,19 +75,6 @@ public class Component {
     public void setId(int id) {
         this.id = id;
     }
-
-    /*
-
-    //Getters and Setters for componentName.
-    //Left them here for now in case we go back to componentName
-    //instead of ENUMS
-
-    public String getComponentName() { return componentName;    }
-
-    public void setComponentName(String componentName) {
-        this.componentName = componentName;
-    }
-    */
 
     public int getComponentMiles() {
         return this.componentMiles;
@@ -101,4 +92,55 @@ public class Component {
     public void setType(ComponentType type) {
         this.type = type;
     }
+
+    public boolean getNeedsMaintenance() {
+        return needsMaintenance;
+    }
+
+    public void setNeedsMaintenance(boolean needsMaintenance) {
+        this.needsMaintenance = needsMaintenance;
+    }
+
+    public MaintenanceSchedule getMaintenanceSchedule() {
+        return maintenanceSchedule;
+    }
+
+    //Set the maintenance schedule based on what type of component it is
+    public void setMaintenanceSchedule(ComponentType componentType) {
+
+        switch (componentType) {
+            case FRAME:
+                this.maintenanceSchedule = new FrameMaintenanceSchedule();
+                break;
+
+            case TIRES:
+                this.maintenanceSchedule = new TiresMaintenanceSchedule();
+                break;
+
+            case BRAKES:
+                this.maintenanceSchedule = new BrakesMaintenanceSchedule();
+                break;
+
+            case WHEELS:
+                this.maintenanceSchedule = new WheelsMaintenanceSchedule();
+                break;
+
+            case DRIVETRAIN:
+                this.maintenanceSchedule = new DriveTrainMaintenanceSchedule();
+                break;
+
+            case SUSPENSION:
+                this.maintenanceSchedule = new SuspensionMaintenanceSchedule();
+                break;
+
+                default:
+                    this.maintenanceSchedule = maintenanceSchedule;
+                    break;
+        }
+
+    }
 }
+
+
+
+

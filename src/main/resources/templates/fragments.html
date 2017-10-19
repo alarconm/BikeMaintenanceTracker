@@ -2,25 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">My Cheeses</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
+    <title th:text="${title}">Bike Maintenance</title>
+    <!-- bootstrap imports -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'></link>
+    <!-- end imports -->
+    <script>
+        $(document).ready(function() {
+            $('li.active').removeClass('active');
+            $('a[href="' + location.pathname + '"]').addClass('active');
+        });
+    </script>
+
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
     <script type="text/javascript" th:src="@{/>js/script.js}"></script>
 </head>
-<body>
+<body class="container">
 
-<nav th:fragment="navigation">
-    <a href="/user">Home</a> |
-    <span th:if="${session.user == null}">
-        <a href="/user/login">Login</a> |
-        <a href="/user/add">Create an Account</a>
-    </span>
-    <span th:if="${session.user !=null}">
-            <a href="/bike">Bikes</a> |
-            <a href="/ride">Rides</a> |
-            <a href="/user/logout">Logout</a>
-    </span>
 
+<nav th:fragment="navigation" class="navbar navbar-toggleable-md navbar-inverse" style="background-color: #6abf57;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><i class="fa fa-bicycle fa-2x" aria-hidden="true"></i></a>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <th:block th:if="${session.user == null}">
+                <li class="nav-item active" >
+                    <a class="nav-link" href="/user/login">Login</a>
+                </li>
+                <li class="nav-item">
+                      <a class="nav-link" href="/user/add">Create an Account</a>
+                </li>
+            </th:block>
+            <th:block th:if="${session.user !=null}">
+                <li class="nav-item active">
+                    <a class="nav-item nav-link" href="/bike">Bikes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/ride">Rides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" href="/user/logout">Logout</a>
+                </li>
+            </th:block>
+        </ul>
+
+    </div>
 </nav>
+
+
+
+
+
 </body>
 </html>
