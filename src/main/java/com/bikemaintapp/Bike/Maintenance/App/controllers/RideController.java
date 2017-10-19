@@ -68,11 +68,13 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         newRide.getBike().addMiles((int)newRide.getMiles());
         newRide.getBike().printBikeName();
 
-        //list to get components from bike - only looking at first one for now to test it
+        //list to get components from the bike used on this ride
         List<Component> components = newRide.getBike().getComponents();
         //call add miles from the component maintenanceschedule to add the miles from ride to the component's
         //maintenance tracking
-        components.get(0).getMaintenanceSchedule().addMiles((int)newRide.getMiles());
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).getMaintenanceSchedule().addMiles((int)newRide.getMiles());
+        }
 
         rideDao.save(newRide);
         return "redirect:";
