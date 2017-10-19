@@ -63,6 +63,8 @@ public class Component {
 
     public Component(ComponentType type) {
         this.type = type;
+        //Create the maintenance schedule based on what type of component it is
+        setMaintenanceSchedule(type);
     }
 
     // Setters & Getters

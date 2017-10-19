@@ -11,7 +11,9 @@
 <h2>Components:</h2>
 
     <p th:each="component : ${bike.components}"
-        th:text="${component.type.name}"></p>
+       th:text="${component.type.name}"
+       th:text="{$component."
+    ></p>
 <!--Display the name of a single bike-->
 
 <!--TODO add the ability for users to upload image of their bike-->

@@ -71,16 +71,18 @@ public class ComponentController {
     @RequestMapping(value = "add-component/{bikeId}", method = RequestMethod.GET)
     public String addComponent(Model model, @PathVariable int bikeId) {
 
-        //create default components
-        componentDao.save(new Component(ComponentType.BRAKES));
-        componentDao.save(new Component(ComponentType.DRIVETRAIN));
-        componentDao.save(new Component(ComponentType.FRAME));
-        componentDao.save(new Component(ComponentType.SUSPENSION));
-        componentDao.save(new Component(ComponentType.TIRES));
-        componentDao.save(new Component(ComponentType.WHEELS));
+        //create default components to display list of types
+        ArrayList<Component> components = new ArrayList<>();
+        components.add(new Component(ComponentType.BRAKES));
+        components.add(new Component(ComponentType.DRIVETRAIN));
+        components.add(new Component(ComponentType.WHEELS));
+        components.add(new Component(ComponentType.FRAME));
+        components.add(new Component(ComponentType.TIRES));
+        components.add(new Component(ComponentType.SUSPENSION));
+
 
         Bike bike = bikeDao.findOne(bikeId);
-        AddComponentForm form = new AddComponentForm(componentDao.findAll(), bike);
+        AddComponentForm form = new AddComponentForm(components, bike);
 
         model.addAttribute("title", "Add component to bike");
         model.addAttribute("form", form);
