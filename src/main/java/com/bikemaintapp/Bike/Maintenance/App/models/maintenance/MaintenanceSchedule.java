@@ -49,10 +49,16 @@ public abstract class MaintenanceSchedule {
 
     //TODO look through all the parts intervals and return the lowest value
     //TODO or maybe something to return mileage details about ALL intervals
+    public List<Integer> getMilesSinceMaintInterval(){
+        return  milesSinceMaintInterval;
+    }
+
+    //This function can also be used to get the mileage instead of the prior convential springboot way
+    //in case we need more flexibilty or something
     public int getMilesSinceLastMaint(){
         return milesSinceMaintInterval.get(0);
     }
-    
+
     public MaintenanceSchedule() {
 
     }
