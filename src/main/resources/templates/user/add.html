@@ -16,7 +16,7 @@
 
     <div class="form-group">
         <label th:for="password">Password:</label>
-        <input class="form-control" type="password" th:field="*{password}" />
+        <input class="form-control" type="password"  th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
     </div>
 
@@ -32,7 +32,7 @@
         <span th:errors="*{email}" class="error"></span>
     </div>
 
-    <input type="submit" value="Add User" />
+    <button type="submit" class="btn btn-primary">Create Account</button>
 </form>
 </body>
 </html>
