@@ -9,7 +9,7 @@
 
     <div class="form-group icon-addon addon-lg" >
         <i class="fa fa-user" aria-hidden="true"></i>
-        <input class="form-control" placeholder="Username" th:type="name" th:field="*{name}" />
+        <input class="form-control" placeholder="Username" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
         <span th:text="${usererror}"></span>
     </div>
