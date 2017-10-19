@@ -5,17 +5,17 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <h1 th:text="${title}">Default Title</h1>
-
 <form method="post"  th:object="${user}">
 
-    <div class="form-group " >
-
-        <input class="form-control" placeholder="Username" th:field="*{name}" />
+    <div class="form-group icon-addon addon-lg" >
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input class="form-control" placeholder="Username" th:type="name" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
         <span th:text="${usererror}"></span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group icon-addon addon-lg">
+        <i class="fa fa-lock" aria-hidden="true"></i>
         <input class="form-control" placeholder="Password" type="password" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
         <span th:text="${passworderror}"></span>
