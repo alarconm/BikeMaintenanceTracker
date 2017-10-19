@@ -14,7 +14,7 @@ public abstract class MaintenanceSchedule {
     @GeneratedValue // Auto generates primary key
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Component component;
 
     //These lists could should maybe all be together in a subclass...but its fine
