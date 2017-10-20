@@ -25,6 +25,8 @@ public abstract class MaintenanceSchedule {
     @ElementCollection(targetClass=Integer.class)
     private List<Integer> milesSinceMaintInterval = new ArrayList<Integer>();
 
+    private String maintenanceNeeded;
+
     // this holds the last entered mileage so that an undo/remove last ride button can be used
     private int undoMiles;
 
@@ -39,10 +41,7 @@ public abstract class MaintenanceSchedule {
 
             if(milesSinceMaintInterval.get(i) >= intervals.get(i)){
                 //We can just return the instruction matching the index of this interval without further comparisons
-                //return maintInstructions[i];
-
-                //But we may need further processing or some other actions so lets keep this call for now
-                notifyMaint(i);
+                maintenanceNeeded = maintInstructions.get(i);
             }
         }
     }
@@ -130,6 +129,14 @@ public abstract class MaintenanceSchedule {
 
     public void setMilesSinceMaintInterval(List<Integer> milesSinceMaintInterval) {
         this.milesSinceMaintInterval = milesSinceMaintInterval;
+    }
+
+    public String getMaintenanceNeeded() {
+        return maintenanceNeeded;
+    }
+
+    public void setMaintenanceNeeded(String maintenanceNeeded) {
+        this.maintenanceNeeded = maintenanceNeeded;
     }
 
     /* old overload methods i was using
