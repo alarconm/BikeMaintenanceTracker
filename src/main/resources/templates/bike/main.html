@@ -13,6 +13,7 @@
         <h3 th:text="${component.type.name}"></h3>
         <h4>Miles since last Maintenance:</h4>
         <h5 th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></h5>
+        <h5 th:text="${component.maintenanceSchedule.maintInstructions[0]}"></h5>
         <button type="submit" class="btn btn-primary" th:value="${component.id}">Perform Maintenance</button>
     </div>
 <hr />

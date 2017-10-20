@@ -65,7 +65,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
-//        model.addAttribute("componentTypes", ComponentType.values());
         return "bike/add";
     }
 
@@ -78,7 +77,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
             model.addAttribute(new Bike());
-//            model.addAttribute("componentTypes", ComponentType.values());
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
