@@ -112,6 +112,25 @@ public abstract class MaintenanceSchedule {
         this.undoMiles = undoMiles;
     }
 
+    public List<Integer> getIntervals() {
+        return intervals;
+    }
+
+    public void setIntervals(List<Integer> intervals) {
+        this.intervals = intervals;
+    }
+
+    public List<String> getMaintInstructions() {
+        return maintInstructions;
+    }
+
+    public void setMaintInstructions(List<String> maintInstructions) {
+        this.maintInstructions = maintInstructions;
+    }
+
+    public void setMilesSinceMaintInterval(List<Integer> milesSinceMaintInterval) {
+        this.milesSinceMaintInterval = milesSinceMaintInterval;
+    }
 
     /* old overload methods i was using
     //This is for our subclasses to set their maintenance instructions
