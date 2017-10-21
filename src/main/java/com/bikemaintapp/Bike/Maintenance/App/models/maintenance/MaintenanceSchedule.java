@@ -31,6 +31,7 @@ public abstract class MaintenanceSchedule {
     private int undoMiles;
 
     // whenever a ride is recorded the mileage is sent to the component, that will then call this method
+    //TODO add functionality to flip boolean on bike/component to maint needed, problably not here though?
     public void addMiles(int miles) {
 
         undoMiles = miles;
