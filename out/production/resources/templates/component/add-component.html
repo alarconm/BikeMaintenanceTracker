@@ -6,18 +6,19 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" th:object="${form}" action="/component/add-component">
+<form method="post" th:object="${component}" action="/component/add-component">
 
     <div class="form-group">
-        <select class="form-control" name="componentId">
-            <option th:each="component : *{components}"
-                    th:text="${component.type.name}"
-                    th:value="${component.id}">
+        <select class="form-control" name="type">
+            <option th:each="type : ${types}"
+                    th:text="${type.name}"
+                    th:value="${type}">
             </option>
         </select>
     </div>
 
-    <input type="hidden" name="bikeId" th:value="*{bike.id}" />
+    <input type="hidden" name="bikeId" th:value="${bikeId}" />
+    <!--<input type="hidden" name="componentId" th:value="${componentId}" />-->
 
     <button class="btn btn-default">Add Component to the bike</button>
 

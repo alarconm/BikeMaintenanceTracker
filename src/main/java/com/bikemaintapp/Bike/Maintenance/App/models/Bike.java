@@ -35,7 +35,7 @@ public class Bike {
     @OneToMany(mappedBy = "bike",fetch = FetchType.EAGER)
     private List<Ride> rides;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name ="bike_id")
     private List<Component> components;
 
