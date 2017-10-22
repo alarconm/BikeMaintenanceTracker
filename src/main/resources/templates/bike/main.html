@@ -4,20 +4,43 @@
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 <!--Displays the name of the user-->
-<h1 th:text="${#strings.capitalize(title)}">Default Title</h1>
+<h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 <!--Displays the total amount of miles-->
-<h4 th:text="'Total Miles Traveled ' + ${totalTraveled}"></h4>
+<p class="text-center" th:text="'Total Miles Ridden on current bike: ' + ${totalTraveled}"></p>
 <!--Displays the components-->
 <h2>Components:</h2>
-    <div th:each="component : ${bike.components}">
-        <h3 th:text="${component.type.name}"></h3>
-        <h4>Miles since last Maintenance:</h4>
-        <h5 th:id="'textFor'+${component.maintenanceSchedule.id}" th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></h5>
-        <h5 th:text="${component.maintenanceSchedule.maintenanceNeeded}"></h5>
-        <button type="submit" th:id="${component.maintenanceSchedule.id}" class="btn btn-primary" th:value="${component.maintenanceSchedule.id}">Perform Maintenance</button>
-    </div>
-<hr />
-<a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a>
+
+<div th:each="component: ${bike.components}">
+    <table class="table table-hover">
+
+        <thead>
+        <tr>
+            <th scope="col" th:text="${component.type.name}">
+                <span th:unless="${component.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Miles since last Maintenance:
+                <span th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td th:unless="${component.maintenanceSchedule.maintenanceNeeded} == ''">Maintenance Needed:
+                <span th:text="${component.maintenanceSchedule.maintenanceNeeded}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td><button type="submit" class="btn btn-primary" th:value="${component.id}">Perform Maintenance</button></td>
+        </tr>
+        </tbody>
+
+    </table>
+    <br />
+</div>
+
+<h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
 
 <script type="text/javascript" language="javascript">
 
@@ -35,5 +58,7 @@
     });
 
 </script>
+
+
 </body>
 </html>

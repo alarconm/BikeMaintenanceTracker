@@ -37,6 +37,7 @@ public abstract class MaintenanceSchedule {
         //Check if this maintShed has an interval at supplied Index
         if(index <= milesSinceMaintInterval.size()-1){
             milesSinceMaintInterval.set(index,0);
+            maintenanceNeeded = ""; // Clear maintenance instructions
         }
 
     }
