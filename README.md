@@ -35,3 +35,14 @@ comprehensive view when worn out parts should be replaced or repaired.
 <img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/IMG_1944.JPG?raw=true" height="480em" width="640em">
 <h5>*update bike view wireframe</h5>
 <img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/updated_bike_view_wireframe_10_12.jpg?raw=true" height="480em" width="640em">
+
+# User Story Tests
+<ol>
+<li>Create multiple user accounts</li>
+<li>Create multiple bikes for individual user</li>
+<li>Upon Bike creation, user will be able to add individual parts that will track miles</li>
+<li>Components will notify user that parts need maintence based of miles traveled</li>
+<li>Each component will have a unique message based off mileage traveled</li>
+<li>User will be able to add rides to different bikes</li>
+<li>User will be able to reset mileage on component using the perform maintenace button under each component</li>
+</ol>
