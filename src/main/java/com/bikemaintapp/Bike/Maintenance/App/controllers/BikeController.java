@@ -87,6 +87,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "redirect:/component/add-component/" + newBike.getId();
 
     }
+    //TODO Make it so you have to be signed in to be here.
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int bikeId) {
 

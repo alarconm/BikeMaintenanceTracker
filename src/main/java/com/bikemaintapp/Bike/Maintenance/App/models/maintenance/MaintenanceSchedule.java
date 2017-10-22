@@ -30,6 +30,16 @@ public abstract class MaintenanceSchedule {
     // this holds the last entered mileage so that an undo/remove last ride button can be used
     private int undoMiles;
 
+
+    public void resetInterval(int index){
+        System.out.println("I am MaintShed " + String.valueOf(id));
+
+        //Check if this maintShed has an interval at supplied Index
+        if(index <= milesSinceMaintInterval.size()-1){
+            milesSinceMaintInterval.set(index,0);
+        }
+
+    }
     // whenever a ride is recorded the mileage is sent to the component, that will then call this method
     //TODO add functionality to flip boolean on bike/component to maint needed, problably not here though?
     public void addMiles(int miles) {
