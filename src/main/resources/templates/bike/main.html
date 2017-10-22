@@ -23,7 +23,7 @@
         <tbody>
         <tr>
             <td>Miles since last Maintenance:
-                <span th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></span>
+                <span th:id="'textFor'+${component.maintenanceSchedule.id}" th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></span>
             </td>
         </tr>
         <tr>
@@ -32,7 +32,9 @@
             </td>
         </tr>
         <tr>
-            <td><button type="submit" class="btn btn-primary" th:value="${component.id}">Perform Maintenance</button></td>
+            <td>
+                <button type="submit" th:id="${component.maintenanceSchedule.id}" class="btn btn-primary" th:value="${component.maintenanceSchedule.id}">Perform Maintenance</button>
+            </td>
         </tr>
         </tbody>
 

@@ -59,7 +59,7 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
     public String processAddRideForm(@ModelAttribute @Valid Ride newRide, Errors errors, Model model,HttpServletRequest request){
 
         if(errors.hasErrors()){
-            return "redirect:ride/add";
+            return "ride/add";
         }
         model.addAttribute("ride",newRide);
         User user = (User) request.getSession().getAttribute("user");
