@@ -3,10 +3,8 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 import com.bikemaintapp.Bike.Maintenance.App.models.ComponentType;
-import com.bikemaintapp.Bike.Maintenance.App.models.DefaultComponents;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.ComponentDao;
-import com.bikemaintapp.Bike.Maintenance.App.models.forms.AddComponentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,9 +26,6 @@ public class ComponentController {
     // Link the component DB to the bike
     @Autowired
     ComponentDao componentDao;
-
-    @Autowired
-    DefaultComponents defaultComponents;
 
     @Autowired
     BikeDao bikeDao;
@@ -75,34 +69,34 @@ public class ComponentController {
     @RequestMapping(value = "add-component/{bikeId}", method = RequestMethod.GET)
     public String addComponent(Model model, @PathVariable int bikeId) {
 
-        //create default components to display list of types
-        defaultComponents.saveDefaults();
-        Iterable<Component> components =  componentDao.findAll();
+        Bike bike = bikeDao.findOne(bikeId); //current user selected bike
 
-        Bike bike = bikeDao.findOne(bikeId);
-        AddComponentForm form = new AddComponentForm(components, bike);
-
-        model.addAttribute("title", "Add component to bike");
-        model.addAttribute("form", form);
-        model.addAttribute("bike", bike);
-
+        model.addAttribute("title", "Add a new component to " + bike.getNameOfBike());
+        model.addAttribute(new Component()); //New component to be created
+        model.addAttribute("types", ComponentType.values()); //enums of component types
+        model.addAttribute("bikeId", bikeId); //bikeId is needed to post & save component to bike
         return "component/add-component";
     }
 
     @RequestMapping(value = "add-component", method = RequestMethod.POST)
-    public String addComponent(Model model, @ModelAttribute @Valid AddComponentForm form, Errors errors) {
+    public String addComponent(Model model, @ModelAttribute @Valid Component component, Errors errors, int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
 
         if(errors.hasErrors()) {
-            model.addAttribute("form", form);
-            return "component/add-component";
+            model.addAttribute("title", "Add a new component to " + bike.getNameOfBike());
+            model.addAttribute("component", component);
+            model.addAttribute("bikeId", bikeId);
+            model.addAttribute("types", ComponentType.values());
+            return "add-component/{bikeId}";
         }
 
-        Bike bike = bikeDao.findOne(form.getBikeId());
-        Component component = componentDao.findOne(form.getComponentId());
+        component.setMaintenanceSchedule(component.getType()); //ties specific maintenance schedule based on type
+        componentDao.save(component);
         bike.addComponent(component);
         bikeDao.save(bike);
 
-        return "redirect:/bike/main/" + bike.getId();
+        return "redirect:/bike/main/" + bike.getId(); //Bike detailed view
     }
 
 }

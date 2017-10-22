@@ -35,9 +35,11 @@ public class Bike {
     @OneToMany(mappedBy = "bike",fetch = FetchType.EAGER)
     private List<Ride> rides;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name ="bike_id")
     private List<Component> components;
+
+    private boolean needsMaintenance = false;
 
 
     // Constructors
@@ -109,4 +111,19 @@ public class Bike {
         return this.user;
     }
 
+    public List<Ride> getRides() {
+        return rides;
+    }
+
+    public void setRides(List<Ride> rides) {
+        this.rides = rides;
+    }
+
+    public boolean isNeedsMaintenance() {
+        return needsMaintenance;
+    }
+
+    public void setNeedsMaintenance(boolean needsMaintenance) {
+        this.needsMaintenance = needsMaintenance;
+    }
 }

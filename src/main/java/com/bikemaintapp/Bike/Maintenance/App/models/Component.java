@@ -43,7 +43,7 @@ public class Component {
 
     // Relationships
     // There are many components, on one bike.
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Bike bike;
 
     //set up relationship with maintenance schedule based on component type
