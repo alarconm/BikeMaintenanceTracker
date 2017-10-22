@@ -95,20 +95,31 @@ public class UserController {
         return "user/add";
     }
 
+    private boolean userNameTaken(String username){
+        User user = userDao.findUserByName(username);
 
+        if(user != null){
+            return true;
+        }
+        return false;
+    }
     //HttpServletRequest is for session management
     //process the user creation form
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid User newUser, Errors errors,
                                      Model model, HttpServletRequest request, String verifyPassword) {
 
-        if (errors.hasErrors() || !verifyPassword.equals(newUser.getPassword())) {
+        if (errors.hasErrors() || !verifyPassword.equals(newUser.getPassword()) || userNameTaken(newUser.getName())) {
             model.addAttribute("title", "Create New Account");
             model.addAttribute("user", newUser);
 
             if (!verifyPassword.equals(newUser.getPassword())) {
                 model.addAttribute("passwordError",
                         "You must enter the same password both times");
+            }
+            if (userNameTaken(newUser.getName())){
+                model.addAttribute("nameError",
+                        "Username unavailable");
             }
             return "user/add";
         }
