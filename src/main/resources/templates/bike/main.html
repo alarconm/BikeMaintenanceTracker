@@ -12,13 +12,28 @@
     <div th:each="component : ${bike.components}">
         <h3 th:text="${component.type.name}"></h3>
         <h4>Miles since last Maintenance:</h4>
-        <h5 th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></h5>
+        <h5 th:id="'textFor'+${component.maintenanceSchedule.id}" th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></h5>
         <h5 th:text="${component.maintenanceSchedule.maintenanceNeeded}"></h5>
-        <button type="submit" class="btn btn-primary" th:value="${component.id}">Perform Maintenance</button>
+        <button type="submit" th:id="${component.maintenanceSchedule.id}" class="btn btn-primary" th:value="${component.maintenanceSchedule.id}">Perform Maintenance</button>
     </div>
 <hr />
 <a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a>
 
+<script type="text/javascript" language="javascript">
 
+    $("button").click(function(e) {
+
+        //Build url with ID of the maintenanceSchedule we want
+        var url = "/maintreset/" + this.id;
+        //$(this).css('color', 'blue');
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", url, true);
+        xhttp.send();
+
+        $("#textFor" + this.id).text("0");
+
+    });
+
+</script>
 </body>
 </html>
