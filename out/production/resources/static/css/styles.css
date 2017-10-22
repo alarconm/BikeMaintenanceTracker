@@ -85,3 +85,10 @@ nav {
     justify-content: center;
     align-items: center;
 }
+
+.loginCarousel{
+    padding-bottom: 1%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
