@@ -10,6 +10,7 @@ comprehensive view when worn out parts should be replaced or repaired.
 <li><a href="https://www.mamp.info/en/">MAMP</a></li>
 </ul>
 <p>Create your database table prior to running the app through MAMP, reference src->main->application.properties</p>
+<p>Run the app through your browser at localhost:8092/user</p>
 
 # User Stories
 <ol>
