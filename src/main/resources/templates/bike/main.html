@@ -27,7 +27,7 @@
             </td>
         </tr>
         <tr>
-            <td th:unless="${component.maintenanceSchedule.maintenanceNeeded} == ''">
+            <td th:unless="${component.maintenanceSchedule.maintenanceNeeded} == null or ${component.maintenanceSchedule.maintenanceNeeded} == ''">
                 <span th:id="maintNeeded" th:text="${'Maintenance Needed:' + component.maintenanceSchedule.maintenanceNeeded}"></span>
             </td>
         </tr>
