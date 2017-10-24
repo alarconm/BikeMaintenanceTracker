@@ -1,7 +1,6 @@
 # Bike Maintenance Tracker
 
-This Java/Springboot app help users track the wear and tear on bikes and their components. Providing users with a
-comprehensive view when worn out parts should be replaced or repaired.
+This Java/Spring Boot app enables the user to track wear and tear on bikes and their components. A comprehensive view shows when worn out parts should be replaced or repaired.
 
 # Requirements
 <ul>
@@ -9,25 +8,25 @@ comprehensive view when worn out parts should be replaced or repaired.
 <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK</a></li>
 <li><a href="https://www.mamp.info/en/">MAMP</a></li>
 </ul>
-<p>Create your database table prior to running the app through MAMP, reference src->main->application.properties</p>
-<p>Run the app through your browser at localhost:8092/user</p>
+<p>Start your MAMP servers and create your database table prior to running the app. Reference src->main->application.properties</p>
+<p>Run the app in your browser at localhost:8092</p>
 
 # User Stories
 <ol>
-<li>User would be able to create an account</li>
-<li>User would be able to create multi bikes</li>
-<li>The bike would have different components that the user would change out.</li>
-<li>The user would be notified if a part on the bike need maintenance</li>
-<li> A user would be able to view a list or table of parts and basic information like milage since last maintenance</li>
-<li>A user would be able to enter milage for a bike ride on a specific bike</li>
+<li>User creates an account</li>
+<li>User creates multiple bikes</li>
+<li>Bike has different components that the user can change out</li>
+<li>User is notified if a part on the bike is due for maintenance</li>
+<li>User can view a list or table of parts and basic information like mileage since last maintenance</li>
+<li>User can enter mileage for a bike ride on a specific bike</li>
 </ol>
 
 <h5>Extra Features</h5>
 <ol>
-<li>User would be able to upload a profile picture and picture for each bike</li>
-<li>Provide feedback when a part had failed</li>
-<li>Track multiple bikes</li>
-<li>Power users would be able to move parts between different bikes</li>
+<li>User can upload a profile picture and a picture for each bike</li>
+<li>User can provide feedback when a part has failed</li>
+<li>App can track multiple bikes</li>
+<li>Power users can move parts between different bikes</li>
 </ol>
 
 # Wireframes
@@ -41,9 +40,18 @@ comprehensive view when worn out parts should be replaced or repaired.
 <ol>
 <li>Create multiple user accounts</li>
 <li>Create multiple bikes for individual user</li>
-<li>Upon Bike creation, user will be able to add individual parts that will track miles</li>
-<li>Components will notify user that parts need maintence based of miles traveled</li>
-<li>Each component will have a unique message based off mileage traveled</li>
-<li>User will be able to add rides to different bikes</li>
-<li>User will be able to reset mileage on component using the perform maintenace button under each component</li>
+<li>Upon bike creation, add individual parts, which will track miles</li>
+<li>After bike is created and parts are added, replace those parts with new parts</li>
+<li>Verify the user is notified that parts need maintence based on miles traveled</li>
+<li>Verify each component has a unique message based on mileage traveled</li>
+<li>Add rides (including miles) to different bikes</li>
+<li>Reset mileage on component using the perform maintenace button under each component</li>
+</ol>
+
+# Extra Features Tests
+<ol>
+  <li>Upload a profile picture and a picture for each bike</li>
+  <li>Add feedback when a part fails</li>
+  <li>Verify app can track multiple bikes</li>
+  <li>Move a specific part to a different bike</li>
 </ol>
