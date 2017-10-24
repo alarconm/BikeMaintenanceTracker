@@ -40,6 +40,7 @@ public class MaintInterval {
     //Main Constructor for MaintenanceSchedule to call
     public MaintInterval(int intervalMiles, String instructions){
         this.intervalMiles = intervalMiles;
+        this.milesRemaining = intervalMiles;
         this.instructions = instructions;
     }
     //Spring methods

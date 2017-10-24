@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public abstract class MaintenanceSchedule {
+public class MaintenanceSchedule {
 
     @Id
     @GeneratedValue // Auto generates primary key
@@ -16,20 +16,13 @@ public abstract class MaintenanceSchedule {
     @OneToOne(cascade = {CascadeType.ALL})
     private Component component;
 
-   // @OneToMany(mappedBy = "maintenanceSchedule")
-
-    //@ElementCollection(targetClass = MaintInterval.class)
-
-    //@OneToMany(mappedBy = "maintenanceSchedule")
-    @Embedded
-    private List<MaintInterval> intervals;
+    @ElementCollection
+    private List<MaintInterval> intervals = new ArrayList<>();
 
     //New mileage is sent from ride-> component-> this.addMiles() -> MaintInterval.addMiles()
     public void addMiles(int miles) {
         for (MaintInterval interval:intervals){
             interval.addMiles(miles);
-            System.out.println("hotdog");
-            System.out.println(miles);
         }
     }
 
@@ -50,14 +43,7 @@ public abstract class MaintenanceSchedule {
     }
 
     public void addInterval(int miles, String instructions){
-        MaintInterval temp = new MaintInterval();
-
-        //temp.setMaintenanceSchedule(this);
-       intervals.add(temp);
-        //intervals.add(new MaintInterval(miles,instructions));
-       // for (MaintInterval interval:intervals){
-         //   interval.setMaintenanceSchedule(this);
-       // }
+        intervals.add(new MaintInterval(miles,instructions));
     }
 
     //Spring methods
