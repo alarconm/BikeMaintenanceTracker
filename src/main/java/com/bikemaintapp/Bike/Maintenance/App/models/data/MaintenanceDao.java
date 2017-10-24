@@ -13,5 +13,4 @@ import java.util.List;
 @Transactional
 public interface MaintenanceDao extends CrudRepository<MaintenanceSchedule,Integer> {
 
-
 }

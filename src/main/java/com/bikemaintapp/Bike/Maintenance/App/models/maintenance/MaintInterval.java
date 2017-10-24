@@ -1,19 +1,9 @@
 package com.bikemaintapp.Bike.Maintenance.App.models.maintenance;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-//@Entity.
 @Embeddable
 public class MaintInterval {
-
-   /* @Id
-    @GeneratedValue
-    private int id;
-
-    @ManyToOne
-    @JoinColumn(name ="maintenanceSchedule_id")
-    private MaintenanceSchedule maintenanceSchedule;*/
 
     private int intervalMiles;
     private int milesRemaining;
@@ -71,18 +61,5 @@ public class MaintInterval {
     public void setPrevMilesRemaining(int prevMilesRemaining) {
         this.prevMilesRemaining = prevMilesRemaining;
     }
-    /*public MaintenanceSchedule getMaintenanceSchedule(){
-        return maintenanceSchedule;
-    }
-    public void setMaintenanceSchedule(MaintenanceSchedule maintenanceSchedule){
-        this.maintenanceSchedule = maintenanceSchedule;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
 }
