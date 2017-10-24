@@ -3,7 +3,6 @@ package com.bikemaintapp.Bike.Maintenance.App.models.maintenance;
 import com.bikemaintapp.Bike.Maintenance.App.models.Component;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,87 +16,66 @@ public abstract class MaintenanceSchedule {
     @OneToOne(cascade = {CascadeType.ALL})
     private Component component;
 
-    //These lists could should maybe all be together in a subclass...but its fine
-    @ElementCollection(targetClass=Integer.class)
-    private List<Integer> intervals = new ArrayList<Integer>();
-    @ElementCollection(targetClass=String.class)
-    private List<String> maintInstructions = new ArrayList<String>();
-    @ElementCollection(targetClass=Integer.class)
-    private List<Integer> milesSinceMaintInterval = new ArrayList<Integer>();
+   // @OneToMany(mappedBy = "maintenanceSchedule")
 
-    private String maintenanceNeeded;
+    //@ElementCollection(targetClass = MaintInterval.class)
 
-    // this holds the last entered mileage so that an undo/remove last ride button can be used
-    private int undoMiles;
+    //@OneToMany(mappedBy = "maintenanceSchedule")
+    @Embedded
+    private List<MaintInterval> intervals;
 
-
-    public void resetInterval(int index){
-        System.out.println("I am MaintShed " + String.valueOf(id));
-
-        //Check if this maintShed has an interval at supplied Index
-        if(index <= milesSinceMaintInterval.size()-1){
-            milesSinceMaintInterval.set(index,0);
-            maintenanceNeeded = ""; // Clear maintenance instructions
-        }
-
-    }
-    // whenever a ride is recorded the mileage is sent to the component, that will then call this method
-    //TODO add functionality to flip boolean on bike/component to maint needed, problably not here though?
+    //New mileage is sent from ride-> component-> this.addMiles() -> MaintInterval.addMiles()
     public void addMiles(int miles) {
+        for (MaintInterval interval:intervals){
+            interval.addMiles(miles);
+            System.out.println("hotdog");
+            System.out.println(miles);
+        }
+    }
 
-        undoMiles = miles;
-        //This runs once for each element in intervals[]
-        for(int i=0;i < intervals.size();i++){
-            int temp = milesSinceMaintInterval.get(i) + miles;
-            milesSinceMaintInterval.set(i,temp);
-
-            if(milesSinceMaintInterval.get(i) >= intervals.get(i)){
-                //We can just return the instruction matching the index of this interval without further comparisons
-                maintenanceNeeded = maintInstructions.get(i);
+    //You should be able to iterate through this in thymleaf and display each ones mileage and instructions
+    public List<MaintInterval> getDueIntervals(){
+        List<MaintInterval> dueIntervals = new ArrayList<>();
+        for (MaintInterval interval:intervals){
+            if(interval.isDue()){
+                dueIntervals.add(interval);
             }
         }
+        return dueIntervals;
     }
 
-    //TODO look through all the parts intervals and return the lowest value
-    //TODO or maybe something to return mileage details about ALL intervals
-    public List<Integer> getMilesSinceMaintInterval(){
-        return  milesSinceMaintInterval;
+    //resets an interval by its index in the this MaintenanceSchedule's list
+    public void resetInterval(int index){
+        intervals.get(index).resetMilesRemaining();
     }
 
-    //This function can also be used to get the mileage instead of the prior convential springboot way
-    //in case we need more flexibilty or something
-    public int getMilesSinceLastMaint(){
-        return milesSinceMaintInterval.get(0);
+    public void addInterval(int miles, String instructions){
+        MaintInterval temp = new MaintInterval();
+
+        //temp.setMaintenanceSchedule(this);
+       intervals.add(temp);
+        //intervals.add(new MaintInterval(miles,instructions));
+       // for (MaintInterval interval:intervals){
+         //   interval.setMaintenanceSchedule(this);
+       // }
     }
 
+    //Spring methods
     public MaintenanceSchedule() {
-
     }
-
-    // if the mileage on a component hits the maximum for a maintenance interval it will call this method
-    // then it will return the string explaining the maintenance that needs to be performed.
-    //TODO returned values not going anywhere
-    //Todo figure out if this should be overridden per subclass for different combinations of messages
-    public void notifyMaint(int miles) {
-
-        /*if (miles < interval[1]) {
-            return maintInstructions[0];
-        } else if (miles < interval[2]) {
-            return maintInstructions[1];
-        } else {
-            return maintInstructions[2];
-        }*/
-    }
-
-    protected void addInterval(int miles, String instructions){
-        intervals.add(miles);
-        maintInstructions.add(instructions);
-        milesSinceMaintInterval.add(0);
-    }
-
     //Setters and Getters
     public int getId() {
         return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public List<MaintInterval> getIntervals() {
+        return intervals;
+    }
+    public void setIntervals(List<MaintInterval> intervals){
+        this.intervals = intervals;
     }
 
     public Component getComponent() {
@@ -107,73 +85,5 @@ public abstract class MaintenanceSchedule {
     public void setComponent(Component component) {
         this.component = component;
     }
-    public int getMilesSinceMaintInterval(int i) {
-        return milesSinceMaintInterval.get(i);
-    }
 
-    public void setMilesSinceMaintInterval(int i,int milesSinceMaint) {
-        int temp = milesSinceMaintInterval.get(i);
-        milesSinceMaintInterval.set(i,milesSinceMaint);
-    }
-    public int getUndoMiles() {
-        return undoMiles;
-    }
-
-    public void setUndoMiles(int undoMiles) {
-        this.undoMiles = undoMiles;
-    }
-
-    public List<Integer> getIntervals() {
-        return intervals;
-    }
-
-    public void setIntervals(List<Integer> intervals) {
-        this.intervals = intervals;
-    }
-
-    public List<String> getMaintInstructions() {
-        return maintInstructions;
-    }
-
-    public void setMaintInstructions(List<String> maintInstructions) {
-        this.maintInstructions = maintInstructions;
-    }
-
-    public void setMilesSinceMaintInterval(List<Integer> milesSinceMaintInterval) {
-        this.milesSinceMaintInterval = milesSinceMaintInterval;
-    }
-
-    public String getMaintenanceNeeded() {
-        return maintenanceNeeded;
-    }
-
-    public void setMaintenanceNeeded(String maintenanceNeeded) {
-        this.maintenanceNeeded = maintenanceNeeded;
-    }
-
-    /* old overload methods i was using
-    //This is for our subclasses to set their maintenance instructions
-    protected void setInstructions(String one,String two,String three){
-        maintInstructions = new String[] {one,two,three};
-    }
-    //This is for our subclasses to set their mileage intervals
-    protected void setInterval(int one, int two, int three){
-        interval = new int[] {one,two,three};
-    }
-    //TODO get rid of these overloaded functions. Should make a new class holding interval
-    //TODO numbers and instructions as one object, and then keep a list of those. then could have a simple add() in the subclasses and no overloading
-    //We could also make a more dynamic setter that accepts arrays, but then the subclasses arent as readable because you lose some IDE notes
-    protected void setInstructions(String one,String two){
-        maintInstructions = new String[] {one,two};
-    }
-    protected void setInterval(int one, int two){
-        interval = new int[] {one,two};
-    }
-    protected void setInstructions(String one){
-        maintInstructions = new String[] {one};
-    }
-    protected void setInterval(int one){
-        interval = new int[] {one};
-    }
-    */
 }

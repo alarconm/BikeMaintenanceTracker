@@ -8,8 +8,8 @@ public class SuspensionMaintenanceSchedule extends MaintenanceSchedule{
 
     public SuspensionMaintenanceSchedule(){
 
-        addInterval(100,"Clean and lubricate suspension");
-        addInterval(500,"Full suspension teardown and rebuild");
+        //this.addInterval(100,"Clean and lubricate suspension");
+       // addInterval(500,"Full suspension teardown and rebuild");
     }
 }
 

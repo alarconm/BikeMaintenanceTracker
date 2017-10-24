@@ -92,3 +92,7 @@ nav {
     align-items: center;
     display: flex;
 }
+
+.text-left{
+    padding: 3%
+}

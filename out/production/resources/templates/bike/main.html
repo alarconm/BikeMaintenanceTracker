@@ -13,30 +13,7 @@
 <div th:each="component: ${bike.components}">
     <table class="table table-hover">
 
-        <thead>
-        <tr>
-            <th scope="col" th:text="${component.type.name}">
-                <span th:unless="${component.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Miles since last Maintenance:
-                <span th:id="'textFor'+${component.maintenanceSchedule.id}" th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td th:unless="${component.maintenanceSchedule.maintenanceNeeded} == null or ${component.maintenanceSchedule.maintenanceNeeded} == ''">
-                <span th:id="maintNeeded" th:text="${'Maintenance Needed:' + component.maintenanceSchedule.maintenanceNeeded}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" th:id="${component.maintenanceSchedule.id}" class="btn btn-primary" th:value="${component.maintenanceSchedule.id}">Perform Maintenance</button>
-            </td>
-        </tr>
-        </tbody>
+    <p>oki</p>
 
     </table>
     <br />

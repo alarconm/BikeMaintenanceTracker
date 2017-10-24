@@ -30,7 +30,6 @@ public class Component {
     //flag for the view to see if component currently needs maintenance or not
     private boolean needsMaintenance = false;
 
-
     //ENUMS for frame, chain, etc
     private ComponentType type;
 
@@ -119,6 +118,8 @@ public class Component {
 
             case BRAKES:
                 this.maintenanceSchedule = new BrakesMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"Check brake cables, increase tension if needed");
+                maintenanceSchedule.setComponent(this);
                 break;
 
             case WHEELS:

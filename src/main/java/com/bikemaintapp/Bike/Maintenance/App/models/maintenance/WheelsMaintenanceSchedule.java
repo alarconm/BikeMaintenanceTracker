@@ -7,6 +7,6 @@ import javax.persistence.Entity;
 public class WheelsMaintenanceSchedule extends MaintenanceSchedule{
 
     public WheelsMaintenanceSchedule(){
-        addInterval(500,"Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels.");
+        //addInterval(500,"Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels.");
     }
 }
