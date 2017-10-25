@@ -72,7 +72,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model,HttpServletRequest request){
 
-
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
@@ -80,11 +79,23 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
-        model.addAttribute("bike",newBike); // Pass bike object into the view
         User user = (User) request.getSession().getAttribute("user"); // Get the session user
         newBike.setUser(user);
+
+        //create default list of components when creating a new bike
+        ArrayList<Component> defaultComponents = new ArrayList<>();
+        defaultComponents.add(new Component(ComponentType.BRAKES));
+        defaultComponents.add(new Component(ComponentType.DRIVETRAIN));
+        defaultComponents.add(new Component(ComponentType.SUSPENSION));
+        defaultComponents.add(new Component(ComponentType.TIRES));
+        defaultComponents.add(new Component(ComponentType.FRAME));
+        defaultComponents.add(new Component(ComponentType.WHEELS));
+
+        newBike.setComponents(defaultComponents);
         bikeDao.save(newBike);
-        return "redirect:/component/add-component/" + newBike.getId();
+
+        model.addAttribute("bike",newBike); // Pass bike object into the view
+        return "redirect:/bike/main/" + newBike.getId();
 
     }
     //TODO Make it so you have to be signed in to be here.
