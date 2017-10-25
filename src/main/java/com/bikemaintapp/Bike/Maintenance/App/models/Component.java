@@ -16,7 +16,7 @@ public class Component {
     @Id
     @GeneratedValue // Auto generates the primary key
     private int id;
-    
+
     //flag for the view to see if component currently needs maintenance or not
     private boolean needsMaintenance = false;
 
