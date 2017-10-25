@@ -7,6 +7,7 @@ This Java/Spring Boot app enables the user to track wear and tear on bikes and t
 
 
 <br/>
+<h2><b>Table of Contents:</h2></b>
 
 - [Requirements](#requirements)
 - [User Stories](#user-stories)
