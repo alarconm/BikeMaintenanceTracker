@@ -1,10 +1,26 @@
-# Bike Maintenance Tracker
+<p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/ReadMe_logo.jpg?raw=true" width="70%" height="70%"></p>
+
+
+<p align="center"><h1><b>Bike Maintenance Tracker</b></h1></p>
 
 This Java/Spring Boot app enables the user to track wear and tear on bikes and their components. A comprehensive view shows when worn out parts should be replaced or repaired.
 
+
+<br/>
+
+- [Requirements](#requirements)
+- [User Stories](#user-stories)
+- [Extra Features](#extra-features)
+- [Wireframes](#wireframes)
+- [User Story Tests](#user-story-tests)
+- [Extra Features Tests](#extra-features-tests)
+
+<br/>
+
+
 # Requirements
 <ul>
-<li>Java IDEA</li>
+<li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></li>
 <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK</a></li>
 <li><a href="https://www.mamp.info/en/">MAMP</a></li>
 </ul>
@@ -21,7 +37,7 @@ This Java/Spring Boot app enables the user to track wear and tear on bikes and t
 <li>User can enter mileage for a bike ride on a specific bike</li>
 </ol>
 
-<h5>Extra Features</h5>
+# Extra Features
 <ol>
 <li>User can upload a profile picture and a picture for each bike</li>
 <li>User can provide feedback when a part has failed</li>
