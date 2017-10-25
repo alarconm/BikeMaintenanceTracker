@@ -80,10 +80,22 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
-        model.addAttribute("bike",newBike); // Pass bike object into the view
         User user = (User) request.getSession().getAttribute("user"); // Get the session user
         newBike.setUser(user);
+
+        //create default list of components when creating a new bike
+        ArrayList<Component> defaultComponents = new ArrayList<>();
+        defaultComponents.add(new Component(ComponentType.BRAKES));
+        defaultComponents.add(new Component(ComponentType.DRIVETRAIN));
+        defaultComponents.add(new Component(ComponentType.SUSPENSION));
+        defaultComponents.add(new Component(ComponentType.TIRES));
+        defaultComponents.add(new Component(ComponentType.FRAME));
+        defaultComponents.add(new Component(ComponentType.WHEELS));
+
+        newBike.setComponents(defaultComponents);
         bikeDao.save(newBike);
+
+        model.addAttribute("bike",newBike); // Pass bike object into the view
         return "redirect:/component/add-component/" + newBike.getId();
 
     }
