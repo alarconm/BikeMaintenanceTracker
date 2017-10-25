@@ -18,19 +18,8 @@ public class Component {
     @GeneratedValue // Auto generates the primary key
     private int id;
 
-    /*
-
-    //Let user enter name. Leaving this here temporarily
-    //in case we go back to this instead of using ENUMS
-
-    @NotNull
-    @Size(min = 3, max = 15, message = "Component name must be 3-15 characters long")
-    private String componentName;
-    */
-
     //flag for the view to see if component currently needs maintenance or not
     private boolean needsMaintenance = false;
-
 
     //ENUMS for frame, chain, etc
     private ComponentType type;
@@ -108,36 +97,44 @@ public class Component {
 
     //Set the maintenance schedule based on what type of component it is
     public void setMaintenanceSchedule(ComponentType componentType) {
-
+        this.maintenanceSchedule = new MaintenanceSchedule();
         switch (componentType) {
             case FRAME:
-                this.maintenanceSchedule = new FrameMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"Clean thoroughly and inspect for any cracks");
+                maintenanceSchedule.addInterval(500,"Tear down frame, clean and inspect for cracks, lube/grease all parts");
                 break;
 
             case TIRES:
-                this.maintenanceSchedule = new TiresMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"check pressure and inspect for any cracks");
+                maintenanceSchedule.addInterval(2500,"Replace tires if tread is fully worn down");
                 break;
 
             case BRAKES:
-                this.maintenanceSchedule = new BrakesMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"Check brake cables, increase tension if needed");
+                maintenanceSchedule.addInterval(500,"Lubricate cables, increase tension if needed");
+                maintenanceSchedule.addInterval(2500,"Check brake pads and replace if worn out");
                 break;
 
             case WHEELS:
-                this.maintenanceSchedule = new WheelsMaintenanceSchedule();
+                maintenanceSchedule.addInterval(500,"Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels.");
                 break;
 
             case DRIVETRAIN:
-                this.maintenanceSchedule = new DriveTrainMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"Lube chain, cassette and pedals");
+                maintenanceSchedule.addInterval(500,"Perform full cleaning of chain and cassette. Re-lube all parts");
+                maintenanceSchedule.addInterval(5000,"Replace chain and cassette");
                 break;
 
             case SUSPENSION:
-                this.maintenanceSchedule = new SuspensionMaintenanceSchedule();
+                maintenanceSchedule.addInterval(100,"Clean and lubricate suspension");
+                maintenanceSchedule.addInterval(500,"Full suspension teardown and rebuild");
                 break;
 
-                default:
-                    this.maintenanceSchedule = maintenanceSchedule;
-                    break;
+            default:
+                this.maintenanceSchedule = new MaintenanceSchedule();
+                break;
         }
+        maintenanceSchedule.setComponent(this);
 
     }
 }
