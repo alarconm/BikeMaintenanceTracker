@@ -41,7 +41,6 @@ public class Bike {
 
     private boolean needsMaintenance = false;
 
-
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Bike() {
