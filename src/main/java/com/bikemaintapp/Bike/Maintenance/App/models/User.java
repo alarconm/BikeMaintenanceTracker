@@ -27,7 +27,7 @@ public class User {
     @NotNull
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
     private List<Bike> bikes;
 
     @OneToMany(mappedBy = "user")

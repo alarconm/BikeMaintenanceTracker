@@ -10,57 +10,17 @@
 <!--Displays the components-->
 <h2>Components:</h2>
 
-<div th:each="component: ${bike.components}">
-    <table class="table table-hover">
+<th:block th:each="component : ${bike.components}">
+    <h2 th:text="${component.type.name}"></h2>
+    <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
+        <span th:if="${minterval.isDue() == true}">Maintenance Needed!</span>
+        <p th:text="'miles remaining: '+ ${minterval.milesRemaining}"></p>
+        <p th:text="${minterval.instructions}"></p>
 
-        <thead>
-        <tr>
-            <th scope="col" th:text="${component.type.name}">
-                <span th:unless="${component.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Miles since last Maintenance:
-                <span th:id="'textFor'+${component.maintenanceSchedule.id}" th:text="${component.maintenanceSchedule.milesSinceMaintInterval[0]}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td th:unless="${component.maintenanceSchedule.maintenanceNeeded} == null or ${component.maintenanceSchedule.maintenanceNeeded} == ''">
-                <span th:id="maintNeeded" th:text="${'Maintenance Needed:' + component.maintenanceSchedule.maintenanceNeeded}"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit" th:id="${component.maintenanceSchedule.id}" class="btn btn-primary" th:value="${component.maintenanceSchedule.id}">Perform Maintenance</button>
-            </td>
-        </tr>
-        </tbody>
-
-    </table>
-    <br />
-</div>
+    </th:block>
+</th:block>
 
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
-
-<script type="text/javascript" language="javascript">
-
-    $("button").click(function(e) {
-
-        //Build url with ID of the maintenanceSchedule we want
-        var url = "/maintreset/" + this.id;
-        //$(this).css('color', 'blue');
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", url, true);
-        xhttp.send();
-
-        $("#textFor" + this.id).text("0");
-        $("#maintNeeded").text("");
-
-    });
-
-</script>
 
 
 </body>

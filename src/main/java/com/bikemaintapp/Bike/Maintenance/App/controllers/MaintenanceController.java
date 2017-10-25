@@ -19,6 +19,6 @@ public class MaintenanceController {
         MaintenanceSchedule maintShed = maintDao.findOne(id);
         maintShed.resetInterval(0);
         maintDao.save(maintShed);
-        return "hotdog";
+        return "tacocat";
     }
 }
