@@ -72,7 +72,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddBikeForm(@ModelAttribute @Valid Bike newBike, Errors errors, Model model,HttpServletRequest request){
 
-
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
@@ -96,7 +95,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         bikeDao.save(newBike);
 
         model.addAttribute("bike",newBike); // Pass bike object into the view
-        return "redirect:/component/add-component/" + newBike.getId();
+        return "redirect:/bike/main/" + newBike.getId();
 
     }
     //TODO Make it so you have to be signed in to be here.
