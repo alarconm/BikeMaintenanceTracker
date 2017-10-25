@@ -13,8 +13,9 @@
 <th:block th:each="component : ${bike.components}">
     <h2 th:text="${component.type.name}"></h2>
     <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
-        <p th:text="${minterval.instructions}"></p>
         <span th:if="${minterval.isDue() == true}">Maintenance Needed!</span>
+        <p th:text="'miles remaining: '+ ${minterval.milesRemaining}"></p>
+        <p th:text="${minterval.instructions}"></p>
 
     </th:block>
 </th:block>
