@@ -12,18 +12,34 @@
 
 <th:block th:each="component : ${bike.components}">
 
-    <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-        <h2 th:text="${component.type.name}">
+    <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="\images\Brakes.jpeg" alt="Card image cap" />
 
-        </h2>
-    </a>
+        <div class="card-block">
 
-    <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
-        <span th:if="${minterval.isDue() == true}" class="badge badge-warning">Maintenance Needed!</span>
-        <!--<p th:text="'miles remaining until next maintenance needed: '+ ${minterval.milesRemaining}"></p>-->
-        <!--<p th:text="${minterval.instructions}"></p>-->
-    </th:block>
+            <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
+                <span th:if="${minterval.isDue() == true}" class="badge badge-warning">Maintenance Needed!</span>
+            </th:block>
+
+            <h4 class="card-title" th:text="${component.type.name}"></h4>
+
+                <a th:href="@{'/component/component-detail/' + ${component.id}}"  class="btn btn-primary">
+                    Maintenance Page</a>
+        </div>
+    </div>
 </th:block>
+
+    <!--<a th:href="@{'/component/component-detail/' + ${component.id}}" >-->
+        <!--<h2 th:text="${component.type.name}">-->
+        <!--</h2>-->
+    <!--</a>-->
+
+    <!--<th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">-->
+        <!--<span th:if="${minterval.isDue() == true}" class="badge badge-warning">Maintenance Needed!</span>-->
+        <!--&lt;!&ndash;&lt;!&ndash;<p th:text="'miles remaining until next maintenance needed: '+ ${minterval.milesRemaining}"></p>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash;<p th:text="${minterval.instructions}"></p>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;</th:block>&ndash;&gt;-->
+<!--</th:block>-->
 
 
 
