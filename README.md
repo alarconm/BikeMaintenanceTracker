@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/ReadMe_logo.jpg?raw=true" width="70%" height="70%"></p>
+<p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/ReadMe_logo.jpg?raw=true" width="70%" height="70%"></p>
 
 
 <p align="center"><h1><b>Bike Maintenance Tracker</b></h1></p>
@@ -49,9 +49,9 @@ This Java/Spring Boot app enables the user to track wear and tear on bikes and t
 # Wireframes
 
 <h5>User log-in and bike add</h5>
-<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/IMG_1944.JPG?raw=true" height="480em" width="640em">
+<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/IMG_1944.JPG?raw=true" height="480em" width="640em">
 <h5>*update bike view wireframe</h5>
-<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/updated_bike_view_wireframe_10_12.jpg?raw=true" height="480em" width="640em">
+<img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/updated_bike_view_wireframe_10_12.jpg?raw=true" height="480em" width="640em">
 
 # User Story Tests
 <ol>
@@ -63,12 +63,4 @@ This Java/Spring Boot app enables the user to track wear and tear on bikes and t
 <li>Verify each component has a unique message based on mileage traveled</li>
 <li>Add rides (including miles) to different bikes</li>
 <li>Reset mileage on component using the perform maintenace button under each component</li>
-</ol>
-
-# Extra Features Tests
-<ol>
-  <li>Upload a profile picture and a picture for each bike</li>
-  <li>Add feedback when a part fails</li>
-  <li>Verify app can track multiple bikes</li>
-  <li>Move a specific part to a different bike</li>
 </ol>
