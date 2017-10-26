@@ -17,16 +17,14 @@ This Java/Spring Boot app enables the user to track wear and tear on bikes and t
 - [Extra Features Tests](#extra-features-tests)
 
 <br/>
-
-
 # Requirements
 <ul>
 <li><a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></li>
 <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Java SDK</a></li>
 <li><a href="https://www.mamp.info/en/">MAMP</a></li>
+<li><a href="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DatabaseSetup.md">Database Setup</a></li>
 </ul>
-<p>Start your MAMP servers and create your database table prior to running the app. Reference src->main->application.properties</p>
-<p>Run the app in your browser at localhost:8092</p>
+
 
 # User Stories
 <ol>
