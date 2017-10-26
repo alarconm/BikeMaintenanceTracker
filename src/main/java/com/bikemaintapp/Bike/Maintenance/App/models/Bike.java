@@ -3,12 +3,9 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 //TODO make this an abstract class that all types of bikes can model from
 
-import org.hibernate.validator.constraints.Range;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class Bike {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 15, message = "Bike needs to be 3-15 characters long")
+    @Size(min = 1, max = 15, message = "Bike name needs to be 1-15 characters long")
     private String nameOfBike;
 
     // Relationships

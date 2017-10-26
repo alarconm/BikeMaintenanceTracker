@@ -4,10 +4,6 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import com.bikemaintapp.Bike.Maintenance.App.models.Bike;
 
 @Entity
 public class Ride {
@@ -37,7 +33,7 @@ public class Ride {
     public Ride(){
     }
 
-    // TODO some kind of generated name for rides if user doesnt enter one
+    // TODO some kind of generated name for rides if user doesnt enter one (use DateTime()?)
     public Ride(String nameOfRide, Bike bike) {
         this.nameOfRide = nameOfRide;
         this.bike = bike;
