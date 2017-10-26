@@ -9,11 +9,9 @@
 
 # User & Table creation
 <p>After configuring the ports for MAMP, open the the admin view through MAMP</p>
-<p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/MAMP_Admin.jpg?raw=true"></p>
-
 <p>Select user accounts a create a user with the same name and password as in the application.properties file.
-In this case we are using the username <b>bikemaintapp</b> and password <b>bike,</b>remember to select create create database with same name and grant all privileges</p>
-
+In this case we are using the username <b>bikemaintapp</b> and password <b>bike,</b> remember to select create create database with same name and grant all privileges</p>
+<p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/MAMP_Admin.jpg?raw=true"></p>
 <p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/User_Creation.jpg?raw=true"></p>
 
 # Run
