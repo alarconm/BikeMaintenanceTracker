@@ -62,4 +62,5 @@ public class MaintInterval {
         this.prevMilesRemaining = prevMilesRemaining;
     }
 
+
 }

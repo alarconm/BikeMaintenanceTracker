@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+
+<h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
+
+<p th:text="${component.type.name}"></p>
+
+</body>
+</html>

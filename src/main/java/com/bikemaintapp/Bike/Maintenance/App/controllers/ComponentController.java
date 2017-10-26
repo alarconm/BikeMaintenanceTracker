@@ -95,8 +95,14 @@ public class ComponentController {
         componentDao.save(component);
         bike.addComponent(component);
         bikeDao.save(bike);
-
         return "redirect:/bike/main/" + bike.getId(); //Bike detailed view
+    }
+
+    @RequestMapping(value = "component-detail/{componentId}" )
+    public String componentDetail(Model model, @PathVariable int componentId) {
+
+        model.addAttribute("component", componentDao.findOne(componentId));
+        return "component/component-detail";
     }
 
 }
