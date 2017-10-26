@@ -13,9 +13,9 @@
 <th:block th:each="component : ${bike.components}">
 
     <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-        <h2 th:text="${component.type.name}">
+        <h4 th:text="${component.type.name}">
 
-        </h2>
+        </h4>
     </a>
 
     <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
@@ -26,7 +26,8 @@
 </th:block>
 
 
-
+<p></p> <!-- put space above Add link -->
+<p></p> <!-- put space above Add link -->
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
 
 
