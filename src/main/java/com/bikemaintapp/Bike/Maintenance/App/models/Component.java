@@ -3,8 +3,11 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.*;
 import org.hibernate.validator.constraints.Range;
 
+import javax.imageio.ImageIO;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 //A bike component, such as brakes or derailleur
@@ -40,6 +43,9 @@ public class Component {
     @OneToOne(cascade = {CascadeType.ALL})
     private MaintenanceSchedule maintenanceSchedule;
 
+    @Lob
+    private byte[] image;
+
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Component() {
@@ -53,6 +59,7 @@ public class Component {
 
     public Component(ComponentType type) {
         this.type = type;
+        this.setImageByType(type);
         //Create the maintenance schedule based on what type of component it is
         setMaintenanceSchedule(type);
     }
@@ -136,6 +143,69 @@ public class Component {
         }
         maintenanceSchedule.setComponent(this);
 
+    }
+
+    public boolean isNeedsMaintenance() {
+        return needsMaintenance;
+    }
+
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    // add default pictures when the bike is created
+    //TODO fix this...probably just want to store the image path!?
+    public void setImageByType(ComponentType componentType) {
+
+        switch (componentType) {
+            case FRAME:
+                File frameFile = new File("/images/Frame.jpeg");
+                byte[] bFrameFile = new byte[((int) frameFile.length())];
+                this.setImage(bFrameFile);
+                break;
+
+            case SUSPENSION:
+                File suspensionFile = new File("/images/Suspension.jpeg");
+                byte[] bSuspensionFile = new byte[((int) suspensionFile.length())];
+                this.setImage(bSuspensionFile);
+                break;
+
+            case DRIVETRAIN:
+                File drivetrainFile = new File("/images/Drivetrain.jpeg");
+                byte[] bdriveTrainFile = new byte[((int) drivetrainFile.length())];
+                this.setImage(bdriveTrainFile);
+                break;
+
+            case WHEELS:
+                File wheelsFile = new File("/images/Wheel.jpeg");
+                byte[] bWheelsFile = new byte[((int) wheelsFile.length())];
+                this.setImage(bWheelsFile);
+                break;
+
+            case BRAKES:
+                File brakesFile = new File("/images/Brakes.jpeg");
+                byte[] bBrakesFile = new byte[((int) brakesFile.length())];
+                this.setImage(bBrakesFile);
+                break;
+
+            case TIRES:
+                File tiresFile = new File("/images/Tires.jpeg");
+                byte[] bTiresFile = new byte[((int) tiresFile.length())];
+                this.setImage(bTiresFile);
+                break;
+        }
     }
 }
 
