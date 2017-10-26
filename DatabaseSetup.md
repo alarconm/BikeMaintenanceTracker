@@ -1,5 +1,5 @@
 <p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/ReadMe_logo.jpg?raw=true"></p>
-<p align="center"><h1><b>Database Setup</b></h1></p>
+# Database Setup
 
 # MAMP Configuration
 <p>After installing MAMP to your machine you will need to configure where the web application will look to reference</p>
