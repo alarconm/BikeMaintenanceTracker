@@ -11,16 +11,21 @@
 <h2>Components:</h2>
 
 <th:block th:each="component : ${bike.components}">
-    <h2 th:text="${component.type.name}"></h2>
-    <a th:href="@{'/component/component-detail/' + ${component.id}}" th:text="${component.type.name}"></a>
+
+    <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+        <h2 th:text="${component.type.name}">
+
+        </h2>
+    </a>
 
     <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
         <span th:if="${minterval.isDue() == true}" class="badge badge-warning">Maintenance Needed!</span>
         <!--<p th:text="'miles remaining until next maintenance needed: '+ ${minterval.milesRemaining}"></p>-->
         <!--<p th:text="${minterval.instructions}"></p>-->
-
     </th:block>
 </th:block>
+
+
 
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
 
