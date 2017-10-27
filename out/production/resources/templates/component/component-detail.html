@@ -8,13 +8,15 @@
 <div class="jumbotron">
     <h1 class="display-3" th:text="${component.type.name}"></h1>
 
-    <p class="lead" th:each="minterval : ${component.maintenanceSchedule.intervals}">
-        <span th:text="'Miles until next maintenance needed: ' + ${minterval.milesRemaining}"></span>
-    </p>
+    <p class="lead"
+       th:text="'Miles until next maintenance needed: ' + ${component.lowestMaintInterval.milesRemaining}"></p>
     <hr class="my-4" />
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p th:text="'Next maintenance needed: ' + ${component.lowestMaintInterval.instructions}"></p>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dmOzeFItkd8?rel=0" frameborder="0"></iframe>
+
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Perform Maintenance</a>
     </p>
 </div>
 

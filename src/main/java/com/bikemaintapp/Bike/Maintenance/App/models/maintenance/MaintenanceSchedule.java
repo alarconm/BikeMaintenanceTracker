@@ -27,10 +27,10 @@ public class MaintenanceSchedule {
     }
 
     //You should be able to iterate through this in thymleaf and display each ones mileage and instructions
-    public List<MaintInterval> getDueIntervals(){
+    public List<MaintInterval> getDueIntervals() {
         List<MaintInterval> dueIntervals = new ArrayList<>();
-        for (MaintInterval interval:intervals){
-            if(interval.isDue()){
+        for (MaintInterval interval : intervals) {
+            if (interval.isDue()) {
                 dueIntervals.add(interval);
             }
         }
