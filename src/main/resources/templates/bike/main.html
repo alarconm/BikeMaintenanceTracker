@@ -11,14 +11,15 @@
 <h2>Components:</h2>
 
 
-
+<!--Table displays each component in a "card" by iterating through the list of components and displaying
+    the even indexes in the first row and the odd indexes in the second row-->
     <table class="table">
         <tbody>
         <tr>
             <th:block th:each="component : ${bike.components}">
             <td th:if="${componentStat.even}">
                 <div class="card" style="width: 20rem;">
-                    <img class="card-img-top" th:src="${component.image}" alt="Card image cap" />
+                    <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
                     <div class="card-block">
                         <a th:href="@{'/component/component-detail/' + ${component.id}}" >
                             <h4 class="card-title" th:text="${component.type.name}"></h4></a>

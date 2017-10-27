@@ -3,10 +3,20 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
-
 <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 
-<p th:text="${component.type.name}"></p>
+<div class="jumbotron">
+    <h1 class="display-3" th:text="${component.type.name}"></h1>
+
+    <p class="lead" th:each="minterval : ${component.maintenanceSchedule.intervals}">
+        <span th:text="'Miles until next maintenance needed: ' + ${minterval.milesRemaining}"></span>
+    </p>
+    <hr class="my-4" />
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+</div>
 
 </body>
 </html>
