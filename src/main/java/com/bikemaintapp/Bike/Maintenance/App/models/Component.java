@@ -194,6 +194,20 @@ public class Component {
                 break;
         }
     }
+
+    // returns the maintenance interval with the lowest amount of mileage until maintenance is due
+    public MaintInterval getLowestMaintInterval() {
+
+        MaintInterval lowestInterval = this.getMaintenanceSchedule().getIntervals().get(0);
+
+        for(MaintInterval interval : this.getMaintenanceSchedule().getIntervals()) {
+
+            if (interval.getIntervalMiles() < lowestInterval.getIntervalMiles()) {
+                lowestInterval = interval;
+            }
+        }
+    return lowestInterval;
+    }
 }
 
 
