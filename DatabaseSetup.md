@@ -1,5 +1,4 @@
 <p align="center"><img src="https://github.com/alarconm/BikeMaintenanceTracker/blob/master/DocFiles/ReadMe_logo.jpg?raw=true" width="70%" height="70%"></p>
-<p align="center"><h1>Bike Maintenance Tracker</h1></p>
 
 # MAMP Configuration
 <p>After installing MAMP you will need to configure your MAMP's port configuration to match the projects</p>
