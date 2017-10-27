@@ -43,8 +43,8 @@ public class Component {
     @OneToOne(cascade = {CascadeType.ALL})
     private MaintenanceSchedule maintenanceSchedule;
 
-    @Lob
-    private byte[] image;
+    //DB holds link url text to image
+    private String image;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -157,53 +157,40 @@ public class Component {
         this.bike = bike;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
     // add default pictures when the bike is created
-    //TODO fix this...probably just want to store the image path!?
     public void setImageByType(ComponentType componentType) {
 
         switch (componentType) {
             case FRAME:
-                File frameFile = new File("/images/Frame.jpeg");
-                byte[] bFrameFile = new byte[((int) frameFile.length())];
-                this.setImage(bFrameFile);
+                this.setImage("/images/Frame.jpeg");
                 break;
 
             case SUSPENSION:
-                File suspensionFile = new File("/images/Suspension.jpeg");
-                byte[] bSuspensionFile = new byte[((int) suspensionFile.length())];
-                this.setImage(bSuspensionFile);
+                this.setImage("/images/Suspension.jpeg");
                 break;
 
             case DRIVETRAIN:
-                File drivetrainFile = new File("/images/Drivetrain.jpeg");
-                byte[] bdriveTrainFile = new byte[((int) drivetrainFile.length())];
-                this.setImage(bdriveTrainFile);
+                this.setImage("/images/Drivetrain.jpeg");
                 break;
 
             case WHEELS:
-                File wheelsFile = new File("/images/Wheel.jpeg");
-                byte[] bWheelsFile = new byte[((int) wheelsFile.length())];
-                this.setImage(bWheelsFile);
+                this.setImage("/images/Wheel.jpeg");
                 break;
 
             case BRAKES:
-                File brakesFile = new File("/images/Brakes.jpeg");
-                byte[] bBrakesFile = new byte[((int) brakesFile.length())];
-                this.setImage(bBrakesFile);
+                this.setImage("/images/Brakes.jpeg");
                 break;
 
             case TIRES:
-                File tiresFile = new File("/images/Tires.jpeg");
-                byte[] bTiresFile = new byte[((int) tiresFile.length())];
-                this.setImage(bTiresFile);
+                this.setImage("/images/Tires.jpeg");
                 break;
         }
     }
