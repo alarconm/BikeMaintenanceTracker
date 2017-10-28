@@ -96,3 +96,13 @@ nav {
 .text-left{
     padding: 3%
 }
+
+#footer
+{
+    position:fixed;
+    bottom:0;
+    padding:0; /*remove padding */
+    margin:0; /* remove margins */
+    border:0; /* remove borders */
+
+}
