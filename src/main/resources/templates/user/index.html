@@ -10,6 +10,7 @@
 <h1 th:unless="${user == null}"
     th:text="'Welcome ' + ${user.name}"></h1>
 
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>
