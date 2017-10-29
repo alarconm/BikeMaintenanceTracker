@@ -3,13 +3,14 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
-
+<div class="loginBox">
 <h1 th:text="${title}">Default Title</h1>
-
-
+</div>
+<!--TODO center and shrink the sign up page-->
+<div class="container signup">
 <form method="post"  th:object="${user}">
     <div class="form-group">
-        <input class="form-control" placeholder="Username" th:field="*{name}" />
+        <input class="form-control " placeholder="Username" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
         <span th:text="${nameError}"></span>
     </div>
@@ -29,9 +30,9 @@
         <span th:errors="*{email}" class="error"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create Account</button>
+    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
 </form>
-
+</div>
 <footer th:replace="fragments :: footer"></footer>
 
 </body>
