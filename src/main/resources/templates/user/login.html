@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-8">
  <!--Start of the carousel item 1-->
-            <div id="bikeMainLogin" class="carousel slide row item" data-ride="carousel">
+            <div id="bikeMainLogin" class="carousel slide row item logInCarousel" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <img class="d-block img-fluid" src="/images/Login_Slide_001.jpg" alt="First slide"/>
@@ -45,6 +45,7 @@
         <div class="col-md-4">
             <div class="loginBox">
                 <form method="post"  th:object="${user}">
+                    <h1 th:text="${title}">Default Title</h1>
                     <div class="form-group icon-addon addon-lg" >
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <input class="form-control" placeholder="Username" th:field="*{name}" />
