@@ -30,7 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ride> rides;
 
     public void setBikes(List<Bike> bikes){
