@@ -19,10 +19,8 @@
         <td>
             <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
             <span th:unless="${bike.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
+
         </td>
-        <!--<td th:unless="${bike.needsMaintenance == false}">-->
-            <!--<div class="alert alert-primary" role="alert">Maintenance Needed!</div>-->
-        <!--</td>-->
     </tr>
     </tbody>
 </table>
@@ -30,6 +28,8 @@
 <p>
 <a href="/bike/add"><h4>Add a new Bike</h4></a>
 </p>
+
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>

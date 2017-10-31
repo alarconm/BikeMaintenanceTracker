@@ -80,19 +80,22 @@ nav {
 }
 
 .loginBox {
+    padding-top: 3%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.loginCarousel{
-    padding-bottom: 1%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.loginPage{
+    padding-top: 3%;
 }
 
-.text-left{
-    padding: 3%
+.footer
+{
+    position:fixed;
+    bottom:0;
+    left:0;
+    padding-left:1em
 }
+
+
