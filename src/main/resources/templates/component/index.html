@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
-
+<div class="container">
 <h1 th:text="${title}">Default Title</h1>
 
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
@@ -17,10 +17,8 @@
     <li th:text="${component.name}"></li>
     <li th:text="${component.milesTraveled}"></li>
 </ul>
-
-
+    <footer th:replace="fragments :: footer"></footer>
+</div>
 </body>
-
-<footer th:replace="fragments :: footer"></footer>
 
 </html>

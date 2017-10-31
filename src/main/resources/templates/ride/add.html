@@ -7,9 +7,9 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'></link>
     <!-- end css imports -->
 </head>
-<body class="container">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
-
+<div class="container">
 <h1 th:text="${title}"></h1>
 
 <!--This will display a form and take the name of the bike for the user-->
@@ -44,6 +44,6 @@
 <!-- end js imports -->
 
 <footer th:replace="fragments :: footer"></footer>
-
+</div>
 </body>
 </html>
