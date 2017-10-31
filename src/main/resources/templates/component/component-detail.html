@@ -9,7 +9,7 @@
 <div class="jumbotron">
     <h1 class="display-3" th:text="${component.type.name}"></h1>
 
-    <p class="lead"
+    <p class="lead" th:id="'textFor'+${component.maintenanceSchedule.id}"
        th:text="'Miles until next maintenance needed: ' + ${component.lowestMaintInterval.milesRemaining}"></p>
     <hr class="my-4" />
     <p th:text="'Next maintenance needed: ' + ${component.lowestMaintInterval.instructions}"></p>
@@ -17,11 +17,28 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/dmOzeFItkd8?rel=0" frameborder="0"></iframe>
 
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Perform Maintenance</a>
+        <button class="btn btn-primary btn-lg" id="btn" href="#" role="button">Maintenance Complete</button>
+        Click to let us know you've performed this maintenance
     </p>
 </div>
 
 <footer th:replace="fragments :: footer"></footer>
 </div>
+
+<script>
+    $("#btn").click(function(){
+        $(this).removeClass('btn-primary');
+        $(this).prop('disabled', true);
+        $(this).addClass('btn-success');
+        $(this).text("Got it!");
+
+        //Build url with ID of the maintenanceSchedule we want
+        //var url = "/maintreset/" + this.id;
+        //var xhttp = new XMLHttpRequest();
+        //xhttp.open("GET", url, true);
+        //xhttp.send();
+        //$("#textFor" + this.id).text("0");
+    });
+</script>
 </body>
 </html>
