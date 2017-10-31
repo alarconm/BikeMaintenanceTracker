@@ -4,6 +4,7 @@
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 
+<div class="container">
 <h1 th:text="${title}">Default Title</h1>
 
 <!-- This displays all the routes you can go, update the navigation in the fragments html-->
@@ -38,5 +39,8 @@
 
     <input type="submit" value="Add a Bike" />
 </form>
+
+<footer th:replace="fragments :: footer"></footer>
+</div>
 </body>
 </html>

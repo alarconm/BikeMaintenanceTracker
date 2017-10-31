@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-
+<div class="container">
 <form method="post" th:object="${component}" action="/component/add-component">
 
     <div class="form-group">
@@ -25,6 +25,6 @@
 </form>
 
 <footer th:replace="fragments :: footer"></footer>
-
+</div>
 </body>
 </html>

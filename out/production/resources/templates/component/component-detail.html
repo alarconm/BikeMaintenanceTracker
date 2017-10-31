@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
+<div class="container">
 <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 
 <div class="jumbotron">
@@ -20,5 +21,7 @@
     </p>
 </div>
 
+<footer th:replace="fragments :: footer"></footer>
+</div>
 </body>
 </html>
