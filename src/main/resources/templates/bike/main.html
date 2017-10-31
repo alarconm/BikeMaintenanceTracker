@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
+<div class="container">
 <!--Displays the name of the user-->
 <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 <!--Displays the total amount of miles-->
@@ -62,5 +63,6 @@
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
 
 <footer th:replace="fragments :: footer"></footer>
+</div>
 </body>
 </html>
