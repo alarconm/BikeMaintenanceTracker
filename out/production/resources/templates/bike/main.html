@@ -11,30 +11,73 @@
 <!--Displays the components-->
 <h2>Components:</h2>
 
+    <div class="row align-items-center justify-content-center">
+        <th:block th:each="component : ${bike.components}">
+                <div th:if="${componentStat.even}">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
+                            <div class="card-block">
+                                <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+                                    <h4 class="card-title" th:text="${component.type.name}"></h4></a>
+                                <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
+                                    <span th:if="${minterval.isDue() == true}" class="badge badge-warning">
+                                        Maintenance Needed!</span>
+                                </th:block>
+                                <a th:href="@{'/component/component-detail/' + ${component.id}}"
+                                   class="btn btn-success">Maintenance Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </th:block>
 
-<!--Table displays each component in a "card" by iterating through the list of components and displaying
-    the even indexes in the first row and the odd indexes in the second row-->
-    <table class="table">
-        <tbody>
-        <tr>
-            <th:block th:each="component : ${bike.components}">
-            <td th:if="${componentStat.even}">
-                <div class="card" style="width: 20rem;">
-                    <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
-                    <div class="card-block">
-                        <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-                            <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                        <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
-                            <span th:if="${minterval.isDue() == true}" class="badge badge-warning">
-                                Maintenance Needed!</span>
-                        </th:block>
-                    <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                       class="btn btn-success">Maintenance Page</a>
+        <th:block th:each="component : ${bike.components}">
+            <div th:if="${componentStat.odd}">
+                <div class="col-md-4">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
+                        <div class="card-block">
+                            <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+                                <h4 class="card-title" th:text="${component.type.name}"></h4></a>
+                            <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
+                                    <span th:if="${minterval.isDue() == true}" class="badge badge-warning">
+                                        Maintenance Needed!</span>
+                            </th:block>
+                            <a th:href="@{'/component/component-detail/' + ${component.id}}"
+                               class="btn btn-success">Maintenance Page</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </th:block>
+    </div>
+<!--Table displays each component in a "card" by iterating through the list of components and displaying
+    the even indexes in the first row and the odd indexes in the second row-->
+    <!--
+    <table class="table">
+        <tbody>
+            <th:block th:each="component : ${bike.components}">
+            <td th:if="${componentStat.even}">
+                <div class="row">
+                    <div class="col-md-4">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
+                        <div class="card-block">
+                            <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+                                <h4 class="card-title" th:text="${component.type.name}"></h4></a>
+                            <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
+                                <span th:if="${minterval.isDue() == true}" class="badge badge-warning">
+                                    Maintenance Needed!</span>
+                            </th:block>
+                            <a th:href="@{'/component/component-detail/' + ${component.id}}"
+                               class="btn btn-success">Maintenance Page</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </td>
             </th:block>
-        </tr>
 
         <tr>
             <th:block th:each="component : ${bike.components}">
@@ -57,7 +100,7 @@
         </tr>
         </tbody>
     </table>
-
+-->
 <p></p> <!-- put space above Add link -->
 <p></p> <!-- put space above Add link -->
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>
