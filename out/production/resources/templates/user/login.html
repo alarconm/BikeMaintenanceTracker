@@ -52,7 +52,7 @@
         <div class="col-md-4">
             <div class="loginBox">
                 <form method="post"  th:object="${user}">
-                    <h1 th:text="${title}">Default Title</h1>
+                    <h1 class="text-center" th:text="${title}">Default Title</h1>
                     <div class="form-group icon-addon addon-lg" >
                         <i class="fa fa-user" aria-hidden="true"></i>
                         <input class="form-control" placeholder="Username" th:field="*{name}" />

@@ -7,7 +7,7 @@
 <div class="container loginPage">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1 th:text="${title}">Default Title</h1>
+            <h1 class="text-center" th:text="${title}">Default Title</h1>
             <form method="post"  th:object="${user}">
                 <div class="form-group">
                     <input class="form-control " placeholder="Username" th:field="*{name}" />
