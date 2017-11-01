@@ -109,34 +109,72 @@ public class Component {
         this.maintenanceSchedule = new MaintenanceSchedule();
         switch (componentType) {
             case FRAME:
-                maintenanceSchedule.addInterval(100,"Clean thoroughly and inspect for any cracks");
-                maintenanceSchedule.addInterval(500,"Tear down frame, clean and inspect for cracks, lube/grease all parts");
+                maintenanceSchedule.addInterval(
+                        100,"Clean thoroughly and inspect for any cracks",
+                        "https://www.youtube.com/embed/Z4KPijfR1Q8?rel=0");
+                maintenanceSchedule.addInterval(
+                        500,
+                        "Tear down frame, clean and inspect for cracks, lube/grease all parts",
+                        "https://www.youtube.com/embed/zYDx7mAhq7Q?rel=0");
                 break;
 
             case TIRES:
-                maintenanceSchedule.addInterval(100,"check pressure and inspect for any cracks");
-                maintenanceSchedule.addInterval(2500,"Replace tires if tread is fully worn down");
+                maintenanceSchedule.addInterval(
+                        100,
+                        "check pressure and inspect for any cracks",
+                        "https://www.youtube.com/embed/FNU0RwAWL4c?rel=0");
+                maintenanceSchedule.addInterval(
+                        2500,
+                        "Replace tires if tread is fully worn down",
+                        "https://www.youtube.com/embed/sGdu4fkrQ9M?rel=0");
                 break;
 
             case BRAKES:
-                maintenanceSchedule.addInterval(100,"Check brake cables, increase tension if needed");
-                maintenanceSchedule.addInterval(500,"Lubricate cables, increase tension if needed");
-                maintenanceSchedule.addInterval(2500,"Check brake pads and replace if worn out");
+                maintenanceSchedule.addInterval(
+                        100,
+                        "Check brake cables, increase tension if needed",
+                        "https://www.youtube.com/embed/hg6s596PPRY?rel=0");
+                maintenanceSchedule.addInterval(
+                        500,
+                        "Lubricate cables, increase tension if needed",
+                        "https://www.youtube.com/embed/iYiCm-W-nO0?rel=0");
+                maintenanceSchedule.addInterval(
+                        2500,
+                        "Check brake pads and replace if worn out",
+                        "https://www.youtube.com/embed/Y5FBygoegYQ?rel=0");
                 break;
 
             case WHEELS:
-                maintenanceSchedule.addInterval(500,"Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels.");
+                maintenanceSchedule.addInterval(
+                        500,
+                        "Check spoke tension. Clean and inspect wheels for cracks. If cracked replace wheels.",
+                        "https://www.youtube.com/embed/9sWQ9lKGdRo?rel=0");
                 break;
 
             case DRIVETRAIN:
-                maintenanceSchedule.addInterval(100,"Lube chain, cassette and pedals");
-                maintenanceSchedule.addInterval(500,"Perform full cleaning of chain and cassette. Re-lube all parts");
-                maintenanceSchedule.addInterval(5000,"Replace chain and cassette");
+                maintenanceSchedule.addInterval(
+                        100,
+                        "Lube chain, cassette and pedals",
+                        "https://www.youtube.com/embed/YOZLa539wd0?rel=0");
+                maintenanceSchedule.addInterval(
+                        500,
+                        "Perform full cleaning of chain and cassette. Re-lube all parts",
+                        "https://www.youtube.com/embed/OvKcsMg8TJc?rel=0");
+                maintenanceSchedule.addInterval(
+                        5000,
+                        "Replace chain and cassette",
+                        "https://www.youtube.com/embed/Zo-8ofvdxQo?rel=0");
                 break;
 
             case SUSPENSION:
-                maintenanceSchedule.addInterval(100,"Clean and lubricate suspension", "https://www.youtube.com/embed/dmOzeFItkd8?rel=0");
-                maintenanceSchedule.addInterval(500,"Full suspension teardown and rebuild");
+                maintenanceSchedule.addInterval(
+                        100,
+                        "Clean and lubricate suspension",
+                        "https://www.youtube.com/embed/dmOzeFItkd8?rel=0");
+                maintenanceSchedule.addInterval(
+                        500,
+                        "Full suspension teardown and rebuild",
+                        "https://www.youtube.com/embed/wxma5WJEZiI?rel=0");
                 break;
 
             default:
