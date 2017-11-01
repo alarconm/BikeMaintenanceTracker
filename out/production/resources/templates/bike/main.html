@@ -25,6 +25,8 @@
                                         <span th:unless="${component.lowestMaintInterval.isDue() == true}"
                                               th:text="'Miles until maintenance: '
                                            + ${component.lowestMaintInterval.milesRemaining}"></span>
+                                                <a th:href="@{'/component/component-detail/' + ${component.id}}"
+                                                   class="btn btn-success">Maintenance Page</a>
                             </div>
                         </div>
                     </div>
@@ -44,6 +46,8 @@
                                     <span th:unless="${component.lowestMaintInterval.isDue() == true}"
                                           th:text="'Miles until maintenance: '
                                            + ${component.lowestMaintInterval.milesRemaining}"></span>
+                                                <a th:href="@{'/component/component-detail/' + ${component.id}}"
+                                                   class="btn btn-success">Maintenance Page</a>
                         </div>
                     </div>
                 </div>
