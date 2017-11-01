@@ -92,7 +92,7 @@ public class UserController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddUserForm(Model model) {
 
-        model.addAttribute("title", "Create New Account");
+        model.addAttribute("title", "Register");
         model.addAttribute(new User());
         return "user/add";
     }
