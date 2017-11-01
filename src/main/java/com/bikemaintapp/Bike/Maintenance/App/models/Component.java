@@ -59,9 +59,9 @@ public class Component {
 
     public Component(ComponentType type) {
         this.type = type;
-        this.setImageByType(type);
+        this.setImageByType(type); //this doesn't work...is the type not set yet?
         //Create the maintenance schedule based on what type of component it is
-        setMaintenanceSchedule(type);
+        this.setMaintenanceSchedule(type); //same as the image...
     }
 
     // Setters & Getters
