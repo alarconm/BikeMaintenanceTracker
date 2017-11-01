@@ -8,6 +8,7 @@ public class MaintInterval {
     private int intervalMiles;
     private int milesRemaining;
     private String instructions;
+    private String video;
 
     private int prevMilesRemaining; //for undo; ONLY for resetting an accidental "perform maintenance"
 
@@ -33,6 +34,15 @@ public class MaintInterval {
         this.milesRemaining = intervalMiles;
         this.instructions = instructions;
     }
+
+    //Constructor with video on maintenance
+    public MaintInterval(int intervalMiles, String instructions, String video) {
+        this.intervalMiles = intervalMiles;
+        this.milesRemaining = intervalMiles;
+        this.instructions = instructions;
+        this.video = video;
+    }
+
     //Spring methods
     public MaintInterval(){
 
@@ -62,5 +72,11 @@ public class MaintInterval {
         this.prevMilesRemaining = prevMilesRemaining;
     }
 
+    public String getVideo() {
+        return video;
+    }
 
+    public void setVideo(String video) {
+        this.video = video;
+    }
 }

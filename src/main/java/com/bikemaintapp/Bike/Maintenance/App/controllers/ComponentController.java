@@ -90,10 +90,9 @@ public class ComponentController {
             model.addAttribute("types", ComponentType.values());
             return "add-component/{bikeId}";
         }
-
-        component.setMaintenanceSchedule(component.getType()); //ties specific maintenance schedule based on type
-        componentDao.save(component);
-        bike.addComponent(component);
+        Component newComponent = new Component(component.getType());
+        newComponent.setMaintenanceSchedule(component.getType());
+        bike.addComponent(newComponent);
         bikeDao.save(bike);
         return "redirect:/bike/main/" + bike.getId(); //Bike detailed view
     }

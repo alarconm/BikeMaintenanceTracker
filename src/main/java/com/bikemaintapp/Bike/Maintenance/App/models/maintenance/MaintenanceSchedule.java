@@ -42,8 +42,11 @@ public class MaintenanceSchedule {
         intervals.get(index).resetMilesRemaining();
     }
 
-    public void addInterval(int miles, String instructions){
-        intervals.add(new MaintInterval(miles,instructions));
+    public void addInterval(int miles, String instructions, String video){
+        intervals.add(new MaintInterval(miles,instructions,video));
+    }
+    public void addInterval(int miles, String instructions) {
+        intervals.add(new MaintInterval(miles, instructions));
     }
 
     //Spring methods
