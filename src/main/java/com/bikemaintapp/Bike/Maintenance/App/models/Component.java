@@ -46,6 +46,8 @@ public class Component {
     //DB holds link url text to image
     private String image;
 
+    private String video;
+
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Component() {
@@ -133,7 +135,7 @@ public class Component {
                 break;
 
             case SUSPENSION:
-                maintenanceSchedule.addInterval(100,"Clean and lubricate suspension");
+                maintenanceSchedule.addInterval(100,"Clean and lubricate suspension", "https://www.youtube.com/embed/dmOzeFItkd8?rel=0");
                 maintenanceSchedule.addInterval(500,"Full suspension teardown and rebuild");
                 break;
 
