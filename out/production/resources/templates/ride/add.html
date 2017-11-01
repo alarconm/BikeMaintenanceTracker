@@ -24,8 +24,9 @@
         <span th:errors="${ride.bike}" class="error"></span>
         <div class="form-group">
             <label th:for="miles-input" class="col-2 col-form-label">Miles</label>
-            <input class="form-control" th:field="${ride.miles}" type="number" value="0" id="miles-input"/>
-            <span th:errors="${ride.miles}" class="error"></span>
+            <input class="form-control" th:field="*{miles}" type="number" value="0" id="miles-input"/>
+            <span th:errors="*{miles}" class="error"></span>
+            <span th:text="${milesError}"></span>
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

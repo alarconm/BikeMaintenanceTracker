@@ -18,7 +18,7 @@ public class Ride {
     //min should be enforced as greater than 0 but @Range will only take ints
     //and plenty of valid rides could be under a mile
     @NotNull
-    @Range(min = 0,max = 9999, message = "")
+    @Range(min = 0,max = 5000, message = "Ride must be between 0 and 5000 miles")
     private double miles;
 
     // Relationships
