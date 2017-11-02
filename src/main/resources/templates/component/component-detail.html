@@ -9,17 +9,28 @@
 <div class="jumbotron">
     <h1 class="display-3" th:text="${component.type.name}"></h1>
 
-    <p class="lead" th:id="'textFor'+${component.maintenanceSchedule.id}"
-       th:text="'Miles until next maintenance needed: ' + ${component.lowestMaintInterval.milesRemaining}"></p>
+    <!--When maintenance is overdue show this-->
+    <div th:if="${component.lowestMaintInterval.milesRemaining} &lt; 0">
+        <p class="lead" th:id="'textFor'+${component.maintenanceSchedule.id}"
+           th:text="'Maintenance overdue by  ' + ${component.lowestMaintInterval.milesRemaining} * -1 + ' miles!'">
+        </p>
+    </div>
+
+    <!--When maintenance is not due yet show this-->
+    <div th:unless="${component.lowestMaintInterval.milesRemaining} &lt; 0">
+        <p class="lead" th:id="'textFor'+${component.maintenanceSchedule.id}"
+           th:text="'Miles until next maintenance needed: ' + ${component.lowestMaintInterval.milesRemaining}"></p>
+    </div>
+
     <hr class="my-4" />
     <p th:text="'Next maintenance needed: ' + ${component.lowestMaintInterval.instructions}"></p>
-
-    <iframe width="560" height="315" th:src="${component.lowestMaintInterval.video}" frameborder="0"></iframe>
 
     <p class="lead">
         <button class="btn btn-primary btn-lg" id="btn" href="#" role="button">Maintenance Complete</button>
         Click to let us know you've performed this maintenance
     </p>
+    <iframe width="560" height="315" th:src="${component.lowestMaintInterval.video}" frameborder="0"></iframe>
+
 </div>
 
 <footer th:replace="fragments :: footer"></footer>
