@@ -2,10 +2,6 @@ body {
     font-family: sans-serif;
 }
 
-nav {
-    margin-bottom: 20px;
-}
-
 .input-group .icon-addon .form-control {
     border-radius: 0;
 }
@@ -98,4 +94,26 @@ nav {
     padding-left:1em
 }
 
+.imgSize{
+    padding-bottom: 2%;
+}
 
+/*CSS style for the user login page*/
+
+html,
+body,
+header,
+#intro {
+    height: 100%;
+}
+
+#intro {
+    background: url("/images/login_bg.jpeg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.loginPage{
+    padding-top: 2em;
+}

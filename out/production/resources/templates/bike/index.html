@@ -3,31 +3,37 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
+<!--background image-->
+<!--"/images/bike_index.jpeg"-->
+
+
+<!--Contains the images as well as the link to add new bikes-->
 <div class="container">
-<h1 th:text="${#strings.capitalize(title)}">Default Title</h1>
-<div class="text-left">
-    <img src="/images/profile_image.jpg" class="rounded"/>
-</div>
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Bike Name</th>
-    </tr>
-    </thead>
-    <tbody th:each="bike: ${bikes}">
-    <tr>
-        <td>
-            <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
-            <span th:unless="${bike.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
-
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<p>
-<a href="/bike/add"><h4>Add a new Bike</h4></a>
-</p>
+    <img class="img-fluid rounded mx-auto d-block imgSize" src="images/bike_index.jpeg"/>
+    <!--Stock photo for user bikes-->
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-left" th:text="${#strings.capitalize(title)}">Default Title</h3>
+        </div>
+        <div class="col-md-4">
+            <a class="text-right" href="/bike/add">Add Bike</a>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-right text-center">Upcoming Maintenance</h3>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-hover ">
+            <tbody th:each="bike: ${bikes}">
+            <tr>
+                <td>
+                    <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
+                    <span th:unless="${bike.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 <footer th:replace="fragments :: footer"></footer>
 </div>
