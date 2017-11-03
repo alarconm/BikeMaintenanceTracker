@@ -12,5 +12,4 @@ public class BikeMaintenanceAppApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

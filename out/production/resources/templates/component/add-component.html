@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container">
-<form method="post" th:object="${component}" action="/component/add-component">
+    <h1 th:text="${title}">Default Title</h1>
+
+    <form method="post" th:object="${component}" action="/component/add-component">
 
     <div class="form-group">
         <select class="form-control" name="type">

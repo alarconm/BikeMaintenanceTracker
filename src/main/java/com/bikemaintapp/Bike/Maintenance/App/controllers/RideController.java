@@ -61,7 +61,7 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         if(errors.hasErrors()){
             User user = (User) request.getSession().getAttribute("user");
             model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
-            model.addAttribute(new Ride());
+            model.addAttribute("ride",newRide);
             return "ride/add";
         }
         model.addAttribute("ride",newRide);
