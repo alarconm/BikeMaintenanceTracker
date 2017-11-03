@@ -75,7 +75,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         // If the value is not met then return user to the add page
         if(errors.hasErrors()){
             model.addAttribute("title", "Add Bike"); // Pass this title to the view
-            model.addAttribute(new Bike());
+            model.addAttribute("bike",newBike);
             return "bike/add";
         }
         // If the values are met the process form and return the new to the index view
