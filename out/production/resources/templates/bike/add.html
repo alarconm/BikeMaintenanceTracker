@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container">
 <h1 th:text="${title}">Default Title</h1>
 
-<!-- This displays all the routes you can go, update the navigation in the fragments html-->
-
-
 <!--This will display a form and take the name of the bike for the user-->
 <form method="post"  th:object="${bike}">
     <!--This will form will take in a user's bike name and  the miles traveled on a bike-->
-    <div class="form-group">
-        <label th:for="name">Name of the bike</label>
-        <input class="form-control" th:field="*{nameOfBike}" />
-        <span th:errors="*{nameOfBike}" class="error"></span>
-        <span th:text="${nameOfBikeError}"></span>
+    <div class="col-sm-12">
+        <div class="form-group">
+            <label th:for="name">Name of the bike</label>
+            <input class="form-control" th:field="*{nameOfBike}" />
+            <span th:errors="*{nameOfBike}" class="error"></span>
+            <span th:text="${nameOfBikeError}"></span>
+        </div>
+        <input type="submit" class="btn btn-primary btn-block" value="Add a Bike" />
     </div>
-    <input type="submit" value="Add a Bike" />
 </form>
 
 <footer th:replace="fragments :: footer"></footer>
