@@ -4,32 +4,35 @@
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 
+
 <div class="container">
     <img class="img-fluid rounded mx-auto d-block imgSize" src="images/bike_index.jpeg"/>
+    <h3>About Bike Maintenance Tracker</h3>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h3 class="text-left" >About Bike Maintenance Tracker</h3>
-        </div>
-        <div class="col-md-4">
-            <a class="text-center" href="/bike/add">Add Bike</a>
-        </div>
-        <div class="col-md-4">
-            <h3 class="text-right text-center">Upcoming Maintenance</h3>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <table class="table table-hover ">
-            <tbody th:each="bike: ${bikes}">
-            <tr>
-                <td>
-                    <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
-                    <span th:unless="${bike.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <p>
+        Your bicycle's components need periodic maintenance. Whether that's just a quick tightening, lubrication, or complete replacement, Bike Maintenance Tracker will keep track of all those intervals, based on how many miles you ride.
+
+        If you use the ride-tracking app Strava, Bike Maintenance Tracker can import your mileage automatically. Or you can simply enter your miles directly into the app after every ride.</p>
+
+
+    <br/>
+    <h3>About Us</h3>
+    <br/>
+        <p>We are four developers in the Portland, Oregon area.
+            <br/>
+        <br/>Michael Alarcon
+            <br/>
+        Kevin Tam
+            <br/>
+        Avery Van Kirk
+            <br/>
+        Timothy Adams
+            <br/>
+        </p>
+
 
     <footer th:replace="fragments :: footer"></footer>
 </div>
+
+</body>
+</html>
