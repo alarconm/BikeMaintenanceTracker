@@ -218,7 +218,7 @@ public class Component {
                 break;
 
             case DRIVETRAIN:
-                this.setImage("/images/Drivetrain.jpeg");
+                this.setImage("/images/DriveTrain.jpeg");
                 break;
 
             case WHEELS:
