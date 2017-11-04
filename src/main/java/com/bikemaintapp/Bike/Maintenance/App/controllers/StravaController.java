@@ -66,7 +66,9 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
                 //for testing it is just getting the first bike in the users list of bikes
                 Bike currentBike = bikeDao.findBikeByUser_Id(user.getId()).get(0);
                 Ride addRide = new Ride(ride.getName(), currentBike);
-                addRide.setMiles((ride.getDistance()*0.000621371));
+                //Truncate the crazy double down for viewing pleasure
+                int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10);
+                addRide.setMiles((double)rideMiles / 10);
                 addRide.setUser(user);
                 List<Component> components = addRide.getBike().getComponents();
 
