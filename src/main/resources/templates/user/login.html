@@ -60,6 +60,7 @@
                             <form method="post"  th:object="${user}">
                                 <!--change color to -->
                                 <h1 style="color:white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class="text-center" th:text="${title}">Default Title</h1>
+
                                 <div class="form-group icon-addon addon-lg" >
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <input class="form-control" placeholder="Username" th:field="*{name}" />
@@ -74,6 +75,7 @@
                                     <span th:text="${passworderror}"></span>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                                <p><a href="/user/add">create account</a></p>
                             </form>
                         </div>
                     </div>
