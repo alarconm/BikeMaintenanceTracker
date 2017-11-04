@@ -117,3 +117,7 @@ header,
 .loginPage{
     padding-top: 2em;
 }
+
+a{
+    text-align: center;
+}
