@@ -58,10 +58,15 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddRideForm(@ModelAttribute @Valid Ride newRide, Errors errors, Model model,HttpServletRequest request){
 
-        if(errors.hasErrors()){
+        if(errors.hasErrors() || !(newRide.getMiles() > 0)){
             User user = (User) request.getSession().getAttribute("user");
             model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
             model.addAttribute("ride",newRide);
+
+            if(!(newRide.getMiles() > 0)){
+                model.addAttribute("milesError",
+                        "Miles must be greater than 0");
+            }
             return "ride/add";
         }
         model.addAttribute("ride",newRide);
