@@ -12,113 +12,55 @@
 <h2>Components:</h2>
 
     <div class="row align-items-center justify-content-center">
-        <th:block th:each="component : ${bike.components}">
-                <div th:if="${componentStat.even}">
-                    <div class="col-md-4">
-                        <div class="card" style="width: 20rem;">
-                            <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
-                            <div class="card-block">
-                                <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-                                    <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                                        <span th:if="${component.lowestMaintInterval.isDue() == true}"
-                                              class="badge badge-warning">Maintenance Needed!</span>
-                                        <span th:unless="${component.lowestMaintInterval.isDue() == true}"
-                                              th:text="'Miles until maintenance: '
-                                           + ${component.lowestMaintInterval.milesRemaining}"></span>
-                                                <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                                                   class="btn btn-success">Maintenance Page</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </th:block>
-
-        <th:block th:each="component : ${bike.components}">
-            <div th:if="${componentStat.odd}">
-                <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
-                        <div class="card-block">
-                            <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-                                <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                                    <span th:if="${component.lowestMaintInterval.isDue() == true}"
-                                          class="badge badge-warning">Maintenance Needed!</span>
-                                    <span th:unless="${component.lowestMaintInterval.isDue() == true}"
-                                          th:text="'Miles until maintenance: '
-                                           + ${component.lowestMaintInterval.milesRemaining}"></span>
-                                                <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                                                   class="btn btn-success">Maintenance Page</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th:block>
-    </div>
-<!--Table displays each component in a "card" by iterating through the list of components and displaying
-    the even indexes in the first row and the odd indexes in the second row-->
-    <!--
-    <table class="table">
-        <tbody>
-            <th:block th:each="component : ${bike.components}">
-            <td th:if="${componentStat.even}">
-<<<<<<< HEAD
+    <th:block th:each="component : ${bike.components}">
+        <div th:if="${componentStat.even}">
+            <div class="col-md-4">
                 <div class="card" style="width: 20rem;">
                     <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
                     <div class="card-block">
                         <a th:href="@{'/component/component-detail/' + ${component.id}}" >
                             <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                            <span th:if="${component.lowestMaintInterval.isDue() == true}" class="badge badge-warning">
-                                Maintenance Needed!</span>
-                            <span th:unless="${component.lowestMaintInterval.isDue() == true}"
-                                  th:text="'Miles until maintenance: '
-                                   + ${component.lowestMaintInterval.milesRemaining}"></span>
-                    <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                       class="btn btn-success">Maintenance Page</a>
-=======
-                <div class="row">
-                    <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
-                        <div class="card-block">
-                            <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-                                <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                            <th:block th:each="minterval : ${component.maintenanceSchedule.intervals}">
-                                <span th:if="${minterval.isDue() == true}" class="badge badge-warning">
-                                    Maintenance Needed!</span>
-                            </th:block>
-                            <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                               class="btn btn-success">Maintenance Page</a>
-                        </div>
+                        <!--Conditionals to check miles remaining on component and display based off of that-->
+                        <span th:if="${component.lowestMaintInterval.milesRemaining &lt; 10}"
+                              class="badge badge-danger">Maintenance Needed!</span>
+                        <span th:if="${component.lowestMaintInterval.milesRemaining &lt; 25
+                                and component.lowestMaintInterval.milesRemaining &gt; 10}"
+                              class="badge badge-warning">Maintenance needed soon!</span>
+                        <span th:if="${component.lowestMaintInterval.milesRemaining &gt; 25}"
+                              class="badge badge-success" th:text="'Miles remaining until maintenance: '
+                           + ${component.lowestMaintInterval.milesRemaining}"></span>
+                        <!--end miles remaining conditionals-->
                     </div>
-                    </div>
->>>>>>> be46c4b8f1654bda3e81e3daf28118ddd9b20c52
                 </div>
-            </td>
-            </th:block>
+            </div>
+        </div>
+    </th:block>
 
-        <tr>
-            <th:block th:each="component : ${bike.components}">
-                <td th:if="${componentStat.odd}">
-                    <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
-                        <div class="card-block">
-                            <a th:href="@{'/component/component-detail/' + ${component.id}}" >
-                                <h4 class="card-title" th:text="${component.type.name}"></h4></a>
-                            <span th:if="${component.lowestMaintInterval.isDue() == true}" class="badge badge-warning">
-                                Maintenance Needed!</span>
-                            <span th:unless="${component.lowestMaintInterval.isDue() == true}"
-                                  th:text="'Miles until maintenance: '
+<th:block th:each="component : ${bike.components}">
+    <div th:if="${componentStat.odd}">
+        <div class="col-md-4">
+            <div class="card" style="width: 20rem;">
+                <img class="card-img-top" th:src="${component.image}" alt="Component Image" />
+                <div class="card-block">
+                    <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+                        <h4 class="card-title" th:text="${component.type.name}"></h4></a>
+
+                    <!--Conditionals to check miles remaining on component and display based off of that-->
+                    <span th:if="${component.lowestMaintInterval.milesRemaining &lt; 10}"
+                          class="badge badge-danger">Maintenance Needed!</span>
+                    <span th:if="${component.lowestMaintInterval.milesRemaining &lt; 25
+                     and component.lowestMaintInterval.milesRemaining &gt; 10}"
+                          class="badge badge-warning">Maintenance needed soon!</span>
+                    <span th:if="${component.lowestMaintInterval.milesRemaining &gt; 25}"
+                          class="badge badge-success" th:text="'Miles remaining until maintenance: '
                                    + ${component.lowestMaintInterval.milesRemaining}"></span>
-                            <a th:href="@{'/component/component-detail/' + ${component.id}}"
-                               class="btn btn-success">Maintenance Page</a>
-                        </div>
-                    </div>
-                </td>
-            </th:block>
-        </tr>
-        </tbody>
-    </table>
--->
+                    <!--end miles remaining conditionals-->
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+    </div>
 <p></p> <!-- put space above Add link -->
 <p></p> <!-- put space above Add link -->
 <h2><a th:href="@{'/component/add-component/' + ${bike.id}}">Add another component</a></h2>

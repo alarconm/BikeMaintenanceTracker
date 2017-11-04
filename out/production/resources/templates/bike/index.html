@@ -29,7 +29,8 @@
                     <span th:if="${bike.LowestInterval.milesRemaining &lt; 25
                      and bike.LowestInterval.milesRemaining &gt; 10}"
                           class="badge badge-warning">Maintenance needed soon!</span>
-                    <span th:if="${bike.LowestInterval.milesRemaining &gt; 25}" class="badge badge-success">Good to go!</span>
+                    <span th:if="${bike.LowestInterval.milesRemaining &gt; 25}"
+                          class="badge badge-success">No maintenance needed</span>
                 </td>
             </tr>
             </tbody>
