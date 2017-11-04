@@ -26,7 +26,7 @@
     <p th:text="'Next maintenance needed: ' + ${component.lowestMaintInterval.instructions}"></p>
 
     <p class="lead">
-        <button class="btn btn-primary btn-lg" id="btn" href="#" role="button">Maintenance Complete</button>
+        <button th:id="${component.maintenanceSchedule.id}" class="btn btn-primary btn-lg" href="#" role="button">Maintenance Complete</button>
         Click to let us know you've performed this maintenance
     </p>
     <iframe width="560" height="315" th:src="${component.lowestMaintInterval.video}" frameborder="0"></iframe>
@@ -36,20 +36,28 @@
 <footer th:replace="fragments :: footer"></footer>
 </div>
 
+<script type="text/javascript" language="javascript">
+    $("button").click(function(e) {
+        //Build url with ID of the maintenanceSchedule we want
+        var url = "/maintreset/" + this.id;
+        //$(this).css('color', 'blue');
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", url, true);
+        xhttp.send();
+        $("#textFor" + this.id).text("Maintenance Complete!");
+    });
+</script>
+
 <script>
-    $("#btn").click(function(){
+    $(".btn").click(function(){
         $(this).removeClass('btn-primary');
         $(this).prop('disabled', true);
         $(this).addClass('btn-success');
         $(this).text("Got it!");
-
-        //Build url with ID of the maintenanceSchedule we want
-        //var url = "/maintreset/" + this.id;
-        //var xhttp = new XMLHttpRequest();
-        //xhttp.open("GET", url, true);
-        //xhttp.send();
-        //$("#textFor" + this.id).text("0");
     });
 </script>
+
+
+
 </body>
 </html>
