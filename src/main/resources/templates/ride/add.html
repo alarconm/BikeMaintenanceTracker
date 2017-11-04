@@ -23,6 +23,8 @@
 
 
     <div th:unless="${#lists.isEmpty(bikes)}">
+        <div class="container">
+            <div class="col-sm-6 offset-sm-3">
 <form method="post"  th:object="${ride}">
     <div class="form-group">
         <label th:for="name">Bike</label>
@@ -38,13 +40,17 @@
             <span th:text="${milesError}"></span>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-block btn-primary">Submit</button>
 </form>
     </div>
+            <div class="row ">
+            <a th:unless="${#lists.isEmpty(bikes)}" th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
+                <img th:src="@{/images/btn_strava_connectwith_orange.png}" /></a>
+            </div>
 
-<br />
-<a th:unless="${#lists.isEmpty(bikes)}" th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
-    <img th:src="@{/images/btn_strava_connectwith_orange.png}" /></a>
+        </div>
+    </div>
+
 
 
 
