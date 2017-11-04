@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
 <head th:replace="fragments :: head">
 
     <!-- Bootstrap and font awesome css for making things pretty-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"></link>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'></link>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"
+          type='text/css'></link>
     <!-- end css imports -->
 </head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container">
-<h1 th:text="${title}"></h1>
+    <h1 th:text="${title}"></h1>
 
-<!--This will display a form and take the name of the bike for the user-->
+    <!--This will display a form and take the name of the bike for the user-->
 
     <!--stop user from being able to create a ride if no bikes are available-->
     <div th:if="${#lists.isEmpty(bikes)}">
         <p>No bikes created yet! Create a bike before adding a ride</p>
-        <a href="/bike/add"><button type="submit" class="btn btn-primary">Create a bike</button></a>
+        <a href="/bike/add">
+            <button type="submit" class="btn btn-primary">Create a bike</button>
+        </a>
     </div>
     <!--End div for no bike conditional-->
 
@@ -25,42 +28,49 @@
     <div th:unless="${#lists.isEmpty(bikes)}">
         <div class="container">
             <div class="col-sm-6 offset-sm-3">
-<form method="post"  th:object="${ride}">
-    <div class="form-group">
-        <label th:for="name">Bike</label>
-        <select class="custom-select" th:field="${ride.bike}">
-            <option th:each="bike : ${bikes}"
-                    th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
-        </select>
-        <span th:errors="${ride.bike}" class="error"></span>
-        <div class="form-group">
-            <label th:for="miles-input" class="col-2 col-form-label">Miles</label>
-            <input class="form-control" th:field="*{miles}" type="number" step="0.1" value="0" id="miles-input"/>
-            <span th:errors="*{miles}" class="error"></span>
-            <span th:text="${milesError}"></span>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-block btn-primary">Submit</button>
-</form>
-    </div>
+                <form method="post" th:object="${ride}">
+                    <div class="form-group">
+                        <label th:for="name">Bike</label>
+                        <select class="custom-select" th:field="${ride.bike}">
+                            <option th:each="bike : ${bikes}"
+                                    th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
+                        </select>
+                        <span th:errors="${ride.bike}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="miles-input">Miles</label>
+                        <input class="form-control" th:field="*{miles}" type="number" step="0.1" value="0"
+                               id="miles-input"/>
+                        <span th:errors="*{miles}" class="error"></span>
+                        <span th:text="${milesError}"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                </form>
+            </div>
             <div class="row ">
-            <a th:unless="${#lists.isEmpty(bikes)}" th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
-                <img th:src="@{/images/btn_strava_connectwith_orange.png}" /></a>
+                <a th:unless="${#lists.isEmpty(bikes)}"
+                   th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
+                    <img th:src="@{/images/btn_strava_connectwith_orange.png}"/></a>
             </div>
 
         </div>
     </div>
 
 
+    <!-- Import jQuery, Popper, and Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+            integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+            crossorigin="anonymous"></script>
+    <!-- end js imports -->
 
-
-<!-- Import jQuery, Popper, and Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-<!-- end js imports -->
-
-<footer th:replace="fragments :: footer"></footer>
+    <footer th:replace="fragments :: footer"></footer>
 </div>
 
 
