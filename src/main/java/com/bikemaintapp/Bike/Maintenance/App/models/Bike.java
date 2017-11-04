@@ -3,6 +3,8 @@ package com.bikemaintapp.Bike.Maintenance.App.models;
 
 //TODO make this an abstract class that all types of bikes can model from
 
+import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.MaintInterval;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -121,5 +123,19 @@ public class Bike {
 
     public void setNeedsMaintenance(boolean needsMaintenance) {
         this.needsMaintenance = needsMaintenance;
+    }
+
+    //Getter so that you can easily get the lowest maintenance interval on the entire bike
+    //used to see when the next maintenance is needed across all components on the bike
+
+    public MaintInterval getLowestInterval() {
+        MaintInterval lowestMaintInterval = this.components.get(0).getLowestMaintInterval();
+
+        for(Component component : this.components) {
+            if (component.getLowestMaintInterval().getIntervalMiles() < lowestMaintInterval.getIntervalMiles()) {
+                lowestMaintInterval = component.getLowestMaintInterval();
+            }
+        }
+        return lowestMaintInterval;
     }
 }

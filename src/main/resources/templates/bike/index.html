@@ -18,9 +18,6 @@
         <div class="col-md-4">
             <a class="text-right" href="/bike/add">Add Bike</a>
         </div>
-        <div class="col-md-4">
-            <h3 class="text-right text-center">Upcoming Maintenance</h3>
-        </div>
     </div>
     <div class="col-md-6">
         <table class="table table-hover ">
@@ -28,13 +25,17 @@
             <tr>
                 <td>
                     <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
-                    <span th:unless="${bike.needsMaintenance == false}" class="badge badge-warning">Maintenance Needed!</span>
+                    <span th:if="${bike.LowestInterval.milesRemaining &lt; 10}" class="badge badge-danger">Maintenance Needed!</span>
+                    <span th:if="${bike.LowestInterval.milesRemaining &lt; 25
+                     and bike.LowestInterval.milesRemaining &gt; 10}"
+                          class="badge badge-warning">Maintenance needed soon!</span>
+                    <span th:if="${bike.LowestInterval.milesRemaining &gt; 25}"
+                          class="badge badge-success">No maintenance needed</span>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
 <footer th:replace="fragments :: footer"></footer>
 </div>
 </body>
