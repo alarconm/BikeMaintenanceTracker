@@ -47,11 +47,18 @@
 
                     <button type="submit" class="btn btn-block btn-primary">Submit</button>
                 </form>
-                <div>
+
+                <div style="text-align:center;padding-top: 10px">
+                    <h5>OR</h5>
+                </div>
+
+                <div style="text-align:center">
+
                     <a th:unless="${#lists.isEmpty(bikes)}"
                        th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
                         <img th:src="@{/images/btn_strava_connectwith_orange.png}"/></a>
                 </div>
+
             </div>
 
 
