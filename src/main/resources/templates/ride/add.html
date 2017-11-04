@@ -18,6 +18,8 @@
     <div th:if="${#lists.isEmpty(bikes)}">
         <p>No bikes created yet! Create a bike before adding a ride</p>
         <a href="/bike/add"><button type="submit" class="btn btn-primary">Create a bike</button></a>
+    </div>
+    <!--End div for no bike conditional-->
 
 
     <div th:unless="${#lists.isEmpty(bikes)}">
@@ -41,10 +43,9 @@
     </div>
 
 <br />
-<a th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
+<a th:unless="${#lists.isEmpty(bikes)}" th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
     <img th:src="@{/images/btn_strava_connectwith_orange.png}" /></a>
-    </div>
-    <!--End div for no bike conditional-->
+
 
 
 <!-- Import jQuery, Popper, and Bootstrap -->
