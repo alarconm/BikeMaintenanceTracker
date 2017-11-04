@@ -29,7 +29,13 @@
         <button th:id="${component.maintenanceSchedule.id}" class="btn btn-primary btn-lg" href="#" role="button">Maintenance Complete</button>
         Click to let us know you've performed this maintenance
     </p>
+
+
+                <!--<div class="col-sm-4">-->
+                    <div class="embed-responsive embed-responsive-16by9">
     <iframe width="560" height="315" th:src="${component.lowestMaintInterval.video}" frameborder="0"></iframe>
+                    </div>
+                <!--</div>-->
 
 </div>
 
