@@ -114,6 +114,18 @@ header,
     -o-background-size: cover;
     background-size: cover;
 }
+
+#about {
+    background: url("/images/bike_index.jpeg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.2;
+    color: rgba(0, 0, 0, 1.0);
+}
+
+
 .loginPage{
     padding-top: 2em;
 }
