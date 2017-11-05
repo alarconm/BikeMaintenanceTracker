@@ -55,7 +55,7 @@
                 <div style="text-align:center">
 
                     <a th:unless="${#lists.isEmpty(bikes)}"
-                       th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='http://127.0.0.1:8092/strava')}">
+                       th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='https://bike-maint.herokuapp.com/strava')}">
                         <img th:src="@{/images/btn_strava_connectwith_orange.png}"/></a>
                 </div>
 
