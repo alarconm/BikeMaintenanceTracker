@@ -5,8 +5,6 @@
 <nav th:replace="fragments :: navigation"></nav>
 <!--background image-->
 <!--"/images/bike_index.jpeg"-->
-
-
 <!--Contains the images as well as the link to add new bikes-->
 <div class="container">
     <img class="img-fluid rounded mx-auto d-block imgSize" src="images/bike_index.jpeg"/>
@@ -25,7 +23,7 @@
             <tr>
                 <td>
                     <a th:href="@{'/bike/main/' + ${bike.id}}" th:text="${#strings.capitalize(bike.nameOfBike)}"></a>
-                    <span th:if="${bike.LowestInterval.milesRemaining &lt; 10}" class="badge badge-danger">Maintenance Needed!</span>
+                    <span th:if="${bike.LowestInterval.milesRemaining &lt;= 10}" class="badge badge-danger">Maintenance Needed!</span>
                     <span th:if="${bike.LowestInterval.milesRemaining &lt; 25
                      and bike.LowestInterval.milesRemaining &gt; 10}"
                           class="badge badge-warning">Maintenance needed soon!</span>

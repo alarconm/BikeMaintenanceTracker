@@ -132,7 +132,7 @@ public class Bike {
         MaintInterval lowestMaintInterval = this.components.get(0).getLowestMaintInterval();
 
         for(Component component : this.components) {
-            if (component.getLowestMaintInterval().getIntervalMiles() < lowestMaintInterval.getIntervalMiles()) {
+            if (component.getLowestMaintInterval().getMilesRemaining()< lowestMaintInterval.getMilesRemaining()) {
                 lowestMaintInterval = component.getLowestMaintInterval();
             }
         }
