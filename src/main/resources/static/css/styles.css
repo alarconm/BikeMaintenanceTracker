@@ -115,6 +115,10 @@ header,
     background-size: cover;
 }
 
+/* This section would put a background image on the About page.
+    It is also applying the opacity to the text, so I'm commenting it out
+    until I figure it out. Tim
+
 #about {
     background: url("/images/bike_index.jpeg")no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -124,6 +128,7 @@ header,
     opacity: 0.2;
     color: rgba(0, 0, 0, 1.0);
 }
+*/
 
 
 .loginPage{
