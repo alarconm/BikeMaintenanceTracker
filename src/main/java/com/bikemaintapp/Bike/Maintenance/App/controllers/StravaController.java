@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
     UserDao userDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String displayLoginForm(Model model, @RequestParam("code") String code, HttpServletRequest request) {
+    public String stravaGet(Model model, @RequestParam("code") String code, HttpServletRequest request) {
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
@@ -62,7 +63,6 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         for (StravaRide ride : rides) {
             if (ride.getType().equals("Ride")) {
 
-                //TODO use a dropdown or button to set which bike is used
                 //for testing it is just getting the first bike in the users list of bikes
                 Bike currentBike = bikeDao.findBikeByUser_Id(user.getId()).get(0);
                 Ride addRide = new Ride(ride.getName(), currentBike);
@@ -82,6 +82,23 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
         model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
         model.addAttribute("title",user.getName() + "'s Rides");
+        return "ride/index";
+    }
+
+    //Post from the strava ride list - user checks which ones get sent here to be added
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String stravaPost(Model model, ArrayList<StravaRide> rideadd, HttpServletRequest request) {
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+        User user = (User) request.getSession().getAttribute("user");
+
+        for (StravaRide ride : rideadd) {
+            StravaRide newRide = new StravaRide(ride.getName());
+        }
+
+        model.addAttribute("rides", rideDao.findRideByUserId(user.getId()));
+        model.addAttribute("title", user.getName() + "'s Rides");
         return "ride/index";
     }
 
