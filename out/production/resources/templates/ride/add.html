@@ -50,9 +50,11 @@
 
                 <div style="text-align:center;padding-top: 10px">
                     <h5>OR</h5>
+                    <h5>Get your rides from Strava</h5>
                 </div>
 
                 <div style="text-align:center">
+
 
                     <a th:unless="${#lists.isEmpty(bikes)}"
                        th:href="@{https://www.strava.com/oauth/authorize(client_id=21098,response_type='code',redirect_uri='https://bike-maint.herokuapp.com/strava')}">
