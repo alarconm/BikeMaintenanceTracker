@@ -39,7 +39,7 @@
         <th:block th:each="ride,i : ${stravaRides}">
             <tr>
                 <th scope="row" th:text="${i.count}">-1</th>
-                <td th:text="${ride.bike}"></td>
+                <td th:text="${ride.gear}"></td>
                 <td th:text="${ride.miles}"></td>
                 <td>
                     <div class="form-check">
@@ -54,12 +54,13 @@
     </table>
         <div class="form-group">
             <label th:for="name">Select which bike to add rides to</label>
-            <select class="custom-select" th:field="${ride.bike}">
+            <select class="custom-select">
                 <option th:each="bike : ${bikes}"
                         th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
             </select>
             <span th:errors="${ride.bike}" class="error"></span>
         </div>
+        <input type="hidden" name="bikeId" value="${bike.id}" />
         <button type="submit" class="btn btn-block btn-primary">Submit</button>
     </form>
     <!--End strava data import table-->

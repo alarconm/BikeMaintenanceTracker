@@ -60,41 +60,65 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         //activity that is a "Ride"
         //Distance comes in as meters so it is converted to miles
         //mileage for each ride is then added to the components on the bike
+//        for (StravaRide ride : rides) {
+//            if (ride.getType().equals("Ride")) {
+//
+//                //for testing it is just getting the first bike in the users list of bikes
+//                Bike currentBike = bikeDao.findBikeByUser_Id(user.getId()).get(0);
+//                Ride addRide = new Ride(ride.getName(), currentBike);
+//
+//                //Truncate the crazy double down for viewing pleasure
+//                int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10);
+//                addRide.setMiles((double)rideMiles / 10);
+//                addRide.setUser(user);
+//                List<Component> components = addRide.getBike().getComponents();
+//
+//                for (int i = 0; i < components.size(); i++) {
+//                    components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
+//                }
+//                rideDao.save(addRide);
+//            }
+//        }
+        ArrayList<StravaRide> stravaRides = new ArrayList<>();
+
         for (StravaRide ride : rides) {
             if (ride.getType().equals("Ride")) {
-
-                //for testing it is just getting the first bike in the users list of bikes
-                Bike currentBike = bikeDao.findBikeByUser_Id(user.getId()).get(0);
-                Ride addRide = new Ride(ride.getName(), currentBike);
-
-                //Truncate the crazy double down for viewing pleasure
                 int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10);
-                addRide.setMiles((double)rideMiles / 10);
-                addRide.setUser(user);
-                List<Component> components = addRide.getBike().getComponents();
-
-                for (int i = 0; i < components.size(); i++) {
-                    components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
-                }
-                rideDao.save(addRide);
+                ride.setMiles((double)rideMiles / 10);
+                stravaRides.add(ride);
             }
         }
 
-        model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
-        model.addAttribute("title",user.getName() + "'s Rides");
-        return "ride/index";
+        model.addAttribute("bikes",bikeDao.findBikeByUser_Id(user.getId()));
+        model.addAttribute("stravaRides", stravaRides);
+        //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
+        model.addAttribute(new Ride());
+        return "ride/add";
+
+//        model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
+//        model.addAttribute("title",user.getName() + "'s Rides");
+//        return "ride/index";
     }
 
     //Post from the strava ride list - user checks which ones get sent here to be added
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String stravaPost(Model model, ArrayList<StravaRide> rideadd, HttpServletRequest request) {
+    public String stravaPost(Model model, ArrayList<StravaRide> rideadd, @RequestParam int bikeId, HttpServletRequest request) {
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
         User user = (User) request.getSession().getAttribute("user");
 
         for (StravaRide ride : rideadd) {
-            StravaRide newRide = new StravaRide(ride.getName());
+            Ride addRide = new Ride(ride.getName(), bikeDao.findOne(bikeId));
+            addRide.setUser(user);
+
+            addRide.setUser(user);
+            List<Component> components = addRide.getBike().getComponents();
+
+            for (int i = 0; i < components.size(); i++) {
+                components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
+            }
+            rideDao.save(addRide);
         }
 
         model.addAttribute("rides", rideDao.findRideByUserId(user.getId()));

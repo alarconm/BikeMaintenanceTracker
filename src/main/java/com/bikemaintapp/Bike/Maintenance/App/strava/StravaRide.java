@@ -7,7 +7,9 @@ public class StravaRide {
 
     private int id;
     private float distance;
+    private double miles;
     private String name;
+    private Object gear;
     private String type;
     private String description;
     private String code;
@@ -62,8 +64,25 @@ public class StravaRide {
         this.code = code;
     }
 
+    public Object getGear() {
+        return gear;
+    }
+
+    public void setGear(Object gear) {
+        this.gear = gear;
+    }
+
+    public double getMiles() {
+        return miles;
+    }
+
+    public void setMiles(double miles) {
+        this.miles = miles;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+
 
 
     }
