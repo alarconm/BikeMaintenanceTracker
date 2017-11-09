@@ -24,49 +24,6 @@
     </div>
     <!--End div for no bike conditional-->
 
-    <!--Table to show bikes from the strava download
-    Only shown if there is strava data-->
-    <form th:if="${!#lists.isEmpty(stravaRides)}" action="/strava" method="post">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Strava Bike Used</th>
-            <th>Miles</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="ride,i : ${stravaRides}">
-            <tr>
-                <th scope="row" th:text="${i.count}">-1</th>
-                <td th:text="${ride.gear}"></td>
-                <td th:text="${ride.miles}"></td>
-                <td>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="rideAdd" />
-                        Add ride                 </label>
-                    </div>
-                </td>
-            </tr>
-        </th:block>
-        </tbody>
-    </table>
-        <div class="form-group">
-            <label th:for="name">Select which bike to add rides to</label>
-            <select class="custom-select">
-                <option th:each="bike : ${bikes}"
-                        th:text="${bike.nameOfBike}" th:value="${bike.id}"></option>
-                <input type="hidden" name="bikeId" value="${bike.id}" />
-            </select>
-            <span th:errors="${ride.bike}" class="error"></span>
-        </div>
-
-        <button type="submit" class="btn btn-block btn-primary">Submit</button>
-    </form>
-    <!--End strava data import table-->
-
-
     <div th:unless="${#lists.isEmpty(bikes)}">
         <div class="container align-items-center">
             <div class="col-sm-6 offset-sm-3">

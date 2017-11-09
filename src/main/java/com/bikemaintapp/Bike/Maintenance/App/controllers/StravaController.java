@@ -93,7 +93,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         model.addAttribute("stravaRides", stravaRides);
         //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
         model.addAttribute(new Ride());
-        return "ride/add";
+        return "ride/stravaAdd";
 
 //        model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
 //        model.addAttribute("title",user.getName() + "'s Rides");
@@ -102,13 +102,13 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
     //Post from the strava ride list - user checks which ones get sent here to be added
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String stravaPost(Model model, ArrayList<StravaRide> rideadd, @RequestParam int bikeId, HttpServletRequest request) {
+    public String stravaPost(Model model, int[] ids, int bikeId, ArrayList<StravaRide> stravaRides, HttpServletRequest request) {
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
         User user = (User) request.getSession().getAttribute("user");
 
-        for (StravaRide ride : rideadd) {
+        for (StravaRide ride : stravaRides) {
             Ride addRide = new Ride(ride.getName(), bikeDao.findOne(bikeId));
             addRide.setUser(user);
 
