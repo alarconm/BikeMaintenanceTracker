@@ -7,6 +7,7 @@ import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.BikeDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.RideDao;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
+import com.bikemaintapp.Bike.Maintenance.App.models.forms.AddStravaRideForm;
 import com.bikemaintapp.Bike.Maintenance.App.strava.StravaRide;
 import com.bikemaintapp.Bike.Maintenance.App.strava.Token;
 import org.hibernate.Hibernate;
@@ -89,9 +90,11 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
             }
         }
 
+        AddStravaRideForm rideForm = new AddStravaRideForm(bikeDao.findBikeByUser_Id(user.getId()), stravaRides);
+
         model.addAttribute("bikes",bikeDao.findBikeByUser_Id(user.getId()));
         model.addAttribute("stravaRides", stravaRides);
-        //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
+        model.addAttribute("title", user.getName() + "'s Rides");
         model.addAttribute(new Ride());
         return "ride/stravaAdd";
 
@@ -102,17 +105,16 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
     //Post from the strava ride list - user checks which ones get sent here to be added
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String stravaPost(Model model, int[] ids, int bikeId, ArrayList<StravaRide> stravaRides, HttpServletRequest request) {
+    public String stravaPost(Model model, AddStravaRideForm stravaRideForm, HttpServletRequest request) {
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
         User user = (User) request.getSession().getAttribute("user");
 
-        for (StravaRide ride : stravaRides) {
-            Ride addRide = new Ride(ride.getName(), bikeDao.findOne(bikeId));
+        for (StravaRide ride : stravaRideForm.getStravaRides()) {
+            Ride addRide = new Ride(ride.getName(), bikeDao.findOne(stravaRideForm.getBikeId()));
             addRide.setUser(user);
 
-            addRide.setUser(user);
             List<Component> components = addRide.getBike().getComponents();
 
             for (int i = 0; i < components.size(); i++) {
