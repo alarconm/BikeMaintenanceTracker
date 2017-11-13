@@ -14,12 +14,12 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,10 +92,9 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
         AddStravaRideForm rideForm = new AddStravaRideForm(bikeDao.findBikeByUser_Id(user.getId()), stravaRides);
 
-        model.addAttribute("bikes",bikeDao.findBikeByUser_Id(user.getId()));
-        model.addAttribute("stravaRides", stravaRides);
+        model.addAttribute("form", rideForm);
+//        model.addAttribute("stravaRides", stravaRides);
         model.addAttribute("title", user.getName() + "'s Rides");
-        model.addAttribute(new Ride());
         return "ride/stravaAdd";
 
 //        model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
@@ -105,14 +104,21 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
     //Post from the strava ride list - user checks which ones get sent here to be added
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String stravaPost(Model model, AddStravaRideForm stravaRideForm, HttpServletRequest request) {
+    public String stravaPost(Model model, @ModelAttribute @Valid AddStravaRideForm stravaRideForm,
+                             @RequestParam int[] rideId, @RequestParam int bikeId,
+                             HttpServletRequest request, Errors errors) {
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
+
+        if (errors.hasErrors()) {
+            model.addAttribute("rideForm", stravaRideForm);
+            return "ride/stravaAdd";
+        }
         User user = (User) request.getSession().getAttribute("user");
 
-        for (StravaRide ride : stravaRideForm.getStravaRides()) {
-            Ride addRide = new Ride(ride.getName(), bikeDao.findOne(stravaRideForm.getBikeId()));
+        for (int ride : rideId) {
+            Ride addRide = new Ride(stravaRides.get(ride).getName(), bikeDao.findOne(bikeId));
             addRide.setUser(user);
 
             List<Component> components = addRide.getBike().getComponents();
