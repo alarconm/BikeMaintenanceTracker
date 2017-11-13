@@ -13,45 +13,50 @@
 <div class="container">
     <h1 th:text="${title}"></h1>
 
-    <!--Table to show bikes from the strava download
-Only shown if there is strava data-->
-    <form action="/strava" method="post" th:object="${form}">
-        <table class="table table-hover">
-            <thead>
+
+
+<!--Table to show bikes from the strava download-->
+<form action="/strava" method="post" th:object="${form}">
+
+    <!--Bike dropdown-->
+    <div class="form-group">
+        <label th:for="bikeId">Select which bike to add rides to</label>
+        <select class="custom-select" name="bikeId">
+            <option th:each="bike : *{bikes}"
+                    th:text="${bike.nameOfBike}"
+                    th:value="${bike.id}"></option>
+        </select>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Miles</th>
+            <th>Name of ride</th>
+            <th>Select which rides to add</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="ride,i : *{stravaRides}">
             <tr>
-                <th>#</th>
-                <th>Strava Bike Used</th>
-                <th>Miles</th>
+                <th scope="row" th:text="${i.count}">-1</th>
+                <td th:text="${ride.miles}"></td>
+                <td th:text="${ride.name}"></td>
+                <td>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="rideId" type="checkbox" th:value="${ride.id}" />
+                            Add ride                 </label>
+                    </div>
+                </td>
             </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="ride,i : *{stravaRides}">
-                <tr>
-                    <th scope="row" th:text="${i.count}">-1</th>
-                    <td th:text="${ride.miles}"></td>
-                    <td>
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" name="rideId" type="checkbox" th:value="${ride.id}" />
-                                Add ride                 </label>
-                        </div>
-                    </td>
-                </tr>
-            </th:block>
-            </tbody>
-        </table>
-        <div class="form-group">
-            <label th:for="bikeId">Select which bike to add rides to</label>
-            <select class="custom-select" name="bikeId">
-                <option th:each="bike : *{bikes}"
-                        th:text="${bike.nameOfBike}"
-                        th:value="${bike.id}"></option>
-                <!--<span th:errors="${ride.bike}" class="error"></span>-->
-            </select>
-        </div>
-        <button type="submit" class="btn btn-block btn-primary">Submit</button>
-    </form>
-    <!--End strava data import table-->
+        </th:block>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+</form>
+<!--End strava data import table-->
 </div>
 
 

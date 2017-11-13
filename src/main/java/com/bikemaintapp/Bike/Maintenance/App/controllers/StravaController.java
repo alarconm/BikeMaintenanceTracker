@@ -62,7 +62,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         for (StravaRide ride : rides) {
             if (ride.getType().equals("Ride")) {
                 int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10); //convert meters to miles
-                ride.setMiles((double)rideMiles / 10); //truncate the double down to 2 decimal places
+                ride.setMiles((double)rideMiles / 10); //truncate the double down to one decimal place
                 stravaRides.add(ride);
             }
         }
@@ -70,14 +70,9 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         user.setStravaRides(stravaRides); // add all of the stravaRides to the current user
         AddStravaRideForm rideForm = new AddStravaRideForm(bikeDao.findBikeByUser_Id(user.getId()), stravaRides);
 
-        model.addAttribute("form", rideForm);
-//        model.addAttribute("stravaRides", stravaRides);
+        model.addAttribute("form", rideForm); //form adds the bikes and stravarides for the user
         model.addAttribute("title", user.getName() + "'s Rides");
         return "ride/stravaAdd";
-
-//        model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
-//        model.addAttribute("title",user.getName() + "'s Rides");
-//        return "ride/index";
     }
 
     //Post from the strava ride list - user checks which ones get sent here to be added
@@ -95,13 +90,14 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         }
         User user = (User) request.getSession().getAttribute("user");
 
+        //Iterate through each ride ID that was selected - set the user, set the miles
         for (int id : rideId) {
             Ride addRide = new Ride(user.getStravaRideById(id).getName(), bikeDao.findOne(bikeId));
             addRide.setUser(user);
             addRide.setMiles(user.getStravaRideById(id).getMiles());
 
+            //Iterate through each component on the bike selected and update the mileage on each based on the ride
             List<Component> components = addRide.getBike().getComponents();
-
             for (int i = 0; i < components.size(); i++) {
                 components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
             }
