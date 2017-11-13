@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head th:replace="fragments :: head">
+
+    <!-- Bootstrap and font awesome css for making things pretty-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"
+          type='text/css'></link>
+    <!-- end css imports -->
+</head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container">
+    <h1 th:text="${title}"></h1>
+
+
+
+<!--Table to show bikes from the strava download-->
+<form action="/strava" method="post" th:object="${form}">
+
+    <!--Bike dropdown-->
+    <div class="form-group">
+        <label th:for="bikeId">Select which bike to add rides to</label>
+        <select class="custom-select" name="bikeId">
+            <option th:each="bike : *{bikes}"
+                    th:text="${bike.nameOfBike}"
+                    th:value="${bike.id}"></option>
+        </select>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Miles</th>
+            <th>Name of ride</th>
+            <th>Select which rides to add</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="ride,i : *{stravaRides}">
+            <tr>
+                <th scope="row" th:text="${i.count}">-1</th>
+                <td th:text="${ride.miles}"></td>
+                <td th:text="${ride.name}"></td>
+                <td>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="rideId" type="checkbox" th:value="${ride.id}" />
+                            Add ride                 </label>
+                    </div>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+</form>
+<!--End strava data import table-->
+</div>
+
+
+</body>
+</html>
