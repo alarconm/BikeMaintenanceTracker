@@ -31,8 +31,6 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
     RideDao rideDao;
     @Autowired
     BikeDao bikeDao;
-    @Autowired
-    UserDao userDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String stravaGet(Model model, @RequestParam("code") String code, HttpServletRequest request) {
@@ -41,7 +39,6 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
             return "redirect:/user/login";
 
         User user = (User) request.getSession().getAttribute("user");
-
 
         //Post to the strava api with client ID, client secret and the code received as a param from the
         //authentication request that redirected to here. With those three things this post request then
@@ -58,38 +55,19 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
                         +token.getAccess_token(), StravaRide[].class);
 
         //loop through each strava activity that we just got from the api and create a new ride for each
-        //activity that is a "Ride"
+        //activity that is a "Ride" (users can have runs,swims etc)
         //Distance comes in as meters so it is converted to miles
         //mileage for each ride is then added to the components on the bike
-//        for (StravaRide ride : rides) {
-//            if (ride.getType().equals("Ride")) {
-//
-//                //for testing it is just getting the first bike in the users list of bikes
-//                Bike currentBike = bikeDao.findBikeByUser_Id(user.getId()).get(0);
-//                Ride addRide = new Ride(ride.getName(), currentBike);
-//
-//                //Truncate the crazy double down for viewing pleasure
-//                int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10);
-//                addRide.setMiles((double)rideMiles / 10);
-//                addRide.setUser(user);
-//                List<Component> components = addRide.getBike().getComponents();
-//
-//                for (int i = 0; i < components.size(); i++) {
-//                    components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
-//                }
-//                rideDao.save(addRide);
-//            }
-//        }
         ArrayList<StravaRide> stravaRides = new ArrayList<>();
-
         for (StravaRide ride : rides) {
             if (ride.getType().equals("Ride")) {
-                int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10);
-                ride.setMiles((double)rideMiles / 10);
+                int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10); //convert meters to miles
+                ride.setMiles((double)rideMiles / 10); //truncate the double down to 2 decimal places
                 stravaRides.add(ride);
             }
         }
 
+        user.setStravaRides(stravaRides); // add all of the stravaRides to the current user
         AddStravaRideForm rideForm = new AddStravaRideForm(bikeDao.findBikeByUser_Id(user.getId()), stravaRides);
 
         model.addAttribute("form", rideForm);
@@ -117,9 +95,10 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         }
         User user = (User) request.getSession().getAttribute("user");
 
-        for (int ride : rideId) {
-            Ride addRide = new Ride(stravaRides.get(ride).getName(), bikeDao.findOne(bikeId));
+        for (int id : rideId) {
+            Ride addRide = new Ride(user.getStravaRideById(id).getName(), bikeDao.findOne(bikeId));
             addRide.setUser(user);
+            addRide.setMiles(user.getStravaRideById(id).getMiles());
 
             List<Component> components = addRide.getBike().getComponents();
 
@@ -133,6 +112,4 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         model.addAttribute("title", user.getName() + "'s Rides");
         return "ride/index";
     }
-
-
 }

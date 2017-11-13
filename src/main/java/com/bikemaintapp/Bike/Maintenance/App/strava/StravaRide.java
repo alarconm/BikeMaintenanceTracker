@@ -1,9 +1,10 @@
 package com.bikemaintapp.Bike.Maintenance.App.strava;
 
+import com.bikemaintapp.Bike.Maintenance.App.models.data.RideDao;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class StravaRide {
+public class StravaRide{
 
     private int id;
     private float distance;

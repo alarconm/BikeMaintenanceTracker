@@ -1,5 +1,7 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
+import com.bikemaintapp.Bike.Maintenance.App.strava.StravaRide;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +28,8 @@ public class User {
 
     @NotNull
     private String email;
+
+    private ArrayList<StravaRide> stravaRides;
 
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes;
@@ -81,5 +85,22 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<StravaRide> getStravaRides() {
+        return stravaRides;
+    }
+
+    public void setStravaRides(ArrayList<StravaRide> stravaRides) {
+        this.stravaRides = stravaRides;
+    }
+
+    public StravaRide getStravaRideById(int id) {
+        for (StravaRide ride : this.stravaRides) {
+            if (ride.getId() == id) {
+                return ride;
+            }
+        }
+        return null;
     }
 }
