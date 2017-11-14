@@ -60,11 +60,22 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
         //Distance comes in as meters so it is converted to miles
         //mileage for each ride is then added to the components on the bike
         ArrayList<StravaRide> stravaRides = new ArrayList<>();
+
         for (StravaRide ride : rides) {
             if (ride.getType().equals("Ride")) {
                 int rideMiles = (int)Math.round((ride.getDistance()*0.000621371)*10); //convert meters to miles
                 ride.setMiles((double)rideMiles / 10); //truncate the double down to one decimal place
                 stravaRides.add(ride);
+            }
+
+            //check to see if the user already has imported and saved these rides
+            //Only display strava rides that are new
+            if (!user.getRides().isEmpty()) {
+                for (Ride userRide : user.getRides()) {
+                    if (userRide.getStravaId() == ride.getId()) {
+                        stravaRides.remove(ride);
+                    }
+                }
             }
         }
 
@@ -96,6 +107,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
             Ride addRide = new Ride(user.getStravaRideById(id).getName(), bikeDao.findOne(bikeId));
             addRide.setUser(user);
             addRide.setMiles(user.getStravaRideById(id).getMiles());
+            addRide.setStravaId(id); //add strava id to the ride - used to check if its from strava or manual
 
             //Iterate through each component on the bike selected and update the mileage on each based on the ride
             List<Component> components = addRide.getBike().getComponents();
