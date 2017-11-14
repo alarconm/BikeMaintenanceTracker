@@ -54,7 +54,6 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
                 "https://www.strava.com/api/v3/athlete/activities?&access_token="
                         +token.getAccess_token(), StravaRide[].class);
 
-        //TODO refactor this flow to check if the user has already added these specific strava rides
         //loop through each strava activity that we just got from the api and create a new ride for each
         //activity that is a "Ride" (users can have runs,swims etc)
         //Distance comes in as meters so it is converted to miles
