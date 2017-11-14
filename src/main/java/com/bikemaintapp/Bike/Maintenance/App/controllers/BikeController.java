@@ -30,13 +30,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
-
     @Autowired // Instance of the user class
     private UserDao userDao;
-
     @Autowired
     private ComponentDao componentDao;
-
     @Autowired
     private RideDao rideDao;
 
@@ -98,6 +95,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "redirect:/bike/main/" + newBike.getId();
 
     }
+
     //TODO Make it so you have to be signed in to be here.
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int bikeId) {
@@ -115,6 +113,17 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         model.addAttribute("bike", bike);
 
         return "bike/main";
+    }
+
+    @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.GET)
+    public String editForm(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        model.addAttribute("title", "edit " + bike.getNameOfBike());
+        model.addAttribute("bike", bike);
+
+        return "bike/edit";
+
     }
 
 }

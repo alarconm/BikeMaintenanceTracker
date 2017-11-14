@@ -8,6 +8,7 @@
 <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 <!--Displays the total amount of miles-->
 <p class="text-center" th:text="'Miles: ' + ${totalTraveled}"></p>
+    <a class="text-center" th:href="@{'/bike/edit/' + ${bike.id}}">Edit this bike</a>
 <!--Displays the components-->
 <h2>Components:</h2>
 
