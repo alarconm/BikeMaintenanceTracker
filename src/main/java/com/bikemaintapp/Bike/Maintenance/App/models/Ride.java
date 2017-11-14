@@ -30,6 +30,8 @@ public class Ride {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private int stravaId;
+
     public Ride(){
     }
 
@@ -56,5 +58,13 @@ public class Ride {
     }
     public void setBike(Bike bike){
         this.bike = bike;
+    }
+
+    public int getStravaId() {
+        return stravaId;
+    }
+
+    public void setStravaId(int stravaId) {
+        this.stravaId = stravaId;
     }
 }
