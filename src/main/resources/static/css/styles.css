@@ -108,11 +108,27 @@ header,
 }
 
 #intro {
-    background: url("/images/login_bg.jpeg")no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    /* The image used */
+    background-image: url("/images/login_bg.jpeg");
+
+    /* Half height */
+    height: 70%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Thumbnail Style*/
+.img-thumbnail{
+    width: 100%;
+    height: 100%;
+}
+
+.about-content{
+    padding: 5%;
+
 }
 
 /* This section would put a background image on the About page.
@@ -131,10 +147,3 @@ header,
 */
 
 
-.loginPage{
-    padding-top: 2em;
-}
-
-a{
-    text-align: center;
-}
