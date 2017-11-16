@@ -13,8 +13,8 @@
         <th:block th:each="component : ${bike.components}">
             <div class="col-md-4">
                 <h4 class="card-title" th:text="${component.type.name}"></h4>
-                <ul>
-                    <li th:text="'Miles: ' + ${component.milesTraveled}"></li>
+                <ul style="list-style-type:none">
+                    <li th:text="'Miles: ' + ${component.componentMiles}"></li>
                 </ul>
             </div>
         </th:block>

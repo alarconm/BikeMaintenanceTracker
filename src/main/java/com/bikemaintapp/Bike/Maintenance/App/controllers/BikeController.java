@@ -100,6 +100,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int bikeId) {
 
+        //TODO refactor this to the bike class so that it can be used easily in multiple views
 //         Display the total amount of mile for the bike in
         List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
         double totalMilesTraveled = 0;
