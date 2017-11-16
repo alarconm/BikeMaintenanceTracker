@@ -3,12 +3,18 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
+
 <div class="container">
 <!--Displays the name of the user-->
 <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
+
 <!--Displays the total amount of miles-->
 <p class="text-center" th:text="'Miles: ' + ${totalTraveled}"></p>
-    <a class="text-center" th:href="@{'/bike/edit/' + ${bike.id}}">Edit this bike</a>
+    <div class="text-center">
+    <a th:href="@{'/bike/edit/' + ${bike.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true">
+    </i>Edit this bike</a>
+    </div>
+
 <!--Displays the components-->
 <h2>Components:</h2>
 
@@ -21,6 +27,7 @@
                     <div class="card-block">
                         <a th:href="@{'/component/component-detail/' + ${component.id}}" >
                             <h4 class="card-title" th:text="${component.type.name}"></h4></a>
+
                         <!--Conditionals to check miles remaining on component and display based off of that-->
                         <span th:if="${component.lowestMaintInterval.milesRemaining &lt;= 10}"
                               class="badge badge-danger">Maintenance Needed!</span>
@@ -31,6 +38,7 @@
                               class="badge badge-success" th:text="'Miles remaining until maintenance: '
                            + ${component.lowestMaintInterval.milesRemaining}"></span>
                         <!--end miles remaining conditionals-->
+
                     </div>
                 </div>
             </div>
