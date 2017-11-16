@@ -48,9 +48,9 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
         //Kick them out if not logged in
         if(notAuthenticated(request))
             return "redirect:/user/login";
+
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("bikes",bikeDao.findBikeByUser_Id(user.getId()));
-        //model.addAttribute("bikes",user.getBikes()); //this one wouldnt show bikes added in current session..?
         model.addAttribute(new Ride());
         return "ride/add";
     }
@@ -78,10 +78,12 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
 
         //list to get components from the bike used on this ride
         List<Component> components = newRide.getBike().getComponents();
+
         //call add miles from the component maintenanceschedule to add the miles from ride to the component's
         //maintenance tracking
         for (int i = 0; i < components.size(); i++) {
             components.get(i).getMaintenanceSchedule().addMiles((int)newRide.getMiles());
+            components.get(i).addMiles((int)newRide.getMiles()); //lifetime mileage tracking for component
         }
 
         rideDao.save(newRide);

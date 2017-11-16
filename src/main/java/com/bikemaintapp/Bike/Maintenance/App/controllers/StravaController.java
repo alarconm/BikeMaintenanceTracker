@@ -112,6 +112,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
             List<Component> components = addRide.getBike().getComponents();
             for (int i = 0; i < components.size(); i++) {
                 components.get(i).getMaintenanceSchedule().addMiles((int)addRide.getMiles());
+                components.get(i).addMiles((int)addRide.getMiles()); //lifetime mileage tracking for component
             }
             rideDao.save(addRide);
         }
