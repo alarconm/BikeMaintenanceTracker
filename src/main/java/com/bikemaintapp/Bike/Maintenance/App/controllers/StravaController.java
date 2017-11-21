@@ -31,6 +31,8 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
     RideDao rideDao;
     @Autowired
     BikeDao bikeDao;
+    @Autowired
+    UserDao userDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String stravaGet(Model model, @RequestParam("code") String code, HttpServletRequest request) {
@@ -69,7 +71,7 @@ public class StravaController extends com.bikemaintapp.Bike.Maintenance.App.cont
 
             //check to see if the user already has imported and saved these rides
             //Only display strava rides that are new
-            if (!user.getRides().isEmpty()) {
+            if (user.getRides() != null && ride.getType().equals("Ride")) {
                 for (Ride userRide : user.getRides()) {
                     if (userRide.getStravaId() == ride.getId()) {
                         stravaRides.remove(ride);

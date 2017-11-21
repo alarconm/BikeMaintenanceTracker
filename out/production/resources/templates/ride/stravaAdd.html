@@ -14,7 +14,7 @@
     <h1 th:text="${title}"></h1>
 
     <!--Display if no new rides are found-->
-<div th:if="${#lists.isEmpty(stravaRides)}">
+<div th:if="${#lists.isEmpty(form.stravaRides)}">
     <hr />
     <h2>No new rides found on strava!</h2>
     <hr />
@@ -23,7 +23,7 @@
 
 <!--Table to show bikes from the strava download-->
     <!--Only displays if rides are found-->
-<form th:unless="${#lists.isEmpty(stravaRides)}"  action="/strava" method="post" th:object="${form}">
+<form th:unless="${#lists.isEmpty(form.stravaRides)}"  action="/strava" method="post" th:object="${form}">
 
     <!--Bike dropdown-->
     <div class="form-group">
