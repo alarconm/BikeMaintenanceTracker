@@ -51,7 +51,7 @@ public class Bike {
 
     //One option for tracking miles
     //Should have less potential for errors
-    public int countMiles(){
+    public int getCountMiles(){
 
         Iterator iterator = rides.iterator();
         int total = 0;
@@ -65,7 +65,7 @@ public class Bike {
     //Temporary function for me to check on whats going on without real debug
     public void printBikeName(){
         System.out.println(this.nameOfBike);
-        System.out.println(countMiles());
+        System.out.println(getCountMiles());
     }
     //Called by /ride/add to add mileage.
     //This function should be able to pass this onto the bikes Component list.
@@ -138,4 +138,5 @@ public class Bike {
         }
         return lowestMaintInterval;
     }
+
 }

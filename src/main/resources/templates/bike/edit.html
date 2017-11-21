@@ -4,9 +4,10 @@
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container">
-    <!--Displays the name of the user-->
+
     <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
-    <!--Displays the components-->
+    <p class="text-center" th:text="'Miles: '+ ${bike.countMiles}"></p>
+
     <h2>Components:</h2>
 
     <div class="row align-items-center justify-content-center">
