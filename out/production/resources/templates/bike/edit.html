@@ -13,8 +13,9 @@
     <div class="row align-items-center justify-content-center">
         <th:block th:each="component : ${bike.components}">
             <div class="col-md-4">
+                <div class="form-group">
                 <h4 class="card-title" th:text="${component.type.name}"></h4>
-                <input class="form-control " placeholder="New Name" th:field="${component.typename}" />
+                <input class="form-control " placeholder="New Name" id="${component.id}" />
             </div>
                 <ul style="list-style-type:none">
                     <li th:text="'Miles: ' + ${component.componentMiles}"></li>
