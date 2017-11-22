@@ -133,14 +133,19 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         User user = bike.getUser();
         List<Bike> userBikes = user.getBikes();
 
-        userBikes.remove(bikeId); //remove bike from user list of bikes, but don't actually delete from DB
+        //remove bike from user list of bikes, but don't actually delete from DB
+        //"oldUser" is set for a bike that has been deleted so that it can be re-used if user wants it back
+        userBikes.remove(bike);
         user.setBikes(userBikes);
         userDao.save(user);
+        bike.setOldUserId(user.getId());
+        bike.setUser(null);
+        bikeDao.save(bike);
 
         model.addAttribute("title",user.getName() + "'s Bikes");
         model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
 
-        return "bike/index";
+        return "redirect:/bike";
     }
 
 }

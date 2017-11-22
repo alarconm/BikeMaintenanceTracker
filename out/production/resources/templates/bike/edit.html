@@ -7,6 +7,10 @@
 
     <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
     <p class="text-center" th:text="'Miles: '+ ${bike.countMiles}"></p>
+    <div class="text-center">
+        <a th:href="@{'/bike/delete/' + ${bike.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true">
+        </i>Delete bike</a>
+    </div>
 
     <h2>Components:</h2>
 
@@ -22,19 +26,6 @@
             </div>
         </th:block>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <p></p> <!-- put space above Add link -->
     <p></p> <!-- put space above Add link -->

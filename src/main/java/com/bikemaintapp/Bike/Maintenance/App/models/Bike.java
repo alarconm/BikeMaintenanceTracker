@@ -25,7 +25,6 @@ public class Bike {
     private String nameOfBike;
 
     // Relationships
-
     // There is one bike to every user, This is the unique id for users to add a bike to their account
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="user_id")
@@ -39,6 +38,8 @@ public class Bike {
     private List<Component> components;
 
     private boolean needsMaintenance = false;
+    private int oldUserId;
+
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -139,4 +140,11 @@ public class Bike {
         return lowestMaintInterval;
     }
 
+    public int getOldUserId() {
+        return oldUserId;
+    }
+
+    public void setOldUserId(int oldUserId) {
+        this.oldUserId = oldUserId;
+    }
 }
