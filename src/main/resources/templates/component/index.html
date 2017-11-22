@@ -11,8 +11,6 @@
 
 <a href="/component/add"><h2>Add Component</h2></a>
 
-<!--TODO display all the components already on the bike-->
-
 <ul th:each="component: ${components}">
     <li th:text="${component.name}"></li>
     <li th:text="${component.milesTraveled}"></li>

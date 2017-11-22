@@ -30,10 +30,6 @@ public class Component {
     //Lifetime miles on the component
     private int componentMiles;
 
-    //Not sure if we will let user enter miles,
-    //or pull it from Bike.milesTraveled
-    private int milesTraveled;
-
     // Relationships
     // There are many components, on one bike.
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -51,12 +47,6 @@ public class Component {
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Component() {
-    }
-
-    public Component(int milesTraveled) {
-        //this();
-        //this.componentType = componentType;
-        this.milesTraveled = milesTraveled;
     }
 
     public Component(ComponentType type) {
@@ -79,9 +69,8 @@ public class Component {
         return this.componentMiles;
     }
 
-    public void setMilesTraveled(int milesTraveled) {
-        this.milesTraveled = milesTraveled;
-        this.componentMiles = this.componentMiles + this.milesTraveled;
+    public void setComponentMiles(int componentMiles) {
+        this.componentMiles = componentMiles;
     }
 
     public ComponentType getType() {
@@ -247,6 +236,10 @@ public class Component {
             }
         }
     return lowestInterval;
+    }
+
+    public void addMiles(int miles) {
+        this.componentMiles += miles;
     }
 }
 
