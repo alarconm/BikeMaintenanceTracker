@@ -120,11 +120,27 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     public String editForm(Model model, @PathVariable int bikeId) {
 
         Bike bike = bikeDao.findOne(bikeId);
-        model.addAttribute("title", "edit " + bike.getNameOfBike());
+        model.addAttribute("title", bike.getNameOfBike());
         model.addAttribute("bike", bike);
 
         return "bike/edit";
+    }
 
+    @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
+    public String deleteBike(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        User user = bike.getUser();
+        List<Bike> userBikes = user.getBikes();
+
+        userBikes.remove(bikeId); //remove bike from user list of bikes, but don't actually delete from DB
+        user.setBikes(userBikes);
+        userDao.save(user);
+
+        model.addAttribute("title",user.getName() + "'s Bikes");
+        model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
+
+        return "bike/index";
     }
 
 }
