@@ -19,6 +19,8 @@
             <div class="col-md-4">
 
                 <h4 class="card-title" th:text="${component.type.name}"></h4>
+                <a th:href="@{'/component/delete/' + ${component.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true">
+                </i>Remove Component</a>
 
                 <ul style="list-style-type:none">
                 </ul>
