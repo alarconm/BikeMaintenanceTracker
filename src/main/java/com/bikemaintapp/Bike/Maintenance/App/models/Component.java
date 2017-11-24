@@ -44,6 +44,8 @@ public class Component {
 
     private String video;
 
+    private int oldUserId;
+
     // Constructors
     // Default constructors required for Springboot/Hibernate
     public Component() {
@@ -240,6 +242,14 @@ public class Component {
 
     public void addMiles(int miles) {
         this.componentMiles += miles;
+    }
+
+    public int getOldUserId() {
+        return oldUserId;
+    }
+
+    public void setOldUserId(int oldUserId) {
+        this.oldUserId = oldUserId;
     }
 }
 

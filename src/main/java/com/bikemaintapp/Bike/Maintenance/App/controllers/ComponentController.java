@@ -112,7 +112,11 @@ public class ComponentController {
         bike.setComponents(componentsOnBike);
         bikeDao.save(bike);
 
-        return "redirect:/bike/main/" + bike.getId();
+        //old user ID set so that it can be accessed from an old components list if user wants to re-use
+        component.setOldUserId(bike.getUser().getId());
+
+
+        return "redirect:/bike/edit/" + bike.getId();
     }
 
 }
