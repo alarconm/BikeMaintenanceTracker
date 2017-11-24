@@ -108,33 +108,40 @@ header,
 }
 
 #intro {
-    background: url("/images/login_bg.jpeg")no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    /* The image used */
+    background-image: url("/images/login_bg.jpeg");
+
+    /* Half height */
+    height: 70%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
-/* This section would put a background image on the About page.
-    It is also applying the opacity to the text, so I'm commenting it out
-    until I figure it out. Tim
+/* Thumbnail Style*/
+.img-thumbnail{
+    width: 100%;
+    height: 100%;
+}
+
+.about-content{
+    padding: 5%;
+
+}
+
+/* This section puts a background image on the About page. Tim */
 
 #about {
-    background: url("/images/bike_index.jpeg")no-repeat center center fixed;
+    background: url("/images/About_page_background.png")no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 0.2;
+    /*opacity: 0.2;*/
     color: rgba(0, 0, 0, 1.0);
 }
-*/
 
 
-.loginPage{
-    padding-top: 2em;
-}
 
-a{
-    text-align: center;
-}
