@@ -8,7 +8,7 @@
     <a th:href="@{'/bike/main/' + ${bike.id}}"><h1 class="text-center"
            th:text="${#strings.capitalize(title)}">Default Title</h1></a>
     <div class="text-center">
-        <a th:href="@{'/bike/delete/' + ${bike.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true">
+        <a th:href="@{'/bike/delete/' + ${bike.id}}"><i class="fa fa-trash-o" aria-hidden="true">
         </i>Delete bike</a>
     </div>
 
@@ -27,7 +27,7 @@
                     </i>Edit Component</a></p>
 
                     <p><a th:href="@{'/component/delete/' + ${component.id}}">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true">
+                        <i class="fa fa-trash-o" aria-hidden="true">
                     </i>Remove from bike</a></p>
                 </li>
             </ul>
