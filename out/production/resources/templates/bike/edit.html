@@ -9,30 +9,33 @@
            th:text="${#strings.capitalize(title)}">Default Title</h1></a>
     <div class="text-center">
         <a th:href="@{'/bike/delete/' + ${bike.id}}"><i class="fa fa-trash-o" aria-hidden="true">
-        </i>Delete bike</a>
+        </i>Delete</a>
     </div>
 
     <h2>Components:</h2>
 
-    <div class="col-md-4">
-    <div class="row align-items-center justify-content-center">
+    <div class="md-4">
         <th:block th:each="component : ${bike.components}">
 
+        <div class="col-md-4">
             <ul>
-                <li>
+                <oi>
                     <p><h4 th:text="${component.type.name} "></h4>
                     <a th:href="@{'/component/edit/' + ${component.id}}">
                     <i class="fa fa-pencil-square-o" aria-hidden="true">
-                    </i>Edit Component</a></p>
+                    </i>Edit</a></p>
 
+                    <div>
                     <p><a th:href="@{'/component/delete/' + ${component.id}}">
-                        <i class="fa fa-trash-o" aria-hidden="true">
-                    </i>Remove from bike</a></p>
-                </li>
+                    <i class="fa fa-trash-o" aria-hidden="true">
+                    </i>Remove Component</a></p>
+                    </div>
+                </oi>
             </ul>
+            <hr />
+        </div>
 
         </th:block>
-    </div>
     </div>
 
     <p></p> <!-- put space above Add link -->

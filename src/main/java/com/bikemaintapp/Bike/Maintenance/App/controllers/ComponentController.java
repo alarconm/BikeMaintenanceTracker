@@ -119,4 +119,14 @@ public class ComponentController {
         return "redirect:/bike/edit/" + bike.getId();
     }
 
+    @RequestMapping(value = "edit/{componentId}", method = RequestMethod.GET)
+    public String editComponent(Model model, @PathVariable int componentId) {
+
+        Component component = componentDao.findOne(componentId);
+        model.addAttribute("title", component.getType().getName());
+        model.addAttribute("component", component);
+
+        return "component/edit";
+    }
+
 }
