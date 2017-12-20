@@ -126,6 +126,17 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "bike/edit";
     }
 
+    @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
+    public String editPost(Model model, @PathVariable int bikeId, String name) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        bike.setNameOfBike(name);
+        bikeDao.save(bike);
+
+        return "bike/edit";
+
+    }
+
     @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
     public String deleteBike(Model model, @PathVariable int bikeId) {
 

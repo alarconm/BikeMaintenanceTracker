@@ -12,6 +12,34 @@
         </i>Delete</a>
     </div>
 
+    <!--Modal to change name start-->
+    <button type="button" data-toggle="modal" data-target="#nameModal">Change Name</button>
+    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nameModalLabel">Change Bike Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label th:for="name">New Name</label>
+                        <input class="form-control" type="text" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary btn-block" value="Change Name" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Without Saving</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <button type="button" data-toggle="modal" data-target="#deleteModal">Delete Bike</button>
+
     <h2>Components:</h2>
 
     <div class="md-4">
@@ -20,15 +48,11 @@
         <div class="col-md-4">
             <ul>
                 <oi>
-                    <p><h4 th:text="${component.type.name} "></h4>
-                    <a th:href="@{'/component/edit/' + ${component.id}}">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true">
-                    </i>Edit</a></p>
-
+                    <h4 th:text="${component.type.name} "></h4>
                     <div>
-                    <p><a th:href="@{'/component/delete/' + ${component.id}}">
+                    <a th:href="@{'/component/delete/' + ${component.id}}">
                     <i class="fa fa-trash-o" aria-hidden="true">
-                    </i>Remove Component</a></p>
+                    </i>Remove Component</a>
                     </div>
                 </oi>
             </ul>
