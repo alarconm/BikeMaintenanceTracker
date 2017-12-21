@@ -3,18 +3,17 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <!--Main Navigation-->
-<header>
-    <nav th:replace="fragments :: navigation"></nav>
 
     <!--Mask-->
     <div  id="intro" class="view">
+        <nav th:replace="fragments :: navigation"></nav>
 
         <div class="full-bg-img d-flex align-items-center">
             <div class="container loginPage">
                 <div class="row">
                     <div class="col-md-8">
                         <!--Start of the carousel item 1-->
-                        <div id="bikeMainLogin" class="carousel slide row item logInCarousel" data-ride="carousel">
+                        <div id="bikeMainLogin" class="carousel slide row item logInCarousel" data-ride="carousel"  data-interval="3000">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active">
                                     <div class="text-center">
@@ -38,7 +37,7 @@
                                         <img class="rounded mx-auto d-block img-fluid" src="/images/Login_Slide_003.jpg" alt="Third slide"/>
                                     </div>
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h3>Track Your Rides</h3>
+                                        <h3>Track your rides</h3>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +85,9 @@
     </div>
     <!--/.Mask-->
 
-    <!--About app location-->
+    <!--This repeats what is on the About page.
+        Some explanation probably should be on the login page,
+        but this is not coming across the right way.
     <div class="container">
         <div class="about-content">
 
@@ -97,8 +98,10 @@
 
         </div>
     </div>
+    -->
 
-    <!--Profile images-->
+    <!--Profile images. Moving to the About page.
+
     <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -137,9 +140,9 @@
 
     </div>
     </div>
+    -->
 
 
-</header>
 <!--Main Navigation-->
 
 <!--Main layout-->
@@ -148,7 +151,6 @@
 
 </main>
 <!--Main layout-->
-
 <!--Footer-->
 <footer>
 

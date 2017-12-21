@@ -30,13 +30,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
     @Autowired // Create an instance of this class
     private BikeDao bikeDao;
-
     @Autowired // Instance of the user class
     private UserDao userDao;
-
     @Autowired
     private ComponentDao componentDao;
-
     @Autowired
     private RideDao rideDao;
 
@@ -98,10 +95,12 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "redirect:/bike/main/" + newBike.getId();
 
     }
+
     //TODO Make it so you have to be signed in to be here.
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int bikeId) {
 
+        //TODO refactor this to the bike class so that it can be used easily in multiple views
 //         Display the total amount of mile for the bike in
         List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
         double totalMilesTraveled = 0;
@@ -115,6 +114,58 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         model.addAttribute("bike", bike);
 
         return "bike/main";
+    }
+
+    @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.GET)
+    public String editForm(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        model.addAttribute("title", bike.getNameOfBike());
+        model.addAttribute("bike", bike);
+
+        return "bike/edit";
+    }
+
+    @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
+    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike, Errors errors) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        bike.setNameOfBike(nameOfBike);
+        bikeDao.save(bike);
+
+        //TODO Error checking within the modal - anything can go through right now
+//        if(errors.hasErrors()){
+//            model.addAttribute("title", bike.getNameOfBike());
+//            model.addAttribute("bike", bike);
+//            return "bike/edit";
+//        }
+
+
+        model.addAttribute("title", bike.getNameOfBike());
+        model.addAttribute("bike", bike);
+        return "bike/edit";
+    }
+
+    @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
+    public String deleteBike(Model model, @PathVariable int bikeId) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        User user = bike.getUser();
+        List<Bike> userBikes = user.getBikes();
+
+        //remove bike from user list of bikes, but don't actually delete from DB
+        //"oldUser" is set for a bike that has been deleted so that it can be re-used if user wants it back
+        userBikes.remove(bike);
+        user.setBikes(userBikes);
+        userDao.save(user);
+        bike.setOldUserId(user.getId());
+        bike.setUser(null);
+        bikeDao.save(bike);
+
+        model.addAttribute("title",user.getName() + "'s Bikes");
+        model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
+
+        return "redirect:/bike";
     }
 
 }

@@ -25,7 +25,6 @@ public class Bike {
     private String nameOfBike;
 
     // Relationships
-
     // There is one bike to every user, This is the unique id for users to add a bike to their account
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="user_id")
@@ -39,6 +38,8 @@ public class Bike {
     private List<Component> components;
 
     private boolean needsMaintenance = false;
+    private int oldUserId;
+
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -51,7 +52,7 @@ public class Bike {
 
     //One option for tracking miles
     //Should have less potential for errors
-    public int countMiles(){
+    public int getCountMiles(){
 
         Iterator iterator = rides.iterator();
         int total = 0;
@@ -65,7 +66,7 @@ public class Bike {
     //Temporary function for me to check on whats going on without real debug
     public void printBikeName(){
         System.out.println(this.nameOfBike);
-        System.out.println(countMiles());
+        System.out.println(getCountMiles());
     }
     //Called by /ride/add to add mileage.
     //This function should be able to pass this onto the bikes Component list.
@@ -137,5 +138,13 @@ public class Bike {
             }
         }
         return lowestMaintInterval;
+    }
+
+    public int getOldUserId() {
+        return oldUserId;
+    }
+
+    public void setOldUserId(int oldUserId) {
+        this.oldUserId = oldUserId;
     }
 }

@@ -112,7 +112,7 @@ header,
     background-image: url("/images/login_bg.jpeg");
 
     /* Half height */
-    height: 70%;
+    height: 100%;
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -131,7 +131,7 @@ header,
 
 }
 
-/* This section puts a background image on the About page. Tim */
+/* This section puts a background image on the About page */
 
 #about {
     background: url("/images/About_page_background.png")no-repeat center center fixed;
@@ -142,6 +142,7 @@ header,
     /*opacity: 0.2;*/
     color: rgba(0, 0, 0, 1.0);
 }
+
 
 
 
