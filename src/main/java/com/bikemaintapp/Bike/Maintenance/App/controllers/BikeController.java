@@ -127,7 +127,7 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
-    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike, Errors errors) {
+    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike) {
 
         Bike bike = bikeDao.findOne(bikeId);
         bike.setNameOfBike(nameOfBike);
