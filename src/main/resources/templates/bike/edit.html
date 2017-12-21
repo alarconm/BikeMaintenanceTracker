@@ -5,43 +5,17 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container">
 
-    <a th:href="@{'/bike/main/' + ${bike.id}}"><h1 class="text-center"
-           th:text="${#strings.capitalize(title)}">Default Title</h1></a>
+    <a th:href="@{'/bike/main/' + ${bike.id}}">
+        <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
+    </a>
+    <br />
+
     <div class="text-center">
-        <a th:href="@{'/bike/delete/' + ${bike.id}}"><i class="fa fa-trash-o" aria-hidden="true">
-        </i>Delete</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Change Name</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete Bike</button>
     </div>
-
-    <!--Modal to change name start-->
-    <button type="button" data-toggle="modal" data-target="#nameModal">Change Name</button>
-    <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="nameModalLabel">Change Bike Name</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label th:for="name">New Name</label>
-                        <input class="form-control" type="text" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary btn-block" value="Change Name" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Without Saving</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <button type="button" data-toggle="modal" data-target="#deleteModal">Delete Bike</button>
 
     <h2>Components:</h2>
-
     <div class="md-4">
         <th:block th:each="component : ${bike.components}">
 
@@ -72,3 +46,55 @@
 </div>
 </body>
 </html>
+
+<!--Modal to change name start-->
+<div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nameModalLabel">Change Bike Name</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post"  th:object="${bike}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label th:for="name">New Name</label>
+                        <input class="form-control" th:field="*{nameOfBike}" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary btn-block" value="Change Name" />
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">
+                        Close Without Saving</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Modal to change name end-->
+
+<!--Modal to delete bike start-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel" th:text="'Delete ' + ${bike.nameOfBike}"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this bike?
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{'/bike/delete/' + ${bike.id}}">
+                        <button type="button" class="btn btn-danger btn-block">Yes</button>
+                    </a>
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">No</button>
+                </div>
+        </div>
+    </div>
+</div>
+<!--Modal to delete bike end-->
