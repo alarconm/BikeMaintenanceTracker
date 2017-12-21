@@ -126,6 +126,26 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         return "bike/edit";
     }
 
+    @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
+    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike, Errors errors) {
+
+        Bike bike = bikeDao.findOne(bikeId);
+        bike.setNameOfBike(nameOfBike);
+        bikeDao.save(bike);
+
+        //TODO Error checking within the modal - anything can go through right now
+//        if(errors.hasErrors()){
+//            model.addAttribute("title", bike.getNameOfBike());
+//            model.addAttribute("bike", bike);
+//            return "bike/edit";
+//        }
+
+
+        model.addAttribute("title", bike.getNameOfBike());
+        model.addAttribute("bike", bike);
+        return "bike/edit";
+    }
+
     @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
     public String deleteBike(Model model, @PathVariable int bikeId) {
 
