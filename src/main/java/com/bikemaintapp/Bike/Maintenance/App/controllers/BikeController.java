@@ -14,6 +14,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -129,19 +130,19 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
-    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike) {
+    public String editPost(Model model, @Valid Bike newBike, BindingResult bindingResult,
+                           @PathVariable int bikeId, String nameOfBike) {
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("title", nameOfBike);
+            model.addAttribute("bike", bikeDao.findOne(bikeId));
+            model.addAttribute("nameError", "Name must be between 1 and 15 characters long.");
+            return "bike/edit";
+        }
 
         Bike bike = bikeDao.findOne(bikeId);
         bike.setNameOfBike(nameOfBike);
         bikeDao.save(bike);
-
-        //TODO Error checking within the modal - anything can go through right now
-//        if(errors.hasErrors()){
-//            model.addAttribute("title", bike.getNameOfBike());
-//            model.addAttribute("bike", bike);
-//            return "bike/edit";
-//        }
-
 
         model.addAttribute("title", bike.getNameOfBike());
         model.addAttribute("bike", bike);
@@ -172,5 +173,4 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         return "redirect:/bike";
     }
-
 }

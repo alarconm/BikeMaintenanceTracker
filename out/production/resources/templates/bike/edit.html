@@ -11,6 +11,7 @@
     <br />
 
     <div class="text-center">
+        <div th:text="${nameError}"></div>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Change Name</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Delete Bike</button>
     </div>
@@ -47,7 +48,6 @@
 </body>
 </html>
 
-<script src="/js/Validation.js"></script>
 <!--Modal to change name start-->
 <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -58,11 +58,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form name="bikeEditForm" method="post"  th:object="${bike}" onsubmit="return validateBikeEditForm()">
+            <form name="bikeEditForm" method="post" th:object="${bike}">
                 <div class="modal-body">
                     <div class="form-group">
                         <label th:for="name">New Name</label>
-                        <input name="name" class="form-control" th:field="*{nameOfBike}" />
+                        <input class="form-control" th:field="*{nameOfBike}" />
                     </div>
                 </div>
                 <div class="modal-footer">
