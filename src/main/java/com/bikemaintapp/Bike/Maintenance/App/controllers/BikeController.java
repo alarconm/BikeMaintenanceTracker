@@ -96,12 +96,12 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
     }
 
-    //TODO Make it so you have to be signed in to be here.
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @PathVariable int bikeId) {
+    public String viewMenu(Model model, @PathVariable int bikeId, HttpServletRequest request) {
 
-        //TODO refactor this to the bike class so that it can be used easily in multiple views
-//         Display the total amount of mile for the bike in
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+
         List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
         double totalMilesTraveled = 0;
         for (Ride miles : bikeMiles){
@@ -112,7 +112,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
         model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
         model.addAttribute("bike", bike);
-
         return "bike/main";
     }
 
