@@ -116,7 +116,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.GET)
-    public String editForm(Model model, @PathVariable int bikeId) {
+    public String editForm(Model model, @PathVariable int bikeId, HttpServletRequest request) {
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
 
         Bike bike = bikeDao.findOne(bikeId);
         model.addAttribute("title", bike.getNameOfBike());
@@ -146,7 +149,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
-    public String deleteBike(Model model, @PathVariable int bikeId) {
+    public String deleteBike(Model model, @PathVariable int bikeId, HttpServletRequest request) {
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
 
         Bike bike = bikeDao.findOne(bikeId);
         User user = bike.getUser();
