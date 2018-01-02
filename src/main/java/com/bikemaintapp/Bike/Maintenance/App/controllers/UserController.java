@@ -55,7 +55,6 @@ public class UserController {
                     request.getSession().setAttribute("user", loggedInUser);
                     return "redirect:/bike";
 
-                    //TODO find the best way to do this
                     /////////////////////////////////////////////////////////////////////////////////
                     // example of how you can GET THE CURRENTLY LOGGED IN USER FROM SESSION        //
                     // it casts the session object into a User object then looks in the            //

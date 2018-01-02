@@ -14,6 +14,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -96,12 +97,12 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
     }
 
-    //TODO Make it so you have to be signed in to be here.
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @PathVariable int bikeId) {
+    public String viewMenu(Model model, @PathVariable int bikeId, HttpServletRequest request) {
 
-        //TODO refactor this to the bike class so that it can be used easily in multiple views
-//         Display the total amount of mile for the bike in
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+
         List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
         double totalMilesTraveled = 0;
         for (Ride miles : bikeMiles){
@@ -112,12 +113,14 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
         model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
         model.addAttribute("bike", bike);
-
         return "bike/main";
     }
 
     @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.GET)
-    public String editForm(Model model, @PathVariable int bikeId) {
+    public String editForm(Model model, @PathVariable int bikeId, HttpServletRequest request) {
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
 
         Bike bike = bikeDao.findOne(bikeId);
         model.addAttribute("title", bike.getNameOfBike());
@@ -127,19 +130,19 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "edit/{bikeId}", method = RequestMethod.POST)
-    public String editPost(Model model, @PathVariable int bikeId, String nameOfBike) {
+    public String editPost(Model model, @Valid Bike newBike, BindingResult bindingResult,
+                           @PathVariable int bikeId, String nameOfBike) {
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("title", nameOfBike);
+            model.addAttribute("bike", bikeDao.findOne(bikeId));
+            model.addAttribute("nameError", "Name must be between 1 and 15 characters long.");
+            return "bike/edit";
+        }
 
         Bike bike = bikeDao.findOne(bikeId);
         bike.setNameOfBike(nameOfBike);
         bikeDao.save(bike);
-
-        //TODO Error checking within the modal - anything can go through right now
-//        if(errors.hasErrors()){
-//            model.addAttribute("title", bike.getNameOfBike());
-//            model.addAttribute("bike", bike);
-//            return "bike/edit";
-//        }
-
 
         model.addAttribute("title", bike.getNameOfBike());
         model.addAttribute("bike", bike);
@@ -147,7 +150,10 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     }
 
     @RequestMapping(value = "delete/{bikeId}", method = RequestMethod.GET)
-    public String deleteBike(Model model, @PathVariable int bikeId) {
+    public String deleteBike(Model model, @PathVariable int bikeId, HttpServletRequest request) {
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
 
         Bike bike = bikeDao.findOne(bikeId);
         User user = bike.getUser();
@@ -167,5 +173,4 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         return "redirect:/bike";
     }
-
 }
