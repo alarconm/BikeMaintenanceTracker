@@ -44,11 +44,11 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         if(notAuthenticated(request))
             return "redirect:/user/login";
+
         // User object
         User user = (User) request.getSession().getAttribute("user"); // Gets the user object from the session object
         // User flow
         model.addAttribute("title",user.getName() + "'s Bikes"); // Display the user name on the title page
-
         // Bike Flow
         model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId())); // Gets all the bikes of the current session user
         return "bike/index";
@@ -59,7 +59,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
     public String displayAddBikeForm(Model model, HttpServletRequest request){
         if(notAuthenticated(request))
             return "redirect:/user/login";
-
 
         model.addAttribute("title", "Add Bike");
         model.addAttribute(new Bike());
@@ -94,7 +93,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         model.addAttribute("bike",newBike); // Pass bike object into the view
         return "redirect:/bike/main/" + newBike.getId();
-
     }
 
     @RequestMapping(value = "main/{bikeId}", method = RequestMethod.GET)
@@ -103,13 +101,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         if(notAuthenticated(request))
             return "redirect:/user/login";
 
-        List<Ride> bikeMiles = rideDao.findRideByBikeId(bikeId); // the total amount of miles on a bike
-        double totalMilesTraveled = 0;
-        for (Ride miles : bikeMiles){
-            totalMilesTraveled = totalMilesTraveled + miles.getMiles();
-        }
-
-        model.addAttribute("totalTraveled",totalMilesTraveled);
         Bike bike = bikeDao.findOne(bikeId); // Gets only one bike, filtered by the id
         model.addAttribute("title", bike.getNameOfBike()); // sends the bike object into the view.
         model.addAttribute("bike", bike);
@@ -125,7 +116,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
         Bike bike = bikeDao.findOne(bikeId);
         model.addAttribute("title", bike.getNameOfBike());
         model.addAttribute("bike", bike);
-
         return "bike/edit";
     }
 
@@ -170,7 +160,6 @@ BikeController extends com.bikemaintapp.Bike.Maintenance.App.controllers.Control
 
         model.addAttribute("title",user.getName() + "'s Bikes");
         model.addAttribute("bikes", bikeDao.findBikeByUser_Id(user.getId()));
-
         return "redirect:/bike";
     }
 }
