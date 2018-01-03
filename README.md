@@ -4,6 +4,7 @@
 <p align="center"><h1><b>Bike Maintenance Tracker</b></h1></p>
 
 This Java/Spring Boot app enables the user to track wear and tear on bikes and their components. A comprehensive view shows when worn out parts should be replaced or repaired. 
+You can check out the [live demo on Heroku](https://bike-maint.herokuapp.com)
 
 
 
