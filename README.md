@@ -3,20 +3,30 @@
 
 <p align="center"><h1><b>Bike Maintenance Tracker</b></h1></p>
 
-This Java/Spring Boot app enables the user to track wear and tear on bikes and their components. A comprehensive view shows when worn out parts should be replaced or repaired.
+This Java/Spring Boot app enables the user to track wear and tear on bikes and their components. A comprehensive view shows when worn out parts should be replaced or repaired. 
+
 
 
 <br/>
 <h2><b>Table of Contents:</h2></b>
 
 - [Requirements](#requirements)
+- [ScreenShots](#screenshots)
 - [User Stories](#user-stories)
 - [Extra Features](#extra-features)
 - [Wireframes](#wireframes)
 - [User Story Tests](#user-story-tests)
 - [Extra Features Tests](#extra-features-tests)
-
 <br/>
+
+# ScreenShots
+![Screenshot of Login Page](https://raw.githubusercontent.com/alarconm/BikeMaintenanceTracker/averys_branch/images/login.png)
+
+![Screenshot of Component Page](https://raw.githubusercontent.com/alarconm/BikeMaintenanceTracker/averys_branch/images/components.png)
+![Screenshot of Phone login](https://raw.githubusercontent.com/alarconm/BikeMaintenanceTracker/averys_branch/images/phone_login.png)
+
+
+
 
 # Requirements
 <ul>
