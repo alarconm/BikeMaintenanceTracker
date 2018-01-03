@@ -23,7 +23,8 @@
         <div class="col-md-4">
             <ul>
                 <oi>
-                    <h4 th:text="${component.type.name} "></h4>
+                    <a th:href="@{'/component/component-detail/' + ${component.id}}" >
+                        <h4 th:text="${component.type.name} "></h4></a>
                     <div>
                     <a th:href="@{'/component/delete/' + ${component.id}}">
                     <i class="fa fa-trash-o" aria-hidden="true">
