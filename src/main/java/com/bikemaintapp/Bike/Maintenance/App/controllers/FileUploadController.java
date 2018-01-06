@@ -49,6 +49,16 @@ public class FileUploadController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file")MultipartFile file, RedirectAttributes redirectAttributes) {
 
+        System.out.println(file.getContentType());// String that shows the type of file chosen
+
+        //Check to ensure file is an image, redirect and give message if not
+        if (!file.getContentType().contains("image") ) {
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You can not upload files that aren't an image");
+            return "redirect:/";
+        }
+
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
