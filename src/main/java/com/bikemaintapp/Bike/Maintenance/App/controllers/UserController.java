@@ -132,11 +132,13 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "edit/{userId}", method = RequestMethod.GET)
-    public String userEdit(Model model, @PathVariable int userId) {
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String userEdit(Model model, HttpServletRequest request){
 
-        model.addAttribute("user", userDao.findOne(userId));
-        model.addAttribute("title", "Edit Account" + userDao.findOne(userId).getName());
+        User user = (User) request.getSession().getAttribute("user");
+
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Edit Account: " + user.getName());
         return "user/edit";
     }
 
