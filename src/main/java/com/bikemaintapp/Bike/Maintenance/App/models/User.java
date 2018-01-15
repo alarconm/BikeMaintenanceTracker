@@ -30,7 +30,7 @@ public class User {
     private String email;
 
     private ArrayList<StravaRide> stravaRides;
-    private String image;
+    private String image = "/images/Profile_Image.jpg";
 
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes;

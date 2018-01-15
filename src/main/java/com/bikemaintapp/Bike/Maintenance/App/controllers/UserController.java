@@ -122,6 +122,7 @@ public class UserController {
             return "user/add";
         }
 
+
         userDao.save(newUser);
         model.addAttribute("user", newUser);
         model.addAttribute("title", "User Login");

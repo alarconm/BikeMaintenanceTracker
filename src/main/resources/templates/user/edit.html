@@ -6,6 +6,7 @@
 <div class="container">
 
     <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
+    <img th:src="${user.image}" alt="User Image" />
 
     <footer th:replace="fragments :: footer"></footer>
 </div>
