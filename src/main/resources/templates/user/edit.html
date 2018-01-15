@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+<div class="container">
+
+    <a th:href="@{'/bike/main/' + ${bike.id}}">
+        <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
+    </a>
+
+    <footer th:replace="fragments :: footer"></footer>
+</div>
+</body>
+</html>
