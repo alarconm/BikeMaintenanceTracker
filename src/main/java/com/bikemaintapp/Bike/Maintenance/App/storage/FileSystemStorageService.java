@@ -8,7 +8,6 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -45,7 +44,6 @@ public class FileSystemStorageService implements StorageService {
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
 
-            //TODO attempt to save file permanently
             byte[] bytes = file.getBytes();
             Path path = this.saveLocation.resolve(filename);
             Files.write(path, bytes);
@@ -85,7 +83,7 @@ public class FileSystemStorageService implements StorageService {
             }
         }
         catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not rad file: " + filename, e);
+            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
     }
 

@@ -1,8 +1,5 @@
 package com.bikemaintapp.Bike.Maintenance.App.models;
 
-
-//TODO make this an abstract class that all types of bikes can model from
-
 import com.bikemaintapp.Bike.Maintenance.App.models.maintenance.MaintInterval;
 
 import javax.persistence.*;
@@ -39,6 +36,7 @@ public class Bike {
 
     private boolean needsMaintenance = false;
     private int oldUserId;
+    private String image;
 
     // Constructors
     // Default constructors required for Springboot/Hibernate
@@ -145,5 +143,13 @@ public class Bike {
 
     public void setOldUserId(int oldUserId) {
         this.oldUserId = oldUserId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
