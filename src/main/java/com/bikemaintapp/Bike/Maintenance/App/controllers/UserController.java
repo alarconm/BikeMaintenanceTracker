@@ -101,6 +101,7 @@ public class UserController {
         }
         return false;
     }
+
     //HttpServletRequest is for session management
     //process the user creation form
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -122,7 +123,6 @@ public class UserController {
             return "user/add";
         }
 
-
         userDao.save(newUser);
         model.addAttribute("user", newUser);
         model.addAttribute("title", "User Login");
@@ -130,14 +130,12 @@ public class UserController {
         // Successful create then adds the username to the session
         request.getSession().setAttribute("user", newUser);
         return "redirect:/bike";
-
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     public String userEdit(Model model, HttpServletRequest request){
 
         User user = (User) request.getSession().getAttribute("user");
-
         model.addAttribute("user", user);
         model.addAttribute("title", "Edit Account: " + user.getName());
         return "user/edit";

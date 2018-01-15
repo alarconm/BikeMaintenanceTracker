@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("upload")
 public class FileUploadController {
 
     private final StorageService storageService;
@@ -26,7 +27,7 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/upload/")
+    @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService.loadAll().map(
@@ -49,26 +50,24 @@ public class FileUploadController {
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file")MultipartFile file, RedirectAttributes redirectAttributes) {
 
-        System.out.println(file.getContentType());// String that shows the type of file chosen
-
         //Check to ensure file is an image, redirect and give message if not
         if (!file.getContentType().contains("image") ) {
 
             redirectAttributes.addFlashAttribute("message",
                     "You can not upload files that aren't an image");
-            return "redirect:/";
+            return "redirect:/upload/";
         }
 
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return "redirect:/";
+        return "redirect:/upload/";
     }
+
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();
     }
-
 }

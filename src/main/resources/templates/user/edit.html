@@ -7,6 +7,15 @@
 
     <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
     <img th:src="${user.image}" alt="User Image" />
+    <h2>Upload new Picture</h2>
+    <div>
+        <form method="POST" enctype="multipart/form-data" action="/upload/">
+            <table>
+                <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+                <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+            </table>
+        </form>
+    </div>
 
     <footer th:replace="fragments :: footer"></footer>
 </div>
