@@ -5,9 +5,7 @@
 <nav th:replace="fragments :: navigation"></nav>
 <div class="container">
 
-    <a th:href="@{'/bike/main/' + ${bike.id}}">
-        <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
-    </a>
+    <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
 
     <footer th:replace="fragments :: footer"></footer>
 </div>

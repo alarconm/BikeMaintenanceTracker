@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -133,6 +130,14 @@ public class UserController {
         request.getSession().setAttribute("user", newUser);
         return "redirect:/bike";
 
+    }
+
+    @RequestMapping(value = "edit/{userId}", method = RequestMethod.GET)
+    public String userEdit(Model model, @PathVariable int userId) {
+
+        model.addAttribute("user", userDao.findOne(userId));
+        model.addAttribute("title", "Edit Account" + userDao.findOne(userId).getName());
+        return "user/edit";
     }
 
     //clicking the "logout" link will log the user out and clear them from the session
