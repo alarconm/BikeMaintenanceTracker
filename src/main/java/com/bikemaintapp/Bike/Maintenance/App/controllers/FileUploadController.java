@@ -1,5 +1,8 @@
 package com.bikemaintapp.Bike.Maintenance.App.controllers;
 
+import com.bikemaintapp.Bike.Maintenance.App.models.User;
+import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
+import com.bikemaintapp.Bike.Maintenance.App.storage.FileSystemStorageService;
 import com.bikemaintapp.Bike.Maintenance.App.storage.StorageFileNotFoundException;
 import com.bikemaintapp.Bike.Maintenance.App.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -21,6 +25,9 @@ import java.util.stream.Collectors;
 public class FileUploadController {
 
     private final StorageService storageService;
+
+    @Autowired
+    UserDao userDao;
 
     @Autowired
     public FileUploadController(StorageService storageService) {
@@ -65,6 +72,32 @@ public class FileUploadController {
         return "redirect:/upload/";
     }
 
+    //TODO get this working to upload image for users
+    @PostMapping("/userImage")
+    public String userImage(Model model, @RequestParam("file")MultipartFile file,
+                            RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+        User user = (User) request.getSession().getAttribute("user");
+        String fileName = "user" + user.getId();
+
+        //Check to ensure file is an image, redirect and give message if not
+        if (!file.getContentType().contains("image") ) {
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You can not upload files that aren't an image");
+            return "redirect:/upload/";
+        }
+
+        storageService.storeName(file, fileName);
+        redirectAttributes.addFlashAttribute("message",
+                "You successfully uploaded " + file.getOriginalFilename() + "!");
+        user.setImage("/images/" + fileName);
+        userDao.save(user);
+
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Edit Account: " + user.getName());
+        return "redirect:/user/edit";
+    }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {

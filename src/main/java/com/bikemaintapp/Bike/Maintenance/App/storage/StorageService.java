@@ -1,5 +1,6 @@
 package com.bikemaintapp.Bike.Maintenance.App.storage;
 
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,8 @@ public interface StorageService {
     void init();
 
     void store(MultipartFile file);
+
+    void storeName(MultipartFile file, String name);
 
     Stream<Path> loadAll();
 

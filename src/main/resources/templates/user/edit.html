@@ -7,9 +7,14 @@
 
     <h1 class="text-center" th:text="${#strings.capitalize(title)}">Default Title</h1>
     <img th:src="${user.image}" alt="User Image" />
+
+    <div th:if="${message}">
+        <h2 th:text="${message}"/>
+    </div>
+
     <h2>Upload new Picture</h2>
     <div>
-        <form method="POST" enctype="multipart/form-data" action="/upload/">
+        <form method="POST" enctype="multipart/form-data" action="/upload/userImage">
             <table>
                 <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
                 <tr><td></td><td><input type="submit" value="Upload" /></td></tr>

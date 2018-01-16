@@ -54,6 +54,36 @@ public class FileSystemStorageService implements StorageService {
         }
     }
 
+
+    //TODO update to make this work to save the image file as user + userID
+    @Override
+    public void storeName(MultipartFile file, String name) {
+
+        String filename = StringUtils.cleanPath(file.getOriginalFilename());
+        try {
+            if (file.isEmpty()) {
+                throw new StorageException("Failed to store empty file " + filename);
+
+            }
+            if (filename.contains("..")) {
+                //Security check
+                throw new StorageException(
+                        "Cannot store file with relative path outside current directory " + filename);
+            }
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+
+            //rename file to user+userId
+            filename = name;
+            byte[] bytes = file.getBytes();
+            Path path = this.saveLocation.resolve(filename);
+            Files.write(path, bytes);
+
+        }
+        catch (IOException e) {
+            throw new StorageException("Failed to store file " + filename, e);
+        }
+    }
+
     @Override
     public Stream<Path> loadAll() {
         try {
