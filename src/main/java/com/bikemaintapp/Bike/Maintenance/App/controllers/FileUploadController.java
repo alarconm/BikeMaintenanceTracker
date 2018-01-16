@@ -78,7 +78,8 @@ public class FileUploadController {
                             RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
-        String fileName = "user" + user.getId();
+        String[] filetype = file.getOriginalFilename().split("\\.");
+        String fileName = "user" + user.getId() + "." + filetype[1]; //TODO this is the issue, it is saving file as user1 - need to add .jpg
 
         //Check to ensure file is an image, redirect and give message if not
         if (!file.getContentType().contains("image") ) {
@@ -91,7 +92,7 @@ public class FileUploadController {
         storageService.storeName(file, fileName);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-        user.setImage("/images/" + fileName);
+        user.setImage("/images/upload/" + fileName);
         userDao.save(user);
 
         model.addAttribute("user", user);
