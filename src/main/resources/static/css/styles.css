@@ -144,8 +144,11 @@ header,
 }
 
 .upload {
-    height: 100px;
-    width: 100px;
+    display: block;
+    height: 200px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

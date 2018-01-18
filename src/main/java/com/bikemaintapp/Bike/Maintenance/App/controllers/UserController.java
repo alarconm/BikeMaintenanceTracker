@@ -3,6 +3,7 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -138,6 +139,15 @@ public class UserController {
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("user", user);
         model.addAttribute("title", "Edit Account: " + user.getName());
+        return "user/edit";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String userEditPost(Model model, HttpServletRequest request) {
+
+        User user = (User) request.getSession().getAttribute("user");
+        model.addAttribute("user", user);
+        model.addAttribute("title", user.getName());
         return "user/edit";
     }
 

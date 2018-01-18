@@ -92,7 +92,7 @@ public class FileUploadController {
         storageService.storeName(file, fileName);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-        user.setImage("/images/upload/" + fileName);
+        user.setImage("C:\\upload\\" + fileName);
         userDao.save(user);
 
         model.addAttribute("user", user);
