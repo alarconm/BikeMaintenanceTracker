@@ -3,11 +3,9 @@ package com.bikemaintapp.Bike.Maintenance.App.controllers;
 import com.bikemaintapp.Bike.Maintenance.App.models.User;
 import com.bikemaintapp.Bike.Maintenance.App.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,7 +102,6 @@ public class UserController {
         }
         return false;
     }
-
     //HttpServletRequest is for session management
     //process the user creation form
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -133,24 +130,7 @@ public class UserController {
         // Successful create then adds the username to the session
         request.getSession().setAttribute("user", newUser);
         return "redirect:/bike";
-    }
 
-    @RequestMapping(value = "edit", method = RequestMethod.GET)
-    public String userEdit(Model model, HttpServletRequest request){
-
-        User user = (User) request.getSession().getAttribute("user");
-        model.addAttribute("user", user);
-        model.addAttribute("title", "Edit Account: " + user.getName());
-        return "user/edit";
-    }
-
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String userEditPost(Model model, HttpServletRequest request) {
-
-        User user = (User) request.getSession().getAttribute("user");
-        model.addAttribute("user", user);
-        model.addAttribute("title", user.getName());
-        return "user/edit";
     }
 
     //clicking the "logout" link will log the user out and clear them from the session
