@@ -59,9 +59,7 @@ public class Ride {
     public void setBike(Bike bike){
         this.bike = bike;
     }
-    public int getId() {
-        return id;
-    }
+
     public int getStravaId() {
         return stravaId;
     }
