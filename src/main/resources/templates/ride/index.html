@@ -16,6 +16,7 @@
         <th>#</th>
         <th>Bike Used</th>
         <th>Miles</th>
+        <th>Remove Ride</th>
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,10 @@
             <th scope="row" th:text="${i.count}">-1</th>
             <td th:text="${ride.bike.nameOfBike}"></td>
             <td th:text="${ride.miles}"></td>
+            <td>
+                <a th:href="@{'/ride/delete/' + ${ride.id}}">
+                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            </td>
         </tr>
     </th:block>
     </tbody>

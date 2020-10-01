@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -37,7 +35,6 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
 
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("rides",rideDao.findRideByUserId(user.getId()));
-
         model.addAttribute("title",user.getName() + "'s Rides");
         return "ride/index";
     }
@@ -88,5 +85,28 @@ public class RideController extends com.bikemaintapp.Bike.Maintenance.App.contro
 
         rideDao.save(newRide);
         return "redirect:";
+    }
+
+    @RequestMapping(value = "delete/{rideId}", method = RequestMethod.GET)
+    public String deleteRide(Model model, @PathVariable int rideId, HttpServletRequest request){
+
+        if(notAuthenticated(request))
+            return "redirect:/user/login";
+
+        Ride ride = rideDao.findOne(rideId);
+        List<Component> components = ride.getBike().getComponents();
+
+        //update maintenance schedule and component mileage to remove deleted ride mileage
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).getMaintenanceSchedule().addMiles((int)ride.getMiles() * -1);
+            components.get(i).addMiles((int)ride.getMiles() * -1); //lifetime mileage tracking for component
+        }
+
+        ride.getBike().addMiles((int)ride.getMiles()*-1);
+        ride.setUser(null);
+        ride.setBike(null);
+        rideDao.save(ride);
+
+        return "redirect:/ride";
     }
 }

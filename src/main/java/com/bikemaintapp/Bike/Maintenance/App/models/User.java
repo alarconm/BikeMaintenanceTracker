@@ -30,6 +30,7 @@ public class User {
     private String email;
 
     private ArrayList<StravaRide> stravaRides;
+    private String image = "/images/Profile_Image.jpg";
 
     @OneToMany(mappedBy = "user")
     private List<Bike> bikes;
@@ -93,6 +94,14 @@ public class User {
 
     public void setStravaRides(ArrayList<StravaRide> stravaRides) {
         this.stravaRides = stravaRides;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public StravaRide getStravaRideById(int id) {
